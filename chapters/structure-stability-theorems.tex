@@ -1,7 +1,19 @@
 \section{Preliminaries (to do work)}
-The contents of this chapter are based on \cite{nanda} and \cite{polterovich}.
+The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \cite{wang}.
 
-\begin{definition}[Persistance module]
+\begin{definition}[Graded ring]
+    
+\end{definition}
+
+\begin{definition}[Graded ideal]
+    
+\end{definition}
+
+\begin{definition}[Graded moudule]
+    
+\end{definition}
+
+\begin{definition}[Persistance module, finite type]
     
 \end{definition}
 
@@ -26,12 +38,23 @@ The contents of this chapter are based on \cite{nanda} and \cite{polterovich}.
 \end{definition}
 
 \section{Structure Theorem}
-\begin{theorem}[Structure]
-    Let $ (V, \pi) $ be a persistence module.
+\begin{fact}[Structure theorem for finitely generated modules over a principal ideal domain] \label{structure-pure}
+    Let $ M $ be a  finitely generated module over a principal ideal domain. There exist a finite sequence of proper ideals $ (d_1) \supseteq (d_2) \supseteq \dots \supseteq (d_n) $ such that
     $$
-        (V, \pi) \equiv \bigoplus_{i=1}^N \mathbb F (I_i, c_i)^{m_i}
+        M \cong \bigoplus_{i=1}^n R / (d_i).
+    $$
+
+\end{fact}
+
+\begin{theorem}[Structure]
+    Let $ (V, \pi) $ be a persistence module. There exist a finite set $ \operatorname{bar}(V, \pi) $ of intervals and a function $ \mu : \operatorname{bar}(V, \pi) \longrightarrow \mathbb N $ and there is a unique direct sum decomposition
+    $$
+        (V, \pi) \cong \bigoplus_{i=1}^N (I_i, c_i)^{m_i}.
     $$
 \end{theorem}
+\begin{proof}
+    $ (V, \pi) $ is of finite type, so it is a finite $ \mathbb F[x] $-module. As $ \mathbb F $ is a field, $ \mathbb F[x] $ is a principal ideal domain, therefor, $ (V, \pi) $ is a finitely generated module over a principal ideal domain. Fact \ref{structure-pure} 
+\end{proof}
 
 \section{Stability Theorem}
 \begin{lemma}
