@@ -53,6 +53,10 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
     
 \end{definition}
 
+\begin{definition}[Induced matching]
+    
+\end{definition}
+
 \newpage
 \section{Structure Theorem}
 \begin{fact}[Structure theorem for finitely generated modules over a principal ideal domain] \label{structure-pure}
@@ -129,6 +133,48 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
     \end{equation*}
     The $ V_Y, W_Y $ modules separate the ``yes, matched'' intervals, from the $ V_N, W_N $ ``not matched" intervals. For every interval $ I $ matched to $ J $ by $\rho(I) = J $, Lemma \ref{interval-interleaving-if-matching}
 \end{proof}
+
+\begin{lemma}
+    Let $ I = (b, d] $ be an interval. It exists an injective morphism $i: (V, \pi) \in (W, \theta) $, then $\# \mathcal B(V)_I^- \leq \# \mathcal B(W)_I^- $. Where $ \# $ denotes the cardinal operator.
+\end{lemma}
+
+\begin{lemma}
+    Let $ I = (b, d] $ be an interval. It exists a surjective morphism $s: (V, \pi) \in (W, \theta) $, then $\# \mathcal B(V)_I^+ \geq \# \mathcal B(W)_I^+    $. Where $ \# $ denotes the cardinal operator.
+\end{lemma}
+
+\begin{lemma}
+    If there exists an injection $i: (V, \pi) \in (W, \theta) $, then the induced matching $ \mu_{inj}: \mathcal B(V) \to \mathcal B (W) $ satisfies:
+    \begin{enumerate}
+        \item $\operatorname{coim} \mu_{inj} = \mathcal B(V)$,
+        \item $\mu_{inj}(b, d] = (c, d], \ \forall c \leq b, \ \forall (b, d] \in \mathcal B(V)$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+    If there exists a surjection $s: (V, \pi) \in (W, \theta) $, then the induced matching $ \mu_{inj}: \mathcal B(V) \to \mathcal B (W) $ satisfies:
+    \begin{enumerate}
+        \item $\operatorname{im} \mu_{inj} = \mathcal B(W)$,
+        \item $\mu_{inj}(b, d] = (b, e], \ \forall b \geq e, \ \forall (b, e] \in \mathcal B(V)$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+    Let $ (V, \pi), (W, \theta) $ are $\delta$-interleaved persistence modules, with $\delta$-interleaving morphisms $ \phi: V \to W_\delta $ and $ \psi: W \to V_\delta $. Let $ \phi: V \to \operatorname{im}\phi $ be a surjection and $ \mu_{sur}: \mathcal B(V) \to \mathcal B (\operatorname{im} \phi)$ the induced matching. Then
+    \begin{enumerate}
+        \item $\operatorname{coim} \mu_{sur} \supseteq \mathcal B (V)_{\geq 2\delta} $,
+        \item $ \operatorname{im} \mu_{sur} = \mathcal B (\operatorname{im} \phi)$ and
+        \item $ \mu_{sur}(b, d] = (b, d'], \ (b, d'] \in \operatorname{coim} \mu_{sur}, \ d' \in [d-2\delta, d]$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+    Let $ (V, \pi), (W, \theta) $ are $\delta$-interleaved persistence modules, with $\delta$-interleaving morphisms $ \phi: V \to W_\delta $ and $ \psi: W \to V_\delta $. Let $ \phi: V \to \operatorname{im}\phi $ be a injection and $ \mu_{inj}: \mathcal B(\operatorname{im} \phi) \to \mathcal B (W_\delta)$ the induced matching. Then
+    \begin{enumerate}
+        \item $\operatorname{coim} \mu_{sur} = \mathcal B (\operatorname{im} \phi) $,
+        \item $ \operatorname{im} \mu_{inj} \supseteq \mathcal B (W_\delta)_{\geq 2\delta} $ and
+        \item $ \mu_{inj}(b, d'] = (b', d'], \ (b, d'] \in \operatorname{coim} \mu_{inj}, \ b' \in [b-2\delta, b]$.
+    \end{enumerate}
+\end{lemma}
 
 \begin{proposition}\label{mathing-if-interleaving}
     Given two persistence modules $ V $, $ W $, if there is a $\delta$-interleaving morphism between them, then there is a $ \delta$-matching between their barcodes.
