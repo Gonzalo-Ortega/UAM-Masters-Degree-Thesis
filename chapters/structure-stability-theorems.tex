@@ -109,7 +109,7 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
     are well defined as for any $ t \in (a,b], \ t + \delta \in (c, d] $ as $ a + \delta > c $ and $ b + \delta \leq d $. In the same way, for any $ t \in (c,d], \ t + \delta \in (a, b] $. Thus, $ \psi_\delta \circ \phi_\delta (\mathbb F(I)_t) = \psi_\delta(\mathbb F(J)_{(t+\delta)}) = \mathbb F(I)_{(t+2\delta)} = \pi_{t \leq t+2\delta}(\mathbb F(I)_t)$ and $ \phi_\delta \circ \psi_\delta (\mathbb F(J)_t) = \phi_\delta(\mathbb F(I)_{(t+\delta)}) = \mathbb F(J)_{(t+2\delta)} = \theta_{t \leq t+2\delta}(\mathbb F(J)_t)$. Therefore, $ \phi_\delta $ and $ \psi_\delta $ are a pair of $\delta$-interleaving morphisms.
 \end{proof}
 
-\begin{proposition}\label{interleaving-if-mathing}
+\begin{proposition} \label{interleaving-if-mathing} % Polterovich Theorem 3.0.1
     Given two persistence modules $ V $, $ W $, if there is a $ \delta$-matching between their barcodes, then there is a $ \delta$-interleaving morphism between them.
 \end{proposition}
 \begin{proof}
@@ -149,15 +149,25 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
         \psi_\delta: W_Y &\to {V_Y}_\delta.\\
         \end{aligned}
     \end{equation*}
-    Not matched intervals are of length smaller than $ 2 \delta $, therefore both, $V_N$ and $V_Y$ are $\delta$-interleaved with the empty set. We can now construct the $\delta$-interleaving morphism $ phi: V \to W$ such as $\phi \vert_{V_Y} = \phi_Y$ and $\phi \vert_{V_N} = 0$ and, in a similar way, we also construct $ \psi: W \to V$.
+    Not matched intervals are of length smaller than $ 2 \delta $, therefore both, $V_N$ and $V_Y$ are $\delta$-interleaved with the empty set. We can now construct the $\delta$-interleaving morphism $ \phi: V \to W$ such as $\phi \vert_{V_Y} = \phi_Y$ and $\phi \vert_{V_N} = 0$ and, in a similar way, we also construct $ \psi: W \to V$.
 \end{proof}
 
-Let $V$ be a persistence module and $ I = (b, d]$ an interval with $ d \in \R \cup \{+ \infty\}$. We denote $ \barc_{I-}(V) = \left\{ (a, b] \in \barc(V) : a \leq b\right\}$. Analogously, for an interval $ I = (b, d] $ we denote $ \barc_{I+}(V) = \left\{ (b, c] \in \barc(V) : c \geq d\right\}$. Let $ \# $ denote the cardinal operator. 
-\begin{lemma}
+Let $V$ be a persistence module and $ I = (b, d]$ an interval with $ d \in \R \cup \{+ \infty\}$. We denote $ \barc_{I-}(V) = \left\{ (a, b] \in \barc(V) : a \leq b\right\}$. Analogously, for an interval $ I = (b, d] $ we denote $ \barc_{I+}(V) = \left\{ (b, c] \in \barc(V) : c \geq d\right\}$. Let $ \# $ denote the cardinal operator.
+
+\begin{lemma} % Polterovich Prop. 3.1.1
     Let $ I = (b, d] $ be an interval. It exists an injective morphism $i: (V, \pi) \in (W, \theta) $, then $\# \barc_{I-}(V) \leq \# \barc_{I-}(W) $.
 \end{lemma}
+\begin{proof} (INCOMPLETE)
+    Let $ E_{I-} = \bigcap_{b < s < d} \operatorname{im} \pi_{s\leq d} \cup \bigcup_{r> d} \ker \pi_{d \leq r} \subseteq V_d $.
+    $$
+    \begin{tikzcd}
+        V_s \arrow[r, "\pi_{s \leq r}"] \arrow[d, "p_s"'] & V_r \arrow[d, "p_r"] \\
+        W_s \arrow[r, "\theta_{s \leq r}"']               & W_r
+    \end{tikzcd}
+    $$
+\end{proof}
 
-\begin{lemma}
+\begin{lemma} % Polterovich Prop. 3.1.3
     Let $ I = (b, d] $ be an interval. It exists a surjective morphism $s: (V, \pi) \in (W, \theta) $, then $\# \barc_{I+}(V) \geq \# \barc_{I+}(W) $.
 \end{lemma}
 
