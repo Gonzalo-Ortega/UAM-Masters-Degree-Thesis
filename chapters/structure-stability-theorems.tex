@@ -72,9 +72,9 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
 \end{proposition}
 
 \begin{theorem}[Structure] \label{structure}
-    Let $ (V, \pi) $ be a persistence module. There exist a barcode $ \mathcal B(V, \pi) $, with $ \mu : \mathcal B (V, \pi) \longrightarrow \mathbb N $, the multiplicity of the barcode intervals, such as there is a unique direct sum decomposition
+    Let $ (V, \pi) $ be a persistence module. There exist a barcode $ \barc(V, \pi) $, with $ \mu : \barc (V, \pi) \longrightarrow \mathbb N $, the multiplicity of the barcode intervals, such as there is a unique direct sum decomposition
     $$
-        V \cong \bigoplus_{I \in  \mathcal B (V)} \mathbb F (I)^{\mu (I)}.
+        V \cong \bigoplus_{I \in  \barc (V)} \mathbb F (I)^{\mu (I)}.
     $$
 \end{theorem}
 \begin{proof}
@@ -94,8 +94,7 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
     Let $ I, J $ be two $\delta$-matched intervals. Then, their corresponding interval modules $ (\mathbb F (I), \pi) $ and $( \mathbb F (J), \theta) $ are $\delta$-interleaved.
 \end{lemma}
 \begin{proof}
-    (NOT SURE)
-    Let $ I = (a, b] $, $ J = (c, d] $. If $\rho$ is the $\delta$-matching between them, then $ \rho(I) = J $ and, following Definition \ref{delta-matching}, $ (a, b] \subseteq (c+\delta, d+\delta] $ and $ (c, d] \subseteq (a+\delta, b+\delta] $, with $ b - a > 2\delta $ and $ d - c > 2\delta $. Then, the morphisms
+    Let $ I = (a, b] $, $ J = (c, d] $. If $\rho$ is the $\delta$-matching between them, then $ \rho(I) = J $ and, following Definition \ref{delta-matching}, $ (a, b] \subseteq (c-\delta, d+\delta] $ and $ (c, d] \subseteq (a-\delta, b+\delta] $, with $ b - a > 2\delta $ and $ d - c > 2\delta $. Then, the morphisms
     \begin{equation*}
         \begin{aligned}[c]
         \phi_\delta: \mathbb F(I) &\to \mathbb F(J)_\delta\\
@@ -114,64 +113,85 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
     Given two persistence modules $ V $, $ W $, if there is a $ \delta$-matching between their barcodes, then there is a $ \delta$-interleaving morphism between them.
 \end{proposition}
 \begin{proof}
-    (INCOMPLETE)
-    Suppose there is a $\delta$-matching between the barcodes of $ V $ and $ W $, $\rho: \mathcal B (V) \to \mathcal B (W) $. By the Structure Theorem \ref{structure}, $ V $ and $ W $ decompose in a finite direct sum of interval modules
+    Suppose there is a $\delta$-matching between the barcodes of $ V $ and $ W $, $\rho: \barc (V) \to \barc (W) $. By the Structure Theorem \ref{structure}, $ V $ and $ W $ decompose in a finite direct sum of interval modules
     $$
-        V \cong \! \bigoplus_{I \in \mathcal B (V)} \mathbb F (I), \ \ W \cong \! \bigoplus_{J \in  \mathcal B (W)} \mathbb F (W) .
+        V \cong \! \bigoplus_{I \in \barc (V)} \mathbb F (I), \ \ W \cong \! \bigoplus_{J \in  \barc (W)} \mathbb F (W) .
     $$
     We can express $ V = V_Y \oplus V_N $, $ W = W_Y \oplus W_N $ denoting
     \begin{equation*}
-        \begin{aligned}[c]S
+        \begin{aligned}[c]
         V_Y &\cong \bigoplus_{I \in  \operatorname{coim} \rho} \mathbb F (I),\\
-        V_N &\cong \bigoplus_{I \in \mathcal B(V) \backslash \operatorname{coim} \rho} \mathbb F (I),\\
+        V_N &\cong \bigoplus_{I \in \barc(V) \backslash \operatorname{coim} \rho} \mathbb F (I),\\
         \end{aligned}
         \quad \quad \quad
         \begin{aligned}[c]
-        W_Y &\cong \bigoplus_{J \in  \operatorname{im} \rho} \mathbb F (I),\\
-        W_N &\cong \bigoplus_{J \in \mathcal B(J) \backslash \operatorname{im} \rho} \mathbb F (J).
+        W_Y &\cong \bigoplus_{J \in  \operatorname{im} \rho} \mathbb F (J),\\
+        W_N &\cong \bigoplus_{J \in \barc(J) \backslash \operatorname{im} \rho} \mathbb F (J).
         \end{aligned}
     \end{equation*}
-    The $ V_Y, W_Y $ modules separate the ``yes, matched'' intervals, from the $ V_N, W_N $ ``not matched" intervals. For every interval $ I $ matched to $ J $ by $\rho(I) = J $, Lemma \ref{interval-interleaving-if-matching}
+    The $ V_Y, W_Y $ modules separate the ``yes, matched'' intervals, from the $ V_N, W_N $ ``not matched" intervals. For every interval $ I \in \barc(V_Y) $, $ I $ is $\delta$-matched to an interval $ J \in \barc(W_Y)$ by $\rho(I) = J $. Thus, by Lemma \ref{interval-interleaving-if-matching}, for all pair $ I, J $ of matched intervals, there exist a par of $\delta$-interleaved morphisms
+    \begin{equation*}
+        \begin{aligned}[c]
+        \phi_\delta: \mathbb F(I) &\to \mathbb F(J)_\delta\\
+        \end{aligned}
+        \quad \text{and} \quad
+        \begin{aligned}[c]
+        \psi_\delta: \mathbb F(J) &\to \mathbb F(I)_\delta\\
+        \end{aligned}
+    \end{equation*}
+    which induce the pair of $\delta$-interleaved morphisms
+    \begin{equation*}
+        \begin{aligned}[c]
+        \phi_\delta: V_Y &\to {W_Y}_\delta\\
+        \end{aligned}
+        \quad \text{and} \quad
+        \begin{aligned}[c]
+        \psi_\delta: W_Y &\to {V_Y}_\delta.\\
+        \end{aligned}
+    \end{equation*}
+    Not matched intervals are of length smaller than $ 2 \delta $, therefore both, $V_N$ and $V_Y$ are $\delta$-interleaved with the empty set. We can now construct the $\delta$-interleaving morphism $ phi: V \to W$ such as $\phi \vert_{V_Y} = \phi_Y$ and $\phi \vert_{V_N} = 0$ and, in a similar way, we also construct $ \psi: W \to V$.
 \end{proof}
 
+Let $ \# $ denote the cardinal operator.
+
 \begin{lemma}
-    Let $ I = (b, d] $ be an interval. It exists an injective morphism $i: (V, \pi) \in (W, \theta) $, then $\# \mathcal B(V)_I^- \leq \# \mathcal B(W)_I^- $. Where $ \# $ denotes the cardinal operator.
+    Let $ I = (b, d] $ be an interval. It exists an injective morphism $i: (V, \pi) \in (W, \theta) $, then $\# \barc(V)_I^- \leq \# \barc(W)_I^- $.
 \end{lemma}
 
 \begin{lemma}
-    Let $ I = (b, d] $ be an interval. It exists a surjective morphism $s: (V, \pi) \in (W, \theta) $, then $\# \mathcal B(V)_I^+ \geq \# \mathcal B(W)_I^+    $. Where $ \# $ denotes the cardinal operator.
+    Let $ I = (b, d] $ be an interval. It exists a surjective morphism $s: (V, \pi) \in (W, \theta) $, then $\# \barc(V)_I^+ \geq \# \barc(W)_I^+ $.
 \end{lemma}
 
 \begin{lemma}
-    If there exists an injection $i: (V, \pi) \in (W, \theta) $, then the induced matching $ \mu_{inj}: \mathcal B(V) \to \mathcal B (W) $ satisfies:
+    If there exists an injection $i: (V, \pi) \in (W, \theta) $, then the induced matching $ \mu_{inj}: \barc(V) \to \barc (W) $ satisfies:
     \begin{enumerate}
-        \item $\operatorname{coim} \mu_{inj} = \mathcal B(V)$,
-        \item $\mu_{inj}(b, d] = (c, d], \ \forall c \leq b, \ \forall (b, d] \in \mathcal B(V)$.
+        \item $\operatorname{coim} \mu_{inj} = \barc(V)$,
+        \item $\mu_{inj}(b, d] = (c, d], \ \forall c \leq b, \ \forall (b, d] \in \barc(V)$.
     \end{enumerate}
 \end{lemma}
 
 \begin{lemma}
-    If there exists a surjection $s: (V, \pi) \in (W, \theta) $, then the induced matching $ \mu_{inj}: \mathcal B(V) \to \mathcal B (W) $ satisfies:
+    If there exists a surjection $s: (V, \pi) \in (W, \theta) $, then the induced matching $ \mu_{inj}: \barc(V) \to \barc (W) $ satisfies:
     \begin{enumerate}
-        \item $\operatorname{im} \mu_{inj} = \mathcal B(W)$,
-        \item $\mu_{inj}(b, d] = (b, e], \ \forall b \geq e, \ \forall (b, e] \in \mathcal B(V)$.
+        \item $\operatorname{im} \mu_{inj} = \barc(W)$,
+        \item $\mu_{inj}(b, d] = (b, e], \ \forall b \geq e, \ \forall (b, e] \in \barc(V)$.
     \end{enumerate}
 \end{lemma}
 
 \begin{lemma}
-    Let $ (V, \pi), (W, \theta) $ are $\delta$-interleaved persistence modules, with $\delta$-interleaving morphisms $ \phi: V \to W_\delta $ and $ \psi: W \to V_\delta $. Let $ \phi: V \to \operatorname{im}\phi $ be a surjection and $ \mu_{sur}: \mathcal B(V) \to \mathcal B (\operatorname{im} \phi)$ the induced matching. Then
+    Let $ (V, \pi), (W, \theta) $ are $\delta$-interleaved persistence modules, with $\delta$-interleaving morphisms $ \phi: V \to W_\delta $ and $ \psi: W \to V_\delta $. Let $ \phi: V \to \operatorname{im}\phi $ be a surjection and $ \mu_{sur}: \barc(V) \to \barc (\operatorname{im} \phi)$ the induced matching. Then
     \begin{enumerate}
-        \item $\operatorname{coim} \mu_{sur} \supseteq \mathcal B (V)_{\geq 2\delta} $,
-        \item $ \operatorname{im} \mu_{sur} = \mathcal B (\operatorname{im} \phi)$ and
+        \item $\operatorname{coim} \mu_{sur} \supseteq \barc (V)_{\geq 2\delta} $,
+        \item $ \operatorname{im} \mu_{sur} = \barc (\operatorname{im} \phi)$ and
         \item $ \mu_{sur}(b, d] = (b, d'], \ (b, d'] \in \operatorname{coim} \mu_{sur}, \ d' \in [d-2\delta, d]$.
     \end{enumerate}
 \end{lemma}
 
 \begin{lemma}
-    Let $ (V, \pi), (W, \theta) $ are $\delta$-interleaved persistence modules, with $\delta$-interleaving morphisms $ \phi: V \to W_\delta $ and $ \psi: W \to V_\delta $. Let $ \phi: V \to \operatorname{im}\phi $ be a injection and $ \mu_{inj}: \mathcal B(\operatorname{im} \phi) \to \mathcal B (W_\delta)$ the induced matching. Then
+    Let $ (V, \pi), (W, \theta) $ are $\delta$-interleaved persistence modules, with $\delta$-interleaving morphisms $ \phi: V \to W_\delta $ and $ \psi: W \to V_\delta $. Let $ \phi: V \to \operatorname{im}\phi $ be a injection and $ \mu_{inj}: \barc(\operatorname{im} \phi) \to \barc (W_\delta)$ the induced matching. Then
     \begin{enumerate}
-        \item $\operatorname{coim} \mu_{sur} = \mathcal B (\operatorname{im} \phi) $,
-        \item $ \operatorname{im} \mu_{inj} \supseteq \mathcal B (W_\delta)_{\geq 2\delta} $ and
+        \item $\operatorname{coim} \mu_{sur} = \barc (\operatorname{im} \phi) $,
+        \item $ \operatorname{im} \mu_{inj} \supseteq \barc (W_\delta)_{\geq 2\delta} $ and
         \item $ \mu_{inj}(b, d'] = (b', d'], \ (b, d'] \in \operatorname{coim} \mu_{inj}, \ b' \in [b-2\delta, b]$.
     \end{enumerate}
 \end{lemma}
@@ -183,9 +203,9 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
 \begin{theorem}[Stability]
     There is an isometry between a persistence module with the interleaving distance and its barcode with the bottleneck distance. This means that, given two persistence modules $ V, \ W $, 
     $$ 
-        d_{int} (V, W) = d_{bot} (\mathcal B(V), \mathcal B(W)).
+        d_{int} (V, W) = d_{bot} (\barc(V), \barc(W)).
     $$
 \end{theorem}
 \begin{proof}
-    Suppose $ d_{int}(V, W) = \delta $. Proposition \ref{mathing-if-interleaving} asures there exist a $\delta$-matching between $ \mathcal B(V) $ and $ \mathcal B (W) $. As $ d_{bot}(V, W) $ is the infimum $\delta$ for witch exists a $\delta$-matching, $ d_{bot}(V, W) \leq d_{int}(V, W)$. On the other hand, Proposition \ref{interleaving-if-mathing} leads, with the same reasoning, to $ d_{int}(V, W) \leq d_{bot}(V, W)$. Thus, it has to be $ d_{int} (V, W) = d_{bot} (\mathcal B(V), \mathcal B(W)) $.
+    Suppose $ d_{int}(V, W) = \delta $. Proposition \ref{mathing-if-interleaving} asures there exist a $\delta$-matching between $ \barc(V) $ and $ \barc (W) $. As $ d_{bot}(V, W) $ is the infimum $\delta$ for witch exists a $\delta$-matching, $ d_{bot}(V, W) \leq d_{int}(V, W)$. On the other hand, Proposition \ref{interleaving-if-mathing} leads, with the same reasoning, to $ d_{int}(V, W) \leq d_{bot}(V, W)$. Thus, it has to be $ d_{int} (V, W) = d_{bot} (\barc(V), \barc(W)) $.
 \end{proof}
