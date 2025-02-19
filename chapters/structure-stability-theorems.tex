@@ -213,7 +213,7 @@ We define the {\it surjective induced matching} $\mu_{sur}\colon \barc(V) \to \b
     If there exists a surjection $s\colon (V, \pi) \to (W, \theta) $, then the induced matching $ \mu_{sur}\colon \barc(V) \to \barc (W) $ satisfies:
     \begin{enumerate}
         \item $\im \mu_{sur} = \barc(W)$,
-        \item $\mu_{sur}(a, c] = (a, d], \ \forall a \geq d, \ \forall (a, d] \in \barc(V)$.
+        \item $\mu_{sur}(a, c] = (a, d], \ \forall c \geq d, \ \forall (a, d] \in \barc(V)$.
     \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -255,15 +255,15 @@ The following lemma verifies that, in fact, the mapping between persistence modu
 
 Finally, we can now claim the two main lemmas from were we will construct our desired $\delta$-matching.
 
-\begin{lemma} \cite[Lemma 3.2.1]{polterovich}
+\begin{lemma} \cite[Lemma 3.2.1]{polterovich} \label{lemma:sur-image}
     Let $ (V, \pi), (W, \theta) $ be $\delta$-interleaved persistence modules, with $\delta$-inter\-leaving morphisms $ \phi\colon V \to W_\delta $ and $ \psi\colon W \to V_\delta $. Let $ \phi\colon V \to \im\phi $ be a surjection and $ \mu_{sur}\colon \barc(V) \to \barc (\im \phi)$ the induced matching. Then
     \begin{enumerate}
         \item $\operatorname{coim} \mu_{sur} \supseteq \barc (V)_{\geq 2\delta} $,
         \item $ \im \mu_{sur} = \barc (\im \phi)$ and \label{}
-        \item $ \mu_{sur}(b, d] = (b, d'], \ (b, d'] \in \operatorname{coim} \mu_{sur}, \ d' \in [d-2\delta, d]$.
+        \item $ \mu_{sur}(b, d] = (b, d'], \ \forall (b, d] \in \operatorname{coim} \mu_{sur}, \ d' \in [d-2\delta, d]$.
     \end{enumerate}
 \end{lemma}
-\begin{proof} (INCOMPLETE)
+\begin{proof}
 \begin{enumerate}
     \item
     To check the first part, we observe that, in the following diagram, the three morphisms are surjective as $\phi$ and $\pi_{t \leq t+2\delta}$ are defined onto their images, and the diagram conmutes,
@@ -288,7 +288,12 @@ Finally, we can now claim the two main lemmas from were we will construct our de
     The second part is just a reformulation of Lemma \ref{lemma:inj-cardinalities}.
 
     \item
-    The third part
+    Let $ (b,d] \in \operatorname{coim} $. There are two cases:
+
+    On one hand, if $ d - b \leq 2 \delta $, $(b, d]$ is matched to $ (b, d'] $ where $ d \geq d'$, by definition of $ \mu_{sur} $. Also, $ d' > b $ and, as in this case we have $ b \geq d - 2 \delta $, we have $ d' > d - 2 \delta $. Therefore, $ d' \in [d - 2 \delta, d]$.
+
+    On the other hand, if $ d - b > 2 \delta $, $(b, d]$ is matched to $ (b, d'] $ by $ \mu_{sur}(\phi)$, with $ (b, d'] \in W_{\leq 2 \delta}$. We can therefore use Lemma \ref{lemma:sur-matching} to check that $ d' \geq d$. In the same manner, $(b, d']$ is matched to $ (b, d''] $ by $ \mu_{sur}(\psi)_\delta $ with $ d'' \geq d' $. Finally, using the commutativity of the following diagram, we have that $ (b, d''] = (b, d - 2 \delta] $, making $ d' \in [d - 2 \delta, d]$.
+
     $$
     \begin{tikzcd}
     \barc(V)_{\geq 2 \delta}
@@ -304,7 +309,7 @@ Finally, we can now claim the two main lemmas from were we will construct our de
 \end{enumerate}
 \end{proof}
 
-\begin{lemma} \cite[Proposition 3.2.2]{polterovich}
+\begin{lemma} \cite[Proposition 3.2.2]{polterovich} \label{lemma:inj-image}
     Let $ (V, \pi), (W, \theta) $ be $\delta$-interleaved persistence modules, with $\delta$-inter\-leaving morphisms $ \phi\colon V \to W_\delta $ and $ \psi\colon W \to V_\delta $. Let $ \phi\colon V \to \im\phi $ be a injection and $ \mu_{inj}\colon \barc(\im \phi) \to \barc (W_\delta)$ the induced matching. Then
     \begin{enumerate}
         \item $\operatorname{coim} \mu_{sur} = \barc (\im \phi) $,
@@ -312,10 +317,10 @@ Finally, we can now claim the two main lemmas from were we will construct our de
         \item $ \mu_{inj}(b, d'] = (b', d'], \ (b, d'] \in \operatorname{coim} \mu_{inj}, \ b' \in [b-2\delta, b]$.
     \end{enumerate}
 \end{lemma}
-\begin{proof} (INCOMPLETE)
+\begin{proof}
 \begin{enumerate}
-    \item 
-    \item 
+    \item Immediate using Lemma \ref{lemma:inj-matching}.
+    \item As $ \phi_\delta \circ \psi = \theta_{t \leq t+2\delta} $ the following diagram conmutes:
     $$
     \begin{tikzcd}
         W \arrow[r, "\psi"] \arrow[rr, "\theta_{t \leq t+2\delta}", bend right] 
@@ -323,7 +328,7 @@ Finally, we can now claim the two main lemmas from were we will construct our de
         & W_{2\delta} \\
     \end{tikzcd}.
     $$
-
+    This implies that $ \im \theta_{t \leq t+2\delta} \subseteq \im \phi_\delta \subseteq W_{2\delta} $, so there are some injections $ j $ and $ i $ which make the following diagram commute as well:
     $$
     \begin{tikzcd}
         \im \theta_{t \leq t+2\delta} \arrow[r, "j"] \arrow[rr, "\theta_{t \leq t+2\delta}"', bend right] 
@@ -331,7 +336,7 @@ Finally, we can now claim the two main lemmas from were we will construct our de
         & W_{2\delta} \\
     \end{tikzcd}.
     $$
-
+    As all morphisms in the diagram abobe are injections, we can use the functorial properties of Lemma \ref{lemma:functoriality} having a commutative diagram of the barcodes of each of the previous persistence modules:
     $$
     \begin{tikzcd}
         \barc(\im \theta_{t \leq t+2\delta}) \arrow[r, "\mu_{inj}(j)"] \arrow[rr, "\mu_{inj}(\theta_{t \leq t+2\delta})"', bend right] 
@@ -339,19 +344,34 @@ Finally, we can now claim the two main lemmas from were we will construct our de
         & \barc(W_{2\delta}) \\
     \end{tikzcd}.
     $$
-    \item 
+    We have that
+    \begin{align}
+        \barc(\im \theta_{t \leq t+2\delta}) &= \{ (b, d-2 \delta) \colon (b, d] \in \barc(W), b < d - 2 \delta\}, \\
+        \barc(W_{2 \delta}) &= \{ (b - 2 \delta, d - 2\delta) \colon (b, d] \in \barc(W) \} \text{ and } \\
+        \mu_{inj}(\theta_{t \leq t+2\delta})((b, d-2 \delta)) &= (b - 2 \delta, 2 - 2\delta)
+    \end{align}
+    Therefore $ \im_\mu{inj}(i) \supseteq \im \mu_{inj}(\psi_{t \leq t+2\delta}) = \barc(W_{2 \delta})_{2 \delta}$. This, undoing the shifts made, make the prove.
+
+    \item Let $ (b, d] \in \barc(\im f_\delta) $ such as for some $ b' $, $ \mu_{inj}(b, d] = (b', d] \in \barc(W) $. Because of Lemma \ref{lemma:inj-matching}, $ b' \leq b $. There are again two cases:
+    
+    If $ d-b \leq 2 \delta $, then $ b' \geq d - 2\delta \geq b > b -2 \delta $ and $ b' \in [b - 2 \delta, b] $.
+
+    Else, if $ d-b > 2 \delta $, there exists an interval $ (b' + 2\delta, d] \in \barc(\im \theta_{t \leq t+2\delta}) $ such that $\mu{inj}(\theta_{t \leq t+2\delta})(b' + 2\delta, d] = \mu{inj}(i)(b, d] = (a,d]$. Thus, $ b \leq b' + 2\delta $ and $ b' \in [b - 2 \delta, b] $.
 \end{enumerate}
 \end{proof}
+
+At last, we can now prove the other part of the Stability theorem. For so, we will construct a $\delta$-matching out of a $\delta$-interleaving morphism.
 
 \begin{proposition} \cite[Theorem 3.0.2]{polterovich} \label{prop:matching-if-interleaving}
     Given two persistence modules $ V $, $ W $, with a $\delta$-interleaving morphism between them, then there is a $ \delta$-matching between their barcodes.
 \end{proposition}
-\begin{proof} (INCOMPLETE)
+\begin{proof}
+    Let $\mu(\phi) = \mu_{inj} \circ \mu_{sur} $ and let $ \Phi_\delta \colon \barc(W_\delta) \to \barc(W) $ be the {\it shift map} that carries each bar $ (a, b] $ into $ (a + \delta, b +\delta ]$. The composition $ \Phi_\delta \circ \mu(\phi) $ is a matching between $ \barc(V) $ and $ \barc(W) $. Hence, using Lemma \ref{lemma:inj-image} and \ref{lemma:sur-image}, we get the following diagram:
     $$
     \begin{tikzcd}[column sep=large, row sep=large]
         \barc(V)
         &
-        & \barc(W[\delta])_{\geq 2 \delta} 
+        & \barc(W_\delta)_{\geq 2 \delta} 
         & \barc(W)_{\geq 2 \delta} \\
         \barc(V)_{\geq 2\delta} \arrow[r, "\mu_{sur}"] \arrow[u, phantom, "{\rotatebox{90}{$\subseteq$}}" description]
         & \barc(\im f) \arrow[r, "\mu_{inj}"]
@@ -363,7 +383,24 @@ Finally, we can now claim the two main lemmas from were we will construct our de
         & (b' + \delta, d' + \delta] \arrow[u, phantom, "{\rotatebox{90}{$\in$}}"]
     \end{tikzcd}
     $$
+    The diagram shows that, by Lemma \ref{lemma:sur-image}, a bar $ (b, d] \in \barc(V)_{\geq 2\delta} $ is sent to $ \mu_{sur}(b, d] = (b, d'] \in \barc(\im \phi) $ with $ d' \in [d - 2 \delta, d] $. Then, by Lemma \ref{lemma:sur-image}, it is sent to $ \mu_{sur}(b, d'] = (b', d'] $ with $ b' \in [b - 2 \delta, b] $. At last, using the shift morphism $ \Phi_\delta$ it is carried to $(b' + \delta, d' + \delta] $.
+
+    This shows that any bar in $ \barc(V)_{\geq 2\delta} $ is matched. In the same manner it can be seen that any bar in $ \barc(W)_{\geq 2\delta} $ is matched. Thus, we have that
+    $$
+        \begin{cases}
+            d - 2\delta \leq d' \leq d\\
+            b - 2\delta \leq b' \leq b
+        \end{cases}
+        \Rightarrow
+        \begin{cases}
+            d - \delta \leq d' + \delta \leq d + \delta \\
+            b - \delta \leq b' + \delta \leq b + \delta 
+        \end{cases},
+    $$
+    and therefore, $ \Phi_\delta \circ \mu(\phi) $ is a $\delta$-matching between $ \barc(V) $ and $ \barc(W) $.
 \end{proof}
+
+The constructions made by Proposition \ref{prop:interleaving-if-matching} and Proposition \ref{prop:matching-if-interleaving} asure that given a $\delta$-interleaving morphism we can build a $\delta$-matching, and conversely, given a $\delta$-matching we can build a $\delta$-interleaving morphism. This means that if one of the two exists, it fixes a $\delta$. Both the interleaving distance and the bottleneck distance try to minimice this $\delta$, so once fixed for one of them, the other needs an smaller or equal $\delta'$. Thus, with each of the propositions we can prove one of the inequalities needed to reach the isomorphism between the space of persistence diagrams and the space of their barcodes.
 
 \begin{theorem}[Stability] \cite[Theorem 2.2.8]{polterovich}
     There is an isometry between a persistence module with the interleaving distance and its barcode with the bottleneck distance. This means that, given two persistence modules $ V, \ W $, 
