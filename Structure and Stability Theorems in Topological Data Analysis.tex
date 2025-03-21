@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper]{book}
+\documentclass[12pt, twoside]{report}
 
 \usepackage[a4paper,bindingoffset=3mm,bottom=35mm]{geometry}
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, pdftex]{hyperref}
@@ -11,6 +11,9 @@
 \usepackage{fullpage}
 \usepackage{thm-restate}
 \usepackage{mathtools}
+\usepackage{fancyhdr}
+\usepackage{quotchap}
+
 \mathtoolsset{showonlyrefs}
 
 \newtheorem{theorem}{Theorem}[section]
@@ -27,7 +30,7 @@
 \newcommand{\authorname}{Gonzalo Ortega Carpintero}
 \newcommand{\tutorname}{Manuel Mellado Cuerno}
 \newcommand{\institution}{Universidad Autónoma de Madrid}
-\newcommand{\projecttitle}{Structure and Stability Theorems in Topological Data Analysis
+\newcommand{\projecttitle}{Structure and Stability Theorems in Topological Data Analysis
 
 Draft}
 
@@ -51,6 +54,20 @@ Draft}
 
 \begin{document}
 
+% Page header %%%
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter.\ #1}{}}
+\fancyhf{}
+\fancyhead[LO]{\thepage}
+\fancyhead[RO]{\leftmark}
+\fancyhead[RE]{\thepage}
+\fancyhead[LE]{\nouppercase\rightmark}
+\fancyfoot[C]{}
+\setlength{\headsep}{30pt}
+\setlength{\headheight}{14.5pt}
+%%%
+
+\pagenumbering{roman}
 \begin{titlepage}
     \centering
     %{\includegraphics[width=0.2\textwidth]{logo}\par}
@@ -71,10 +88,8 @@ Draft}
     {\Large 13/03/2025 \par}
 \end{titlepage}
 
-
 \setlength{\parskip}{0.75em}
 \renewcommand{\baselinestretch}{1.25}
-
 
 \subsection*{Abstract}
 This is a draft version of a in-work Master's thesis on TDA, compiled for the application to the PhD position in area of topological data analysis in VU University.
@@ -82,11 +97,22 @@ This is a draft version of a in-work Master's thesis on TDA, compiled for the ap
 \subsection*{Key words}
 
 \tableofcontents
-\pagebreak
+\newpage
 
-\input{chapters/structure-stability-theorems.tex}
-\pagebreak
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
+
+\input{chapters/preliminaries.tex}
+\input{chapters/structure-theorem.tex}
+\input{chapters/interleaving-stability.tex}
+\input{chapters/eldelsbruner-harer-stability.tex}
+\input{chapters/gromov-husdorff-stability.tex}
+\input{chapters/vectorizations-stability.tex}
+
+
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
 \bibliographystyle{acm}
 \bibliography{biblio.bib}
 
