@@ -2,7 +2,7 @@
 *
 
 !.gitignore
-!chapters/
+!*/
 !*.tex
 !*.pdf
 !*.bib

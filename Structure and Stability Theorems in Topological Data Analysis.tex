@@ -2,99 +2,26 @@
 
 \usepackage[a4paper,bindingoffset=3mm,bottom=35mm]{geometry}
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, pdftex]{hyperref}
-
 \usepackage[pdftex]{graphicx}  
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsthm}
 \usepackage{tikz-cd}
 \usepackage{fullpage}
-\usepackage{thm-restate}
-\usepackage{mathtools}
 \usepackage{fancyhdr}
 \usepackage{quotchap}
 
-\mathtoolsset{showonlyrefs}
-
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corolary}[theorem]{Corolary}
-\newtheorem{fact}[theorem]{Fact}
-
-\theoremstyle{definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{remark}[theorem]{Remark}
-
-\newcommand{\authorname}{Gonzalo Ortega Carpintero}
-\newcommand{\tutorname}{Manuel Mellado Cuerno}
-\newcommand{\institution}{Universidad Autónoma de Madrid}
-\newcommand{\projecttitle}{Structure and Stability Theorems in Topological Data Analysis
-
-Draft}
-
-\newcommand{\dgmp}{\operatorname{Dgm}_p}
-\newcommand{\dgmi}{\operatorname{Dgm}_\infty}
-\newcommand{\costp}{\operatorname{cost}_p}
-\newcommand{\costi}{\operatorname{cost}_\infty}
-\newcommand{\wdp}{\omega_p}
-\newcommand{\wdi}{\omega_\infty}
-\newcommand{\twdp}{\tilde \omega_p}
-\newcommand{\twdi}{\tilde \omega_\infty}
-\newcommand{\p}{\mathcal P}
-\newcommand{\B}{\mathcal B}
-\newcommand{\T}{T_\#}
-\newcommand{\N}{\mathbb N}
-\newcommand{\R}{\mathbb R}
-\newcommand{\upr}{\mathbb{R}_<^2}
-
-\newcommand{\barc}{\operatorname{Bar}}
-\newcommand{\im}{\operatorname{im}}
+\input{tex-configuration/math-definitions.tex}
+\input{tex-configuration/commands.tex}
 
 \begin{document}
-
-% Page header %%%
-\pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter.\ #1}{}}
-\fancyhf{}
-\fancyhead[LO]{\thepage}
-\fancyhead[RO]{\leftmark}
-\fancyhead[RE]{\thepage}
-\fancyhead[LE]{\nouppercase\rightmark}
-\fancyfoot[C]{}
-\setlength{\headsep}{30pt}
-\setlength{\headheight}{14.5pt}
-%%%
-
-\pagenumbering{roman}
-\begin{titlepage}
-    \centering
-    %{\includegraphics[width=0.2\textwidth]{logo}\par}
-    \vspace{1cm}
-    {\bfseries\LARGE \institution \par}
-    \vspace{1cm}
-    {\scshape\Large Final Master Thesis \par}
-    \vspace{3cm}
-    {\scshape\Huge \projecttitle \par}
-    \vspace{2cm}
-    \vfill
-    {\Large Author: \par}
-    {\Large \authorname \par}
-    \vspace{1cm}
-    {\Large Tutor: \par}
-    {\Large \tutorname \par}
-    \vfill
-    {\Large 13/03/2025 \par}
-\end{titlepage}
+\input{tex-configuration/headers.tex}
+\input{tex-configuration/titlepage.tex}
 
 \setlength{\parskip}{0.75em}
 \renewcommand{\baselinestretch}{1.25}
+\pagenumbering{roman}
 
-\subsection*{Abstract}
-This is a draft version of a in-work Master's thesis on TDA, compiled for the application to the PhD position in area of topological data analysis in VU University.
-
-\subsection*{Key words}
+\input{chapters/complements/abstract.tex}
 
 \tableofcontents
 \newpage
@@ -102,18 +29,12 @@ This is a draft version of a in-work Master's thesis on TDA, compiled for the ap
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-
 \input{chapters/preliminaries.tex}
 \input{chapters/structure-theorem.tex}
 \input{chapters/interleaving-stability.tex}
 \input{chapters/eldelsbruner-harer-stability.tex}
 \input{chapters/gromov-husdorff-stability.tex}
 \input{chapters/vectorizations-stability.tex}
-
-
-\phantomsection
-\addcontentsline{toc}{chapter}{Bibliography}
-\bibliographystyle{acm}
-\bibliography{biblio.bib}
+\input{chapters/complements/bibliography.tex}
 
 \end{document}
