@@ -1,0 +1,65 @@
+\chapter{Edelsbrunner \& Harer's (Hausdorff) Stability Theorem}
+
+In this chapter we will follow \cite{Edelsbrunner}. To simplify notation, along this chapter we will adopt the following. Let $ H_k(x) $ be the $k$-th singular homology group of a topological space $ X $. The dimension of $ H_k(x) $ is denoted by the $k$-th Betti number $ \beta_k(X) \coloneq \dim $
+
+
+\begin{definition}[Homological critical value]
+    Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
+    $ \epsilon > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \infty)) \to H_k(f_{-1}(-\infty, a + \epsilon)) $ is not an isomorphism.
+\end{definition}
+
+\begin{definition}[Tame function]
+    A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z$
+\end{definition}
+
+\begin{theorem}[Main Theorem, \cite{Edelsbrunner}] \label{lemma:edelsbrunner-stability}
+    Let $ X $ be a triangulable space, and $ f, g\colon X \to \R $ continuous tame functions. Then,
+    \begin{align}
+        \db (D(f), D(g)) \leq \|f-g\|_\infty
+    \end{align}
+\end{theorem}
+
+\section{Hausdorff Stability}
+
+We will denote the closed upper left quadrant of a point $ (x, y) \in \R^2 $ as $ Q_x^y \coloneq [-\infty, x] \times [y, \infty] $.
+
+\begin{lemma}[$k$-Triangle Lemma, \cite{Edelsbrunner}] \label{lemma:k-triangle}
+    Let $ f\colon X \to \R $ be a tame function, $ x < y \in \R $ be non critical values of $ f $. Then
+    \begin{align}
+        \# (D(f) \cap Q_x^y) = \beta_x^y.
+    \end{align}
+\end{lemma}
+
+Denote the {\bf upper left quadrants} $ Q \coloneq Q_b^c = [-\infty, b] \times [c, \infty] $, $ Q_\epsilon \coloneq Q_{b-\epsilon}^{c+\epsilon} = [-\infty, b-\epsilon] \times [c+\epsilon, \infty] $.
+
+\begin{lemma}[Quadrant Lemma, \cite{Edelsbrunner}] \label{lemma:quadrant-lemma}
+    With the notation abobe, the following inequality holds,
+    \begin{align}
+        \#(D(f), \cap Q_\epsilon) \leq \#(D(g) \cap Q).
+    \end{align}
+\end{lemma}
+
+Let $ a < b < c < d \in \R $. Denote the {\bf rectangles} $ R \coloneq [a, b] \times [c, d] $, $ R_\epsilon \coloneq [a+\epsilon, b-\epsilon] \times [c+\epsilon, d -\epsilon] $.
+
+\begin{lemma}[Box Lemma, \cite{Edelsbrunner}] \label{lemma:box-lemma}
+    With the notation abobe, the following inequality holds,
+    \begin{align}
+        \#(D(f), \cap R_\epsilon) \leq \#(D(g) \cap R).
+    \end{align}
+\end{lemma}
+
+\section{Bottleneck Stability}
+
+\begin{lemma}[Easy Bijection Lemma, \cite{Edelsbrunner}]
+    Let $ f, g \colon X \to \R $ be tame functions, where $ g $ is very close to $ f $. Then, following holds,
+    \begin{align}
+        \db(D(f), D(g)) \leq \|f - g \|_\infty.
+    \end{align}
+\end{lemma}
+
+\begin{lemma}[Interpolation Lemma, \cite{Edelsbrunner}]
+    Let $ K $ be a simplicial complex and let $ \hat f, \hat g \colon K \to \R $ be two picewise linear functions. Then, following holds,
+    \begin{align}
+        \db(D(\hat f), D(\hat g)) \leq \|\hat f - \hat g \|_\infty.
+    \end{align}
+\end{lemma}
