@@ -1,6 +1,10 @@
 \chapter{Edelsbrunner \& Harer's (Hausdorff) Stability Theorem}
 
-In this chapter we will follow \cite{Edelsbrunner}. To simplify notation, along this chapter we will adopt the following. Let $ H_k(x) $ be the $k$-th singular homology group of a topological space $ X $. The dimension of $ H_k(x) $ is denoted by the $k$-th Betti number $ \beta_k(X) \coloneq \dim $
+In this chapter we will follow \cite{Edelsbrunner}. To simplify notation, along this chapter we will adopt the following. Let $ H_k(X) $ be the $k$-th singular homology group of a topological space $ X $. The dimension of $ H_k(x) $ is denoted by the $k$-th Betti number $ \beta_k(X) \coloneq \dim H_k(x) $.
+
+Let $ f\colon X \to \R $, $x < y \in \R$. Denote the $k$-th homology group of the pre-image by $ f $ of an interval $ (-\infty, x] $ as $ F_x \coloneq H_k(f^{-1}(-\infty, x])$. Denote the inclusion map from the $k$-th homology group $ F_x$ to the  $k$-th homology group $ F_y$ as $f_x^y \colon F_x \to F_y $. Finally, denote $ F_x^y \coloneq \im f_x^y $.
+
+Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \infty $, then $ y = \infty $ too. 
 
 
 \begin{definition}[Homological critical value]
@@ -9,8 +13,19 @@ In this chapter we will follow \cite{Edelsbrunner}. To simplify notation, along 
 \end{definition}
 
 \begin{definition}[Tame function]
-    A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z$
+    A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z \in \Z $, and for all $ a \in \R $, $ \dim F_a < \infty $.
 \end{definition}
+
+\begin{definition}[Multiplicity]
+    Let $f \colon X \to \R $ be tame, and $ (a_i)_{i = 1, \dots, n} $ be its homological critical values. Take $ (b_i)_{i = 1, \dots, n} $ be an interleaved sequence of non critical values such that $ b_{i-1} < a_i < b_i $ for all $ i = 1, \dots, n $. Define $ b_{-1} = a_0 = -\infty $, $b_{n+1} = a_{n+1} = \infty $. The {\bf multiplicity} of $ (a_i, a_j) \in D(f) $, denoted $ \mu_i^j $ is
+    \begin{align}
+        \mu_i^j \coloneq \beta_{b_{i-1}}^{b_j} - \beta_{b_{i}}^{b_j} + \beta_{b_{i}}^{b_{j-1}} - \beta_{b_{i-1}}^{b_{j-1}}.
+    \end{align}.
+
+    The {\bf total multiplicity} of a multiset A, denoted $ \#(A) $ is the sum of the multiplicities of every element elements in $A$.
+\end{definition}
+
+Note that the total multiplicity of a multiset is the the generalized concept of cardinality of a normal set. While the cardinality of a set counts the number of elements in the set, the multiplicity of a multiset counts how many elements, different or not, are there in the multiset.
 
 \begin{theorem}[Main Theorem, \cite{Edelsbrunner}] \label{lemma:edelsbrunner-stability}
     Let $ X $ be a triangulable space, and $ f, g\colon X \to \R $ continuous tame functions. Then,
@@ -24,11 +39,19 @@ In this chapter we will follow \cite{Edelsbrunner}. To simplify notation, along 
 We will denote the closed upper left quadrant of a point $ (x, y) \in \R^2 $ as $ Q_x^y \coloneq [-\infty, x] \times [y, \infty] $.
 
 \begin{lemma}[$k$-Triangle Lemma, \cite{Edelsbrunner}] \label{lemma:k-triangle}
-    Let $ f\colon X \to \R $ be a tame function, $ x < y \in \R $ be non critical values of $ f $. Then
+    Let $ f\colon X \to \R $ be a tame function, $ x < y \in \R $ be non critical values of $ f $. Then the multiplicity $\mu $ of the persistence diagram of $ f $ in the closed upper left quadrant is 
     \begin{align}
-        \# (D(f) \cap Q_x^y) = \beta_x^y.
+        \mu = \# (D(f) \cap Q_x^y) = \beta_x^y.
     \end{align}
 \end{lemma}
+\begin{proof}
+    Let $ x = b_i $, $ y = b_{j-1} $.
+    \begin{align} 
+        \mu &= \sum_{k \leq i \leq j \leq l} \mu_k^l = \sum_{k \leq i \leq j \leq l} \beta_{b_{k-1}}^{b_l} - \beta_{b_k}^{b_l} + \beta_{b_k}^{b_{l-1}} - \beta_{b_{k-1}}^{b_{l-1}} \label{eq:k-triangle-1} \\
+        &= \beta_{b_{-1}}^{b_{n+1}} - \beta_{b_i}^{b_{n+1}} + \beta_{b_i}^{b_{j-1}} - \beta_{b_{j-1}}^{b_{-1}} = \beta_{b_k}^{b_{l-1}} = \beta_x^y. \label{eq:k-triangle-2}
+    \end{align}
+    The fist two equalities in \eqref{eq:k-triangle-1} are just the definition of total multiplicity. In \eqref{eq:k-triangle-2}, note that every other term in the sum cancels. Then note that $ \beta_{b_{-1}}^{b_{n+1}} = \dim F_{-\infty}^{\infty} $, $ \beta_{b_i}^{b_{n+1}} = \dim F_{x}^{\infty} $ and $ \beta_{b_{j-1}}^{b_{-1}} = \dim F_{-\infty}^y $. All of them are the dimension of the trivial group, therefore, equal to $ 0 $. This leaves only one remaining term and completes the proof.
+\end{proof}
 
 Denote the {\bf upper left quadrants} $ Q \coloneq Q_b^c = [-\infty, b] \times [c, \infty] $, $ Q_\epsilon \coloneq Q_{b-\epsilon}^{c+\epsilon} = [-\infty, b-\epsilon] \times [c+\epsilon, \infty] $.
 
@@ -47,6 +70,21 @@ Let $ a < b < c < d \in \R $. Denote the {\bf rectangles} $ R \coloneq [a, b] \t
         \#(D(f), \cap R_\epsilon) \leq \#(D(g) \cap R).
     \end{align}
 \end{lemma}
+\begin{proof}
+    $$
+    \begin{tikzcd}
+        G_a^d \arrow[rrr, "r_1"]
+        &
+        &
+        & G_b^d \\
+        & F_{a+\epsilon}^{d-\epsilon} \arrow[r, "r_2"]
+        & F_{b-\epsilon}^{d-\epsilon} \arrow[ru, "s_1"]
+        & \\
+                                                                                      & F_{a+\epsilon}^{c+\epsilon} \arrow[u, "u_2"] \arrow[r, "r_3"] & F_{b-\epsilon}^{c+\epsilon} \arrow[u, "u_3"'] &                                                              \\
+        G_a^c \supseteq E_a^c \arrow[ru, "s_2"] \arrow[uuu, "u_1"] \arrow[rrr, "r_4"] &                                                               &                                               & E_b^c \subseteq G_b^c \arrow[lu, "s_3"'] \arrow[uuu, "u_4"']
+        \end{tikzcd}
+    $$
+\end{proof}
 
 \section{Bottleneck Stability}
 
