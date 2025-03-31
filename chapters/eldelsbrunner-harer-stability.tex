@@ -9,7 +9,7 @@ Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \inf
 
 \begin{definition}[Homological critical value]
     Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
-    $ \epsilon > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \infty)) \to H_k(f_{-1}(-\infty, a + \epsilon)) $ is not an isomorphism.
+    $ \e > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \infty)) \to H_k(f_{-1}(-\infty, a + \e)) $ is not an isomorphism.
 \end{definition}
 
 \begin{definition}[Tame function]
@@ -53,76 +53,106 @@ We will denote the closed upper left quadrant of a point $ (x, y) \in \R^2 $ as 
     The fist two equalities in \eqref{eq:k-triangle-1} are just the definition of total multiplicity. In \eqref{eq:k-triangle-2}, note that every other term in the sum cancels. Then note that $ \beta_{b_{-1}}^{b_{n+1}} = \dim F_{-\infty}^{\infty} $, $ \beta_{b_i}^{b_{n+1}} = \dim F_{x}^{\infty} $ and $ \beta_{b_{j-1}}^{b_{-1}} = \dim F_{-\infty}^y $. All of them are the dimension of the trivial group, therefore, equal to $ 0 $. This leaves only one remaining term and completes the proof.
 \end{proof}
 
-Denote the {\bf upper left quadrants} $ Q \coloneq Q_b^c = [-\infty, b] \times [c, \infty] $, $ Q_\epsilon \coloneq Q_{b-\epsilon}^{c+\epsilon} = [-\infty, b-\epsilon] \times [c+\epsilon, \infty] $.
-
-
+Denote the {\bf upper left quadrants} $ Q \coloneq Q_b^c = [-\infty, b] \times [c, \infty] $, $ Q_\e \coloneq Q_{b-\e}^{c+\e} = [-\infty, b-\e] \times [c+\e, \infty] $.
 
 \begin{lemma}[Quadrant Lemma, \cite{Edelsbrunner}] \label{lemma:quadrant-lemma}
     Let $f,g \colon X \to \R $ be two tame functions. With the notation abobe, the following inequality holds,
     \begin{align}
-        \#(D(f), \cap Q_\epsilon) \leq \#(D(g) \cap Q).
+        \#(D(f), \cap Q_\e) \leq \#(D(g) \cap Q).
     \end{align}
 \end{lemma}
 \begin{proof}
-    Let $ \epsilon \coloneq \|f - g\|_\infty $. Hence, considering the pre-image of the functions, we have the following inclusions
+    Let $ \e \coloneq \|f - g\|_\infty $. Hence, considering the pre-image of the functions, we have the following inclusions
     \begin{align}
-        f^{-1}((-\infty, x]) &\subseteq g^{-1}((-\infty, x+\epsilon)), \label{eq:quadrant-1}\\
-        g^{-1}((-\infty, x]) &\subseteq f^{-1}((-\infty, x+\epsilon)). \label{eq:quadrant-2}
+        f^{-1}((-\infty, x]) &\subseteq g^{-1}((-\infty, x+\e)), \label{eq:quadrant-1}\\
+        g^{-1}((-\infty, x]) &\subseteq f^{-1}((-\infty, x+\e)). \label{eq:quadrant-2}
     \end{align}
-    Name $ \varphi_x \colon F_x \to G_{x+\epsilon} $  to the inclusion map induced by \eqref{eq:quadrant-1} and $ \psi_x \colon G_x \to F_{x+\epsilon} $ to the inclusion map induced by \eqref{eq:quadrant-2}. Let $ b<c \in \R $. With the described maps, we can form commutative diagram \eqref{cd:quadrant-1} where we observe that
-    \begin{align} \label{eq:quadrant-3}
-        \im(f_{c-\epsilon}^{c+\epsilon}) = F_{c-\epsilon}^{c+\epsilon} \subseteq \psi_c \circ g_b^c(G_b) = \psi_c (G_b^c).
+    Name $ \varphi_x \colon F_x \to G_{x+\e} $  to the inclusion map induced by \eqref{eq:quadrant-1} and $ \psi_x \colon G_x \to F_{x+\e} $ to the inclusion map induced by \eqref{eq:quadrant-2}. Let $ b<c \in \R $. With the described maps, we can form commutative diagram \eqref{cd:quadrant-1} where we observe that
+    \begin{align} 
+        \im(f_{c-\e}^{c+\e}) = F_{c-\e}^{c+\e} \subseteq \psi_c \circ g_b^c(G_b) = \psi_c (G_b^c).
     \end{align}
     \begin{equation} \label{cd:quadrant-1}
     \begin{tikzcd}
-        F_{b-\epsilon} \arrow[r, "f_{b-\epsilon}^{c+\epsilon}"] \arrow[d, "\varphi_{b-\epsilon}"']
-        & F_{c+\epsilon} \\
+        F_{b-\e} \arrow[r, "f_{b-\e}^{c+\e}"] \arrow[d, "\varphi_{b-\e}"']
+        & F_{c+\e} \\
         G_b \arrow[r, "g_b^c"]
         & G_c \arrow[u, "\psi_c"']        
     \end{tikzcd}
     \end{equation}
-    We can also fit the maps so that they describe commutative diagram \eqref{cd:quadrant-2}, showing that
+    Last inclusion is enough for the requirements of this proof, never the less, we will make one more note that will be useful latter on, through the proof of Lemma \ref{lemma:box-lemma}. Fit the maps so that they describe commutative diagram \eqref{cd:quadrant-2}, showing that
     \begin{align}
-        \psi_c(G_b^c) = \psi_c \circ g_b^c(G_b) = f_{b+\epsilon}^{c+\epsilon} \circ \psi_b(G_b) \subseteq F_{b+\epsilon}^{c+\epsilon}.
+        \psi_c(G_b^c) = \psi_c \circ g_b^c(G_b) = f_{b+\e}^{c+\e} \circ \psi_b(G_b) \subseteq F_{b+\e}^{c+\e}.
     \end{align}
     \begin{equation} \label{cd:quadrant-2}
     \begin{tikzcd}
-        F_{b+\epsilon} \arrow[r, "f_{b+\epsilon}^{c+\epsilon}"]
-        & F_{c+\epsilon} \\
-        G_b \arrow[r, "g_b^c"] \arrow[u, "\phi_{b}"]
+        F_{b+\e} \arrow[r, "f_{b+\e}^{c+\e}"]
+        & F_{c+\e} \\
+        G_b \arrow[r, "g_b^c"] \arrow[u, "\varphi_{b}"]
         & G_c \arrow[u, "\psi_c"']        
     \end{tikzcd}
     \end{equation}
+    From both diagrams we finally obtain the inclusion chain
+    \begin{align}  \label{eq:quadrant-3}
+        F_{c-\e}^{c+\e} \subseteq \psi_c (G_b^c) \subseteq F_{b+\e}^{c+\e}.
+    \end{align}
     By Lemma \ref{lemma:k-triangle}, we are able to count the elements in the intersection of the diagrams with the upper left quadrants. Hence
     \begin{align}
-        \#(D(f) \cap Q_\epsilon) &= \beta_{b-\epsilon}^{c+\epsilon} = \dim F_{b-\epsilon}^{c+\epsilon}, \\
+        \#(D(f) \cap Q_\e) &= \beta_{b-\e}^{c+\e} = \dim F_{b-\e}^{c+\e}, \\
         \#(D(g) \cap Q) &= \beta_b^c = \dim G_b^c.
     \end{align}
-    As if one homology group is contain in an other, the dimension of the first must be lower or equal to the one of the second. Also, the dimension is invariant under inclusion maps. Thus, inclusion \label{eq:quadrant-3} assets that $ F_{c-\epsilon}^{c+\epsilon} \subseteq \psi_c (G_b^c) $ and therefore we have $ \dim F_{c-\epsilon}^{c+\epsilon} \leq  \dim G_b^c $.
+    As if one homology group is contain in an other, the dimension of the first must be lower or equal to the one of the second. Also, the dimension is invariant under inclusion maps. Thus, the first inclusion of \eqref{eq:quadrant-3} asserts that $ F_{c-\e}^{c+\e} \subseteq \psi_c (G_b^c) $ and therefore we have proven that $ \dim F_{c-\e}^{c+\e} \leq  \dim G_b^c $.
 \end{proof}
 
-Let $ a < b < c < d \in \R $. Denote the {\bf rectangles} $ R \coloneq [a, b] \times [c, d] $, $ R_\epsilon \coloneq [a+\epsilon, b-\epsilon] \times [c+\epsilon, d -\epsilon] $.
+Before next lemma we will introduce some new notation. Let $ f\colon X \to \R $ fe a tame function. Let $ w < x < y < z \in \R $ be numbers different from critical values of $ f $. Recall that $ F_x = H_k(f^{-1}(-\infty, x]) $, $ f_x^y \colon F_x \to F_y $ and $ F_x^y = \dim f_x^y $. We denote
+\begin{align}
+    f_x^{y, z} &\coloneq f_y^z \rvert_{F_x^y},
+    \quad &
+    F_x^{y, z} &\coloneq \dim f_x^{y, z}.
+\end{align}
+Note, from linear algebra, that $ \dim F_x^{y,z} = \dim F_x^y - \dim F_x^z $. Note too that $ F_w^y \subseteq F_x^y $. Therefore, $ \ker F_w^y \subseteq \ker F_x^y $ and we can define the quotient
+\begin{align}
+    F_{w,x}^{y,z} \coloneq F_x^{y,z} / F_w^{y,z}.
+\end{align}
+
+Let $ a < b < c < d \in \R $. Denote the {\bf rectangles} $ R \coloneq [a, b] \times [c, d] $, $ R_\e \coloneq [a+\e, b-\e] \times [c+\e, d -\e] $.
 
 \begin{lemma}[Box Lemma, \cite{Edelsbrunner}] \label{lemma:box-lemma}
     With the notation abobe, the following inequality holds,
     \begin{align}
-        \#(D(f), \cap R_\epsilon) \leq \#(D(g) \cap R).
+        \#(D(f), \cap R_\e) \leq \#(D(g) \cap R).
     \end{align}
 \end{lemma}
 \begin{proof}
-    $$
-    \begin{tikzcd}
-        G_a^d \arrow[rrr, "r_1"]
-        &
-        &
-        & G_b^d \\
-        & F_{a+\epsilon}^{d-\epsilon} \arrow[r, "r_2"]
-        & F_{b-\epsilon}^{d-\epsilon} \arrow[ru, "s_1"]
-        & \\
-                                                                                      & F_{a+\epsilon}^{c+\epsilon} \arrow[u, "u_2"] \arrow[r, "r_3"] & F_{b-\epsilon}^{c+\epsilon} \arrow[u, "u_3"'] &                                                              \\
-        G_a^c \supseteq E_a^c \arrow[ru, "s_2"] \arrow[uuu, "u_1"] \arrow[rrr, "r_4"] &                                                               &                                               & E_b^c \subseteq G_b^c \arrow[lu, "s_3"'] \arrow[uuu, "u_4"']
-        \end{tikzcd}
-    $$
+Note that we can asume that $ a + \e < b - \e $ and $ c+\e < d - \e $. Otherwise there would not be rectangle $ R_\e $. Also note that
+\begin{align}
+    \#(D(f) \cap R_\e) &= \dim F_{a+\e, b-\e}^{c+\e, d-\e} \\
+    \#(D(g) \cap R) &= \dim G_{a, b}^{c, d} \\
+\end{align}
+To make our prove we draw diagram \ref{cd:box}. Lets analice every element of the diagram.
+\begin{equation} \label{cd:box}
+\begin{tikzcd}
+    G_a^d \arrow[rrr, "r_1"]
+    & & & G_b^d \\
+    & F_{a+\e}^{d-\e} \arrow[r, "r_2"]
+    & F_{b-\e}^{d-\e} \arrow[ru, "s_1"] & \\
+    & F_{a+\e}^{c+\e} \arrow[u, "u_2"] \arrow[r, "r_3"]
+    & F_{b-\e}^{c+\e} \arrow[u, "u_3"'] & \\
+    G_a^c \supseteq E_a^c \arrow[ru, "s_2"] \arrow[uuu, "u_1"] \arrow[rrr, "r_4"]
+    & & & E_b^c \subseteq G_b^c \arrow[lu, "s_3"'] \arrow[uuu, "u_4"']
+\end{tikzcd}
+\end{equation}
+First of all, the middle upside arrows, are
+\begin{align}
+    u_2 &= f_{a+\e}^{c+\e, d-\e}, \quad & u_3 &= f_{b-\e}^{c+\e, d-\e}.
+\end{align}
+Right arrows $ r_1, r_2, r_3, r_4 $ represent the inclusions from its respective vector spaces to their destination, in the same manner. The objetive is to define que respective quotients to define $ G_{a, b}^{c, d} $. Recall the inclusion maps defined in the proof of Lemma \ref{lemma:quadrant-lemma}, $ \varphi_x \colon F_x \to G_{x+\e} $ and $ \psi_x \colon G_x \to F_{x+\e}$. We define
+\begin{align}
+    E_b^c &\coloneq \psi_c^{-1}(F_{b-\e}^{c+\e, d-\e}) \cap G_b^c, \quad & E_a^c \coloneq G_a^c \cap E_b^c.
+\end{align}
+We have then that the outer upside arrows are the respective restrictions
+\begin{align}
+    u_1 &= g_a^{c,d}\rvert_{E_a^c} \quad & u_4 &= g_b^{c,d}\rvert_{E_b^d}
+\end{align}
 \end{proof}
 
 \section{Bottleneck Stability}
