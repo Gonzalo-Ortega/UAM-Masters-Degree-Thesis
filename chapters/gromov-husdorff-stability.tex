@@ -1,2 +1,50 @@
 \chapter{Gromov-Hausdorff's Stability Theorem}
-\cite{burago}
+
+\begin{lemma}[Exercise 3.5.4, \cite{burago}]
+    Any finite metric space of cardinality $ n $ can be isometrically embedded into $(\R^n, \ell^n)$
+\end{lemma}
+
+\begin{lemma}[Lemma VII, \cite{ghrist}]
+    Let $ X \subset \R^n $ and $ \alpha > 0 $. Then the $\alpha$-\v Cech and the $\alpha$-Rips complexes coincide when using the $ \ell^\infty $-norm. That is
+    $$
+        \check C_\alpha(X, \ell^\infty) = R_\alpha(X, \ell^\infty).
+    $$
+\end{lemma}
+
+\begin{definition}[Paracompact space]
+    Let $ X $ be a topological space. It is said to be {\bf paracompact} if for all covering $ U $ of $ X $, there exists $ \mathcal V \subseteq \mathcal U $ such that $ \mathcal V $ is a finite covering.
+\end{definition}
+
+\begin{definition}[Good cover]
+    Let $ X $ be a topological space.
+\end{definition}
+
+\begin{lemma}[\cite{oudot}]
+    Let $ S \subset S' $ be two paracompact spaces. Let $ \mathcal U = \{U_x\}_{x \in A}$, $ \mathcal U' = \{U'_x\}_{x \in A'}$ be two good covers of $ S $ and $ S'$ respectively, based on finite parameter sets $ A \subset A ' $ such that $ U_x \subset U_x' $ for all $ x \in A $. Then the homotopy equivalences $ \n \mathcal U \to S $ and $\n U' \to S' $ commute with the canonical inclusions $ S \to S' $ and $ \n \mathcal U \to \n \mathcal U' $ at homology level.
+\end{lemma}
+
+\begin{theorem}[Theorem 3.1, \cite{chazal}]
+    Let $ (X, d_X) $, $ (Y, d_Y) $ be finite metric spaces. Then, for any $ k \in \N$, 
+    $$
+        \db(D_k(\rf(X, d_X)), D_k(\rf(Y, d_Y))) \leq \dgh((X, d_X), (Y, d_Y)).
+    $$
+\end{theorem}
+
+\begin{proposition}
+    Let $ (X, d_X) $, $ (Y, d_Y) $ be finite metric spaces. Then, for any $ k \in \N$, the bottleneck distance
+    $$
+        \db(D_k(\rf(X, d_X)), D_k(\rf(Y, d_Y))),
+    $$
+    is a tight lower bound of
+    $$
+        \dgh((X, d_X), (Y, d_Y)).
+    $$
+    That is, it is the largest possible lower bound.
+\end{proposition}
+
+\begin{theorem}
+    Let $ (X, d_X) $, $ (Y, d_Y) $ be finite metric spaces endowed with the functions $ f \colon X \to \R $ and $ g \colon Y \to \R $. Then
+    $$
+        \db(D_k(\rf(X, d_X, f)), D_k(\rf(Y, d_Y, g))) \leq \dgh^1((X, d_X, f), (Y, d_Y, g)).
+    $$
+\end{theorem}
