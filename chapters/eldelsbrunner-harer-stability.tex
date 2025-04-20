@@ -1,6 +1,10 @@
 \chapter{Edelsbrunner \& Harer's (Hausdorff) Stability Theorem}
 
-In this chapter we will follow \cite{Edelsbrunner}. To simplify notation, along this chapter we will adopt the following. Let $ H_k(X) $ be the $k$-th singular homology group of a topological space $ X $. The dimension of $ H_k(x) $ is denoted by the $k$-th Betti number $ \beta_k(X) \coloneq \dim H_k(x) $.
+Persistence diagrams help summarize the information given by the homology groups of a filtration over a certain data set. They represent the birth and death of every feature in an easy to analice format scattering points over the upper half of the plane $\R^2 $ and its diagonal $ \Delta $. Once we have computed the diagrams given by two datasets we can measure distances between them using the bottleneck distance, enabling us to decide wether two diagrams are close to each other. However, this would be kind of useless if the bottleneck distance were not stable. If minor differences in original data would cause great changes in the bottleneck distance between the corresponding persistence diagrams, then this data summary method would be as good as any other random method.
+
+Fortunately for us, David Cohen-Steiner, Herbert Edelsbrunner and John Harer, proved in their 2005 paper that bottleneck distance over persistence diagrams is indeed stable \cite{Edelsbrunner}. This means that, when comparing the bottleneck distance between the persistence diagrams formed by the pre images of two tame functions, the first will be always lower or equal that the Lebesgue $L_\infty$ norm between the two functions.
+
+Along this chapter we will follow Edelsbrunner et al. paper \cite{Edelsbrunner} to prove Theorem \ref{theorem:edelsbrunner-stability}. To simplify notation, along this chapter we will adopt the following. Let $ H_k(X) $ be the $k$-th singular homology group of a topological space $ X $. The dimension of $ H_k(x) $ is denoted by the $k$-th Betti number $ \beta_k(X) \coloneq \dim H_k(x) $.
 
 Let $ f\colon X \to \R $, $x < y \in \R$. Denote the $k$-th homology group of the pre-image by $ f $ of an interval $ (-\infty, x] $ as $ F_x \coloneq H_k(f^{-1}(-\infty, x])$. Denote the inclusion map from the $k$-th homology group $ F_x$ to the  $k$-th homology group $ F_y$ as $f_x^y \colon F_x \to F_y $. Finally, denote $ F_x^y \coloneq \im f_x^y $.
 
@@ -20,14 +24,13 @@ Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \inf
     Let $f \colon X \to \R $ be tame, and $ (a_i)_{i = 1, \dots, n} $ be its homological critical values. Take $ (b_i)_{i = 1, \dots, n} $ be an interleaved sequence of non critical values such that $ b_{i-1} < a_i < b_i $ for all $ i = 1, \dots, n $. Define $ b_{-1} = a_0 = -\infty $, $b_{n+1} = a_{n+1} = \infty $. The {\bf multiplicity} of $ (a_i, a_j) \in D(f) $, denoted $ \mu_i^j $ is
     \begin{align}
         \mu_i^j \coloneq \beta_{b_{i-1}}^{b_j} - \beta_{b_{i}}^{b_j} + \beta_{b_{i}}^{b_{j-1}} - \beta_{b_{i-1}}^{b_{j-1}}.
-    \end{align}.
-
-    The {\bf total multiplicity} of a multiset A, denoted $ \#(A) $ is the sum of the multiplicities of every element elements in $A$.
+    \end{align}
+    The {\bf total multiplicity} of a multiset A, denoted $ \#(A) $ is the sum of the multiplicities of every element in $A$.
 \end{definition}
 
 Note that the total multiplicity of a multiset is the the generalized concept of cardinality of a normal set. While the cardinality of a set counts the number of elements in the set, the multiplicity of a multiset counts how many elements, different or not, are there in the multiset.
 
-\begin{restatable}[Main Theorem, \cite{Edelsbrunner}]{theorem}{Main} \label{lemma:edelsbrunner-stability}
+\begin{restatable}[Main Theorem, \cite{Edelsbrunner}]{theorem}{Main} \label{theorem:edelsbrunner-stability}
     Let $ X $ be a triangulable space, and $ f, g\colon X \to \R $ continuous tame functions. Then,
     \begin{align}
         \db (D(f), D(g)) \leq \|f-g\|_\infty
@@ -155,20 +158,111 @@ We have then that the outer upside arrows are the respective restrictions
 \end{align}
 \end{proof}
 
-\section{Bottleneck Stability}
+\begin{theorem}[Hausdorff Stability] \label{theorem:hausdorff-stability}
+$$
+    d_H(D(f), D(g)) \leq \| f - g \|_\infty.
+$$
+\end{theorem}
 
-\begin{lemma}[Easy Bijection Lemma, \cite{Edelsbrunner}]
+\section{Bottleneck Stability}
+In this section we are going to prove Theorem \ref{theorem:edelsbrunner-stability}. 
+
+\begin{definition}[Very close tame functions]
+    Let $ f, g \colon X \to \R $ be tame functions. We define
+    $$
+        \delta_f = \min \{ \|p - q\|_\infty : p \in D(f) \setminus \Delta, \ q \in D(f), \ p \neq q\}.
+    $$
+    We say that $ g $ is {\bf very close} to $ f $ if $\|f-g\|_\infty < \delta_f / 2$.
+\end{definition}
+
+\begin{lemma}[Easy Bijection Lemma, \cite{Edelsbrunner}] \label{lemma:easy-biyection}
     Let $ f, g \colon X \to \R $ be tame functions, where $ g $ is very close to $ f $. Then, following holds,
     \begin{align}
         \db(D(f), D(g)) \leq \|f - g \|_\infty.
     \end{align}
 \end{lemma}
 
-\begin{lemma}[Interpolation Lemma, \cite{Edelsbrunner}]
+\begin{proof}
+    Let $ p \coloneq (a_i, a_j) \in D(f) - \Delta $ be a point in the diagram of $ f $ that is not in the diagonal, and let $ \mu \coloneq \beta_i^j $ denote its multiplicity. Let $S_\epsilon$ be the square of center $ p $ and radius $\epsilon = \| f- g \|_\infty $. That is, the square of side $ 2 \epsilon $. By definition of the square $ S_\epsilon $ we have that the number of points of its intersection with the diagram of $ g $ must be grater or equal than the multiplicity at $ p $. Hence, by the Box Lemma \ref{lemma:box-lemma} we have
+    $$
+        \mu \leq \# (D(g) \cap S_\epsilon) \leq \#(D(f) \cap S_2\epsilon).
+    $$
+    As $ g $ is very close to $ f $, we have $ 2\epsilon \leq \delta_f $. Hence $ p $ is the only point of $ D(f) $ in $ S_\epsilon$, and therefore the previous inequality is in fact an equivalence. If there was a point in the intersection which was not in $\mu $ then it would be inside the square $ S_\epsilon $ and meaning the distance $\| f - g \| $ would be smaller. That is
+    $$
+        \mu = \# (D(g) \cap S_\epsilon).
+    $$
+    Hence we can map every point in $ D(g) \cap S_epsilon $ with $ p $. We can then repeat this process for every other $ p \in D(f) \setminus \Delta $. After this process, every point of $ D(g) $ which have not been matched jet, must be at distance grater than $ \epsilon $ from $ D(f) \setminus \Delta $. By Theorem \ref{theorem:hausdorff-stability}, every unmatched point must be at distance at most $ \epsilon $ from the diagonal $ \Delta $. Hence, if we map each of this points to $ \Delta $, we have built a bijection between $ D(f) $ and $ D(g) $ that moves each point at most $ \epsilon $.
+\end{proof}
+
+\begin{definition}
+    Let $\hat f, \hat g $ be two picewise linear functions over a simplicial complex $ K $. Let $ \lambda \in [0, 1] $. A {\bf convex combination} of $ \hat f $ and $ \hat g $ is a function of the form
+    $$
+        h_\lambda \coloneq (1-\lambda) \hat f + \lambda \hat g.
+    $$
+\end{definition}
+
+\begin{lemma}[Interpolation Lemma, \cite{Edelsbrunner}] \label{lemma:interpolation}
     Let $ K $ be a simplicial complex. Take two picewise linear functions $ \hat f, \hat g \colon K \to \R $. Then, following holds,
     \begin{align}
         \db(D(\hat f), D(\hat g)) \leq \|\hat f - \hat g \|_\infty.
     \end{align}
 \end{lemma}
+\begin{proof}
+    Let $ c \coloneq \| \hat f - \hat g \|_\infty $. For every $ \lambda \in [0, 1] $, define $ \delta(\lambda) \coloneq \delta_{h_\lambda} > 0 $. Let $ J_\lambda $ denote open intervals around each $ \delta $ as follows, and consider the set $ C $ of all $ J_\lambda $ be
+    $$
+        C \coloneq \left\{J_\lambda \coloneq\left( \lambda - \frac{\delta(\lambda)}{4c}, \lambda + \frac{\delta(\lambda)}{4c}\right)\right\}.
+    $$
+    The set $ C $ is an open cover of the interval $ [0, 1] $. Let $ C'$ be the minimal subcover of $ C $. As $ [0, 1] $ is compact, the subcover $ C' $ must be finite. Consider then $ \lambda_1 < \lambda_2 < \cdots < \lambda_n $ the midpoints of the intervals in $ C' $. As $ C' $ is minimal, the each intersection $ J_{\lambda_i} \cap J_{\lambda_{i+1}} $ is not empty. Hence
+    $$
+        \lambda_i + \lambda_{i+1} \leq \frac{\delta(\lambda_i) + \delta(\lambda_{i+1})}{4c} \leq \frac{\max\{\delta(\lambda_i), \delta(\lambda_{i+1})\}}{2c}.
+    $$
+    Therefore, by definition of $ c $ and each $ h_{\delta_i} $, it holds
+    $$
+        \|h_{\delta_i} - h_{\delta_{i+1}} \|_\infty = c(\lambda_{i+1} - \lambda_i) \leq \frac{\max\{\delta(\lambda_i), \delta(\lambda_{i+1})\}}{2}.
+    $$
+    This implies that $ h_{\delta_i} $ is very close to $ h_{\delta_{i+1}} $ or viceversa. Then, by Lemma \ref{lemma:easy-biyection}, for every $ 1 \leq i \leq n-1 $,
+    \begin{align} \label{eq:picewise-inequality}
+        \db(D(h_{\lambda_i}), D(h_{\lambda_{i+1}})) \leq \| h_{\lambda_i} - h_{\lambda_{i+1}} \|_\infty.
+    \end{align}
+    Let $ \lambda_0 = 0 $ and $ \lambda_{n+1} = 1 $. Then $ h_{\lambda_0} = \hat f $ is very close to $ h_{\lambda_1} $ and $ h_{\lambda_1} = \hat g $ is very close to $ h_{\lambda_n} $ and therefore \eqref{eq:picewise-inequality} also holds for $ i = 0 $ and $ i = n+1 $. Finally, using the triangle inequality we have
+    $$
+        \db(D(\hat f), D(\hat g)) \leq \sum_{i=0}^{n} \db(D(h_{\lambda_i}), D(h_{\lambda_{i+1}})) \leq \sum_{i=0}^{n} \| h_{\lambda_i} - h_{\lambda_{i+1}} \|_\infty = \|\hat f - \hat g \|_\infty.
+    $$
+\end{proof}
+
+For the final prove lets recall
+
+\begin{definition}[Star of a simplicial complex]
+    Let $\sigma $ be a simplex in a simplicial complex $ L $. The {\bf star} $ \st(\sigma) $ of $ \sigma $ is the set of simplices in $ L $ which contain $ \sigma $ as a face. The {\bf star of a subset} $ K $ of $ L $, denoted $ \st(K) $, is the union of the stars of each simplex of $ K $.
+\end{definition}
 
 \Main*
+\begin{proof}
+    As $ X $ is triangulable, there exists a finite simplicial complex $ L $ and a homeomorphism $ \Phi\colon L \to X $. Hence a persistence diagram is invariant under this change of variables. That is, $ f \circ \Phi\colon L \to \R $ is tame and $ D(f \circ \Phi) = D(f) $. Since $ f $ and $ g $ are continuous and $ L $ is compact, for every $ \delta < 0 $ there exists a subdivision $ K $ of $ L $ such that for every $ u, v $ points of a common simplex $ \sigma \in K $, 
+    \begin{align}
+        |f \circ \Phi (u) - f \circ \Phi(v)| &\leq \delta, \\
+        |g \circ \Phi (u) - g \circ \Phi(v)| &\leq \delta.
+    \end{align}
+    Let $ \hat f, \hat g \colon \st(K) \to \R $ be the picewise linear interpolations of $ f \circ \Phi $ and $ g \circ \Phi $ on $ K $. By construction of $ K $ and the definition of the $ L_\infty$-norm, this interpolations satisfy
+    \begin{align}
+        \| \hat f - f \circ \Phi \|_\infty &\leq \delta, \\
+        \| \hat g - g \circ \Phi \|_\infty &\leq \delta.
+    \end{align}
+    Hence, by Lemma \ref{lemma:interpolation} and the triangle inequality
+    $$
+        \db(D(\hat f), D(\hat g)) \leq \|\hat f - \hat g \|_\infty \leq \| f \circ \Phi - g \circ \Phi \|_\infty + 2 \delta \leq \| f - g \|_\infty + 2 \delta.
+    $$
+    Now, we can take some $ \delta $ such that $ \delta \leq \delta_f/2 $ so $ \hat f $ is very close to $ f $. This allows to use Lemma \ref{lemma:easy-biyection} to make a bijection that satisfy
+    $$
+        \db(D(f), D(\hat f)) \leq \db(D(f \circ \Phi), D(\hat f)) \leq \delta.
+    $$
+    Analogously, also assuring $ \delta < \delta_g $ we also have
+    $$
+        \db(D(g), D(\hat g)) \leq \db(D(g \circ \Phi), D(\hat g)) \leq \delta,
+    $$
+    and therefore, by triangle inequality again,
+    $$
+        \db(D(f), D(g)) \leq \db(D(f), D(\hat f)) + \db(D(\hat f), D(\hat g)) + \db(D(\hat g), D(g)) \leq 4 \delta.
+    $$
+    As this holds for any $ \delta $ smaller that $ \delta_f $ and $ \delta_g $, taking the limit when $ \delta $ tends to $ 0 $, we complete the proof.
+\end{proof}
