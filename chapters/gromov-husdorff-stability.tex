@@ -1,5 +1,34 @@
 \chapter{Gromov-Hausdorff's Stability Theorem}
 
+\section{Gromov-Hausdorff distance}
+
+\begin{definition}[Hausdorff distance]
+    
+\end{definition}
+
+\begin{definition}[Gromov-Hausdorff distance]
+    
+\end{definition}
+
+\begin{proposition}[Theorem 7.3.25, \cite{burago}]
+    Let $ (X, d_X), (Y, d_Y) $ be two metric spaces. The Gromov-Housdorf distance between them can be characterized as
+    $$
+        \dgh((X, d_X), (Y, d_Y)) = \frac{1}{2} \inf_{\mathcal R} \operatorname{dis}(\mathcal R)
+    $$  
+\end{proposition}
+
+\begin{lemma}[Proposition 7.3.16, \cite{burago}]
+    Gromov-Hausdorff distance satisfies the triangle inequality. That is, for any $ (X_1, d_{X_1}), (X_1, d_{X_1}), (X_1, d_{X_1}) $,
+    $$
+        \dgh(X_1, X_3) \leq \dgh(X_1, X_2) + \dgh(X_2, X_3).
+    $$
+\end{lemma}
+
+\begin{theorem}[Theorem 7.3.30, \cite{burago}]
+    Gromov-Hausdorff distance is in fact a metric over the space of isometry clases of compact metric spaces.    
+\end{theorem}
+
+\section{Gromov-Hausdorff stability}
 \begin{lemma}[Exercise 3.5.4, \cite{burago}]
     Any finite metric space of cardinality $ n $ can be isometrically embedded into $(\R^n, \ell^n)$
 \end{lemma}
