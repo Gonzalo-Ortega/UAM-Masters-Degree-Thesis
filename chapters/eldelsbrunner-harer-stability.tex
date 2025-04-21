@@ -148,21 +148,60 @@ First of all, the middle upside arrows, are
 \begin{align}
     u_2 &= f_{a+\e}^{c+\e, d-\e}, \quad & u_3 &= f_{b-\e}^{c+\e, d-\e}.
 \end{align}
-Right arrows $ r_1, r_2, r_3, r_4 $ represent the inclusions from its respective vector spaces to their destination, in the same manner. The objetive is to define que respective quotients to define $ G_{a, b}^{c, d} $. Recall the inclusion maps defined in the proof of Lemma \ref{lemma:quadrant-lemma}, $ \varphi_x \colon F_x \to G_{x+\e} $ and $ \psi_x \colon G_x \to F_{x+\e}$. We define
+Right arrows $ r_1, r_2, r_3, r_4 $ represent the inclusions from its respective vector spaces to their destination. The objetive is to define que respective quotients to define $ G_{a, b}^{c, d} $. Recall the inclusion maps defined in the proof of Lemma \ref{lemma:quadrant-lemma}, $ \varphi_x \colon F_x \to G_{x+\e} $ and $ \psi_x \colon G_x \to F_{x+\e}$. We define
 \begin{align}
     E_b^c &\coloneq \psi_c^{-1}(F_{b-\e}^{c+\e, d-\e}) \cap G_b^c, \quad & E_a^c \coloneq G_a^c \cap E_b^c.
 \end{align}
 We have then that the outer upside arrows are the respective restrictions
 \begin{align}
-    u_1 &= g_a^{c,d}\rvert_{E_a^c} \quad & u_4 &= g_b^{c,d}\rvert_{E_b^d}
+    u_1 &= g_a^{c,d}\rvert_{E_a^c}, \quad & u_4 &= g_b^{c,d}\rvert_{E_b^d}.
+\end{align}
+We denote
+\begin{align}
+    s_1 &\coloneq \varphi_{d-\varepsilon}\rvert_{F_{b-\varepsilon}^{d-\varepsilon}}, \quad & s_2 &\coloneq \psi_c\rvert_{E_a^c}, \quad & s_3 \coloneq \psi_c(G_b^c)\rvert_{E_b^c}.
+\end{align}
+By the inclusions \eqref{eq:quadrant-3}, we have that
+\begin{align}
+    \varphi_{d-\varepsilon}(F_{b-\varepsilon}^{d-\varepsilon}) &\subseteq G_b^d, \quad & \psi_c(G_a^c), &\subseteq F_{a+\varepsilon}^{c+\varepsilon} \quad & F_{b-\varepsilon}^{c+\varepsilon} &\subseteq \psi_c(G_b^c).
+\end{align}
+Note that by the manner we have define the diagram, it need to be that
+\begin{align}
+    \im(s_3) &= \ker(u_3), \quad & \im(s_1) &\subseteq G_b^d.
+\end{align}
+Also, we can observe that $ u_4 = s_1 \circ u_3 \circ s_3 $. As $ u_3 \circ s_3 = 0 $, then $ E_b^c = \ker(u_4) $. Also, as $ r_1 \circ u_1 = u_4 \circ r_4 = 0 $ and $ r_1 $ is the inclusion, then $ E_a^c = \ker(u_1) $. Hence, we can write
+\begin{align}
+    E_b^c &= E_b^{c,d} \subseteq G_b^{c,d}, \quad & E_a^c = E_a^{c,d} \subseteq G_a^{c,d}.
+\end{align}  
+As $ E_a^{c,d} = E_b^{c,d} \cap G_a^{c,d} $, the following quotient inclusion holds
+\begin{align}
+    E_{a,b}^{c,d} = E_b^{c,d} / E_a^{c,d} \subseteq G_b^{c,d} / G_a^{c,d} = G_{a,b}^{c,d}.
+\end{align}
+Therefore, we have
+\begin{align}
+    \dim(E_{a,b}^{c,d}) \leq \dim(G_{a,b}^{c,d}).
+\end{align}
+Now note that
+\begin{align}
+    E_{a,b}^{c,d} &= \ker(u_4) / \ker(u_1), \quad & F_{a+\varepsilon, b+\varepsilon}^{c+\varepsilon, d+\varepsilon} &= \ker(u_3 / \ker(u_2)).
+\end{align}
+By construction $s_3(\ker(u_4)) = \ker(u_3) $. As for every $x \in \ker(u_1)$, $r_2 \circ u_2 \circ s_2 (x) = u_3 \circ s_3 \circ r_4 (x) = 0 $, and $r_2 $ is an injection, then $ s_3(\ker(u_1)) = s_2(\ker(u_1) \subseteq \ker(u_2))$, we get 
+\begin{align}
+    \dim(F_{a+\varepsilon, b+\varepsilon}^{c+\varepsilon, d+\varepsilon}) \leq \dim(E_{a,b}^{c,d}).
+\end{align}
+Hence, the desired inequality is hold as we have seen that
+\begin{align}
+    \#(D(f) \cap R_\e) = \dim F_{a+\e, b-\e}^{c+\e, d-\e} \leq \dim(E_{a,b}^{c,d}) \leq \dim(G_{a,b}^{c,d}) = \#(D(g) \cap R).
 \end{align}
 \end{proof}
 
 \begin{theorem}[Hausdorff Stability] \label{theorem:hausdorff-stability}
 $$
-    d_H(D(f), D(g)) \leq \| f - g \|_\infty.
+    \dhf(D(f), D(g)) \leq \| f - g \|_\infty.
 $$
 \end{theorem}
+\begin{proof}
+    As a direct consequence of Lemma \ref{lemma:box-lemma} if $ (x, y)\in D(f) $ then there must exist some point at $ D(g) $ at distance less than or equal to $ \varepsilon =  \| f - g \|_\infty $ from $(x, y) $ since the total multiplicity of $ D(g) \cap R_\varepsilon $ is at least one.
+\end{proof}
 
 \section{Bottleneck Stability}
 In this section we are going to prove Theorem \ref{theorem:edelsbrunner-stability}. 
@@ -183,15 +222,15 @@ In this section we are going to prove Theorem \ref{theorem:edelsbrunner-stabilit
 \end{lemma}
 
 \begin{proof}
-    Let $ p \coloneq (a_i, a_j) \in D(f) - \Delta $ be a point in the diagram of $ f $ that is not in the diagonal, and let $ \mu \coloneq \beta_i^j $ denote its multiplicity. Let $S_\epsilon$ be the square of center $ p $ and radius $\epsilon = \| f- g \|_\infty $. That is, the square of side $ 2 \epsilon $. By definition of the square $ S_\epsilon $ we have that the number of points of its intersection with the diagram of $ g $ must be grater or equal than the multiplicity at $ p $. Hence, by the Box Lemma \ref{lemma:box-lemma} we have
+    Let $ p \coloneq (a_i, a_j) \in D(f) - \Delta $ be a point in the diagram of $ f $ that is not in the diagonal, and let $ \mu \coloneq \beta_i^j $ denote its multiplicity. Let $S_\varepsilon$ be the square of center $ p $ and radius $\varepsilon = \| f- g \|_\infty $. That is, the square of side $ 2 \varepsilon $. By definition of the square $ S_\varepsilon $ we have that the number of points of its intersection with the diagram of $ g $ must be grater or equal than the multiplicity at $ p $. Hence, by the Box Lemma \ref{lemma:box-lemma} we have
     $$
-        \mu \leq \# (D(g) \cap S_\epsilon) \leq \#(D(f) \cap S_2\epsilon).
+        \mu \leq \# (D(g) \cap S_\varepsilon) \leq \#(D(f) \cap S_2\varepsilon).
     $$
-    As $ g $ is very close to $ f $, we have $ 2\epsilon \leq \delta_f $. Hence $ p $ is the only point of $ D(f) $ in $ S_\epsilon$, and therefore the previous inequality is in fact an equivalence. If there was a point in the intersection which was not in $\mu $ then it would be inside the square $ S_\epsilon $ and meaning the distance $\| f - g \| $ would be smaller. That is
+    As $ g $ is very close to $ f $, we have $ 2\varepsilon \leq \delta_f $. Hence $ p $ is the only point of $ D(f) $ in $ S_\varepsilon$, and therefore the previous inequality is in fact an equivalence. If there was a point in the intersection which was not in $\mu $ then it would be inside the square $ S_\varepsilon $ and meaning the distance $\| f - g \| $ would be smaller. That is
     $$
-        \mu = \# (D(g) \cap S_\epsilon).
+        \mu = \# (D(g) \cap S_\varepsilon).
     $$
-    Hence we can map every point in $ D(g) \cap S_epsilon $ with $ p $. We can then repeat this process for every other $ p \in D(f) \setminus \Delta $. After this process, every point of $ D(g) $ which have not been matched jet, must be at distance grater than $ \epsilon $ from $ D(f) \setminus \Delta $. By Theorem \ref{theorem:hausdorff-stability}, every unmatched point must be at distance at most $ \epsilon $ from the diagonal $ \Delta $. Hence, if we map each of this points to $ \Delta $, we have built a bijection between $ D(f) $ and $ D(g) $ that moves each point at most $ \epsilon $.
+    Hence we can map every point in $ D(g) \cap S_epsilon $ with $ p $. We can then repeat this process for every other $ p \in D(f) \setminus \Delta $. After this process, every point of $ D(g) $ which have not been matched jet, must be at distance grater than $ \varepsilon $ from $ D(f) \setminus \Delta $. By Theorem \ref{theorem:hausdorff-stability}, every unmatched point must be at distance at most $ \varepsilon $ from the diagonal $ \Delta $. Hence, if we map each of this points to $ \Delta $, we have built a bijection between $ D(f) $ and $ D(g) $ that moves each point at most $ \varepsilon $.
 \end{proof}
 
 \begin{definition}
