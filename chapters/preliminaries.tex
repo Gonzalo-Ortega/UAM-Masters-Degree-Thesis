@@ -2,19 +2,56 @@
 The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \cite{wang}.
 
 \begin{definition}[Graded ring]
-    
+    Let $ R $ be a ring. It is said that $ R $ is a {\bf graded ring} if it can be decomposed into a direct sum of additive groups
+    $$
+        R = \bigoplus_{n=1}^{\infty} R_n = R_1 \oplus R_2 \oplus \dots
+    $$
+    such that for all $ n, m \geq 0 $, 
+    $$
+        R_n R_m = R_{n+m}.
+    $$
 \end{definition}
 
 \begin{definition}[Graded ideal]
-    
+    Let $ R $ be a graded ring. A {\bf graded ideal} is a two sided ideal $ I \subseteq R $ that can be decomposed into a direct sum
+    $$
+        I = \bigoplus_{n=1}^{\infty} I_n
+    $$
+    where each $n \geq 0 $, $ I_n = I \cap R_n $.
 \end{definition}
 
-\begin{definition}[Graded moudule]
-    
+\begin{definition}[Left moudule, Definition IV.1.1.1 \cite{hungerford}]
+    Let $ R $ be a ring. A {\bf left $R$-module } is an abelian group $ (M, +) $ with an operation $ \cdot \colon R \times M \to M $ such that for all $ r, s \in R $ and for all $ x, y \in M $,
+    \begin{enumerate}
+    \renewcommand{\labelenumi}{(\roman{enumi})}
+        \item $ (rs) \cdot x = r (s \cdot x) $,
+        \item $ (r + s) = r \cdot x + s \cdot x $,
+        \item $ r \cdot (x + y) = r \cdot x + r \cdot y $.
+    \end{enumerate}
+    If $ R $ has a multiplicative identity $ 1 $, then $ M $ is said to be a {\bf unitary $R$-module} and 
+    \begin{enumerate}
+    \renewcommand{\labelenumi}{(\roman{enumi})}
+        \setcounter{enumi}{3}
+        \item $1 \cdot x = x $.
+    \end{enumerate}
+    If $ R $ is a division ring, that is, a ring with identity where every non cero element is a unit, then 
+    a unitary $R$-module is called a {\bf left vector space}. Note that in this case, $R$ is in fact a field.
 \end{definition}
 
-\begin{definition}[Persistance module, finite type]
-%    $ (V, \pi) $, where $ V = \{V_t\}_{t \in \mathbb R} $ is a collection of finite dimensional vector spaces over a field $ \mathbb F $, and $ \pi = \{ \pi_{s \leq t} \} $ is a collection of linear maps $ \pi_{s \leq t}\colon V_s \rightarrow V_t $.
+\begin{definition}[Graded moudule, Definition 4.7 \cite{wang}]
+    Let $M$ be a left module over a graded ring $ R $. It is said that $ M $ is a {\bf left graded module} if it can be decomposed into a direct sum
+    $$
+        M = \bigoplus_{n=1}^{\infty} M_n
+    $$
+    if for each $n, m \geq 0 $, $ R_n M_m \subseteq M_{n+m} $.
+\end{definition}
+
+\begin{definition}[Persistance module]
+    Let $ V = \{V_t\}_{t \in \mathbb R} $ is a collection of finite dimensional vector spaces over a field $ \mathbb F $. A {\bf persistence module} is a pair $ (V, \pi) $ such that $ \pi = \{ \pi_{s \leq t} \} $ is a collection of linear maps $ \pi_{s \leq t}\colon V_s \rightarrow V_t $ that verifies
+    \begin{enumerate}
+    \renewcommand{\labelenumi}{(\roman{enumi})}
+    \item a
+    \end{enumerate}
 \end{definition}
 
 \begin{definition}[Module morphism, shift]

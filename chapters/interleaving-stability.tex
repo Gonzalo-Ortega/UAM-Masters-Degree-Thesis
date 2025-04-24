@@ -1,7 +1,7 @@
 \chapter{Interleaving Stability Theorem}
 In this section we are going to give a detailed proof of the first stability theorem for persistence homology. This theorem is refer to as the ``geometry miracle'' of persistent homology, as it allows to describe an isometry between persistence modules and barcodes \cite{nanda}. This shows that {\it small} changes in a data sets will perform {\it small} changes in their persistence modules, and therefore small changes in how persistent homology groups vary through time. The theorem claims that given two persistence modules, the distance between them using the interleaving distance, is the same as the distance between their barcodes using the bottleneck distance.
 
-\begin{restatable}[Stability]{theorem}{Stability} \cite[Theorem 2.2.8]{polterovich} \label{theorem:stability}
+\begin{restatable}[Interleaving Stability, Theorem 2.2.8, \cite{polterovich}]{theorem}{Stability} \label{theorem:stability}
     There is an isometry between a persistence module with the interleaving distance and its barcode with the bottleneck distance. That is, given two persistence modules $ V $ and $ W $, it holds that
     $$ 
         d_{int} (V, W) = d_{bot} (\barc(V), \barc(W)).
@@ -12,7 +12,7 @@ For the presented proof we have followed \cite{polterovich}. Hence, we will divi
 
 The first claim can be deduced from the Structure Theorem in a rather direct way, proving first the case where our modules are just interval modules.
 
-\begin{lemma} \cite[Exercise 2.2.7]{polterovich} \label{interval-interleaving-if-matching}
+\begin{lemma}[Exercise 2.2.7, \cite{polterovich}] \label{lemma:interval-interleaving-if-matching}
     Let $ I, J $ be two $\delta$-matched intervals. Then, their corresponding interval modules $ (\mathbb F (I), \pi) $ and $( \mathbb F (J), \theta) $ are $\delta$-interleaved.
 \end{lemma}
 \begin{proof}
@@ -38,11 +38,11 @@ The first claim can be deduced from the Structure Theorem in a rather direct way
 
 Once we are able to build a $\delta$-interleaving between two $\delta$-matched interval modules, we will use the Structure Theorem for persistence modules to generalice the construction for arbitrary persistence modules. This will prove useful to prove the first inequality needed to prove Theorem \ref{theorem:stability}.
 
-\begin{proposition} \cite[Theorem 3.0.1]{polterovich} \label{prop:interleaving-if-matching} 
+\begin{proposition}[Theorem 3.0.1, \cite{polterovich}]\label{prop:interleaving-if-matching} 
     Given two persistence modules $ V $, $ W $, if there is a $ \delta$-matching between their barcodes, then there is a $ \delta$-interleaving morphism between them.
 \end{proposition}
 \begin{proof}
-    Suppose that $\rho\colon \barc (V) \to \barc (W) $ is a $\delta$-matching between the barcodes of $ V $ and $ W $. By the Structure Theorem \ref{structure}, $ V $ and $ W $ decompose in a finite direct sum of interval modules
+    Suppose that $\rho\colon \barc (V) \to \barc (W) $ is a $\delta$-matching between the barcodes of $ V $ and $ W $. By the Structure Theorem \ref{theorem:structure}, $ V $ and $ W $ decompose in a finite direct sum of interval modules
     \begin{align}
         V \cong \! \bigoplus_{I \in \barc (V)} \mathbb F (I),& &W \cong \! \bigoplus_{J \in  \barc (W)} \mathbb F (W) .
     \end{align}
@@ -51,7 +51,7 @@ Once we are able to build a $\delta$-interleaving between two $\delta$-matched i
         V_Y &\cong \bigoplus_{I \in  \operatorname{coim} \rho} \mathbb F (I),& V_N \cong &\bigoplus_{I \in \barc(V) \backslash \operatorname{coim} \rho} \mathbb F (I),\\
         W_Y &\cong \bigoplus_{J \in  \im \rho} \mathbb F (J),& W_N \cong &\bigoplus_{J \in \barc(J) \backslash \im \rho} \mathbb F (J).
     \end{align}
-    The $ V_Y, W_Y $ modules separate the ``yes, matched'' intervals, from the $ V_N, W_N $ ``not matched" intervals. For every interval $ I \in \barc(V_Y) $, $ I $ is $\delta$-matched to an interval $ J \in \barc(W_Y)$ by $\rho(I) = J $. Thus, by Lemma \ref{interval-interleaving-if-matching}, for all pair $ I, J $ of matched intervals, there exist a par of $\delta$-interleaved morphisms
+    The $ V_Y, W_Y $ modules separate the ``yes, matched'' intervals, from the $ V_N, W_N $ ``not matched" intervals. For every interval $ I \in \barc(V_Y) $, $ I $ is $\delta$-matched to an interval $ J \in \barc(W_Y)$ by $\rho(I) = J $. Thus, by Lemma \ref{lemma:interval-interleaving-if-matching}, for all pair $ I, J $ of matched intervals, there exist a par of $\delta$-interleaved morphisms
     \begin{equation*}
         \begin{aligned}[c]
         \phi_\delta\colon \mathbb F(I) &\to \mathbb F(J)_\delta\\
@@ -85,7 +85,7 @@ $$
     \barc_{I+}(V) \coloneq \left\{ (b, c] \in \barc(V) \colon c \geq d\right\}.
 $$
 
-\begin{lemma}  \cite[Proposition 3.1.1]{polterovich} \label{lemma:inj-cardinalities}
+\begin{lemma}[Proposition 3.1.1, \cite{polterovich}] \label{lemma:inj-cardinalities}
     Let $ I = (b, d] $ be an interval. It exists an injective morphism $\iota \colon (V, \pi) \in (W, \theta) $, then $\#(\barc_{I-}(V)) \leq \#(\barc_{I-}(W)) $. Where $ \#(\cdot) $ denotes the cardinal operator.
 \end{lemma}
 \begin{proof}
@@ -118,7 +118,7 @@ $$
     $$
 \end{proof}
  
-\begin{lemma} \cite[Exercise 3.1.3]{polterovich} \label{lemma:sur-cardinalities}
+\begin{lemma}[Exercise 3.1.3, \cite{polterovich}] \label{lemma:sur-cardinalities}
     Let $ I = (b, d] $ be an interval. It exists a surjective morphism $s\colon (V, \pi) \to (W, \theta) $, then $\#(\barc_{I+}(V)) \geq \#(\barc_{I+}(W)) $.
 \end{lemma}
 \begin{proof}
@@ -150,7 +150,7 @@ $$
 $$
 As there is an injection between $ V $ and $ W$, Lemma \ref{lemma:inj-cardinalities} asures that the amount of bars in $ \barc(V) $ is lower that the amount in $ \barc(V) $, i.e., $ k \leq l $. We define the {\it injective induced matching} $\mu_{inj}\colon \barc(V) \to \barc(W) $ matching, for each $ c \in \R \cup \{\infty\} $, the intervals from both lists by decreasing length.
 
-\begin{lemma} \cite[Proposition 3.1.5]{polterovich} \label{lemma:inj-matching}
+\begin{lemma}[Proposition 3.1.5, \cite{polterovich}] \label{lemma:inj-matching}
     If there exists an injection $\iota\colon (V, \pi) \in (W, \theta) $, then the induced matching $ \mu_{inj}\colon \barc(V) \to \barc (W) $ satisfies:
     \begin{enumerate}
         \item $\operatorname{coim} \mu_{inj} = \barc(V)$, \label{prop:3.1.5. 1}
@@ -171,7 +171,7 @@ $$
 $$
 We define the {\it surjective induced matching} $\mu_{sur}\colon \barc(V) \to \barc(W) $ matching, for each $ a \in \R $, the intervals from both lists by decreasing length.
 
-\begin{lemma} \cite[Exercise 3.1.8]{polterovich} \label{lemma:sur-matching}
+\begin{lemma}[Exercise 3.1.8, \cite{polterovich}] \label{lemma:sur-matching}
     If there exists a surjection $s\colon (V, \pi) \to (W, \theta) $, then the induced matching $ \mu_{sur}\colon \barc(V) \to \barc (W) $ satisfies:
     \begin{enumerate}
         \item $\im \mu_{sur} = \barc(W)$,
@@ -186,7 +186,7 @@ Hence, with the injective and the surjective induced matchings at hand, for a ge
 
 The following lemma verifies that, in fact, the mapping between persistence modules with its morphisms and barcodes with induced matchings (either the injective or the surjective versions) has functorial properties between the two categories.
 
-\begin{lemma} \cite[Claim 3.1.13]{polterovich} \label{lemma:functoriality}
+\begin{lemma}[Claim 3.1.13, \cite{polterovich}] \label{lemma:functoriality}
     Let $ U$, $V$ and $W$ persistence diagrams and $f, g, h$ morphisms between them defined as in the following diagram:
     $$
         \begin{tikzcd}
@@ -217,7 +217,7 @@ The following lemma verifies that, in fact, the mapping between persistence modu
 
 Finally, we can claim the two main lemmas from which we will construct our desired $\delta$-matching.
 
-\begin{lemma} \cite[Lemma 3.2.1]{polterovich} \label{lemma:sur-image}
+\begin{lemma}[Lemma 3.2.1, \cite{polterovich}] \label{lemma:sur-image}
     Let $ (V, \pi), (W, \theta) $ be $\delta$-interleaved persistence modules, with $\delta$-inter\-leaving morphisms $ \phi\colon V \to W_\delta $ and $ \psi\colon W \to V_\delta $. Let $ \phi\colon V \to \im\phi $ be a surjection and $ \mu_{sur}\colon \barc(V) \to \barc (\im \phi)$ the induced matching. Then
     \begin{enumerate}
         \item $\operatorname{coim} \mu_{sur} \supseteq \barc (V)_{\geq 2\delta} $,
@@ -282,7 +282,7 @@ Finally, we can claim the two main lemmas from which we will construct our desir
 \end{enumerate}
 \end{proof}
 
-\begin{lemma} \cite[Proposition 3.2.2]{polterovich} \label{lemma:inj-image}
+\begin{lemma}[Proposition 3.2.2, \cite{polterovich}] \label{lemma:inj-image}
     Let $ (V, \pi), (W, \theta) $ be $\delta$-interleaved persistence modules, with $\delta$-inter\-leaving morphisms $ \phi\colon V \to W_\delta $ and $ \psi\colon W \to V_\delta $. Let $ \phi\colon V \to \im\phi $ be a injection and $ \mu_{inj}\colon \barc(\im \phi) \to \barc (W_\delta)$ the induced matching. Then
     \begin{enumerate}
         \item $\operatorname{coim} \mu_{sur} = \barc (\im \phi) $,
@@ -339,7 +339,7 @@ Finally, we can claim the two main lemmas from which we will construct our desir
 
 At last, we can now prove the other part of the Stability theorem. For so, we will construct a $\delta$-matching out of a $\delta$-interleaving morphism.
 
-\begin{proposition} \cite[Theorem 3.0.2]{polterovich} \label{prop:matching-if-interleaving}
+\begin{proposition}[Theorem 3.0.2, \cite{polterovich}] \label{prop:matching-if-interleaving}
     Given two persistence modules $ V $, $ W $, with a $\delta$-interleaving morphism between them, then there is a $ \delta$-matching between their barcodes.
 \end{proposition}
 \begin{proof}
