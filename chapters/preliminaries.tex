@@ -1,6 +1,8 @@
 \chapter{Preliminaries}
 The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \cite{wang}.
 
+\section{Persistence modules and the interleaving distance}
+
 \begin{definition}[Graded ring]
     Let $ R $ be a ring. It is said that $ R $ is a {\bf graded ring} if it can be decomposed into a direct sum of additive groups
     $$
@@ -35,7 +37,7 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
         \item $1 \cdot x = x $.
     \end{enumerate}
     If $ R $ is a division ring, that is, a ring with identity where every non cero element is a unit, then 
-    a unitary $R$-module is called a {\bf left vector space}. Note that in this case, $R$ is in fact a field.
+    a unitary $R$-module is called a {\bf left $R$-vector space}. Note that in this case, $R$ is in fact a field.
 \end{definition}
 
 \begin{definition}[Graded moudule, Definition 4.7 \cite{wang}]
@@ -46,17 +48,90 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
     if for each $n, m \geq 0 $, $ R_n M_m \subseteq M_{n+m} $.
 \end{definition}
 
-\begin{definition}[Persistance module]
-    Let $ V = \{V_t\}_{t \in \mathbb R} $ is a collection of finite dimensional vector spaces over a field $ \mathbb F $. A {\bf persistence module} is a pair $ (V, \pi) $ such that $ \pi = \{ \pi_{s \leq t} \} $ is a collection of linear maps $ \pi_{s \leq t}\colon V_s \rightarrow V_t $ that verifies
+\begin{definition}[Persistence module]
+    Let $F$ be a field and let $T$ be a totally ordered set. Let $ V = \{V_t\}_{t \in T} $ be a collection of $F$-vector spaces. A $T$-indexed {\bf persistence module} is a pair $ (V, \pi) $ such that $ \pi = \{ \pi_{s \leq t} \} $ is a collection of linear maps $ \pi_{s \leq t}\colon V_s \rightarrow V_t $ that verifies that for all $ r, s, t \in T $,
+    $$
+        \pi_{r \leq s} \circ \pi_{s \leq t} = \pi_{r \leq t}.
+    $$
+\end{definition}
+
+\begin{definition}[Morphism between persistence modules]
+    Let $T$ be a totally ordered set. Let $ (V, \pi), (W, \theta) $ be two persistence modules. A {\bf morphism} between persistence modules $ p \colon (V, \pi) \to (W, \theta) $ is a family of linear maps $ p_t \colon V_t \to W_t $ such that for all $ s \leq t $ the following diagram commutes:
+    $$
+    \begin{tikzcd}
+        V_s \arrow[r, "\pi_{s \leq t}"] \arrow[d, "p_s"'] & V_t \arrow[d, "p_t"] \\
+        W_s \arrow[r, "\theta_{s \leq t}"']               & W_t
+    \end{tikzcd}
+    $$
+    If a morphism $ i $ verifies that for all $ t \in T $, $ i_t \colon V_t \to V_t $ is the identity, then $ i $ is the {\bf identity morphism}. If there exists two morphisms $ p \colon (V, \pi) \to (W, \theta) $ and $ q \colon (W, \theta) \to (V, \pi) $ such that the compositions $ p \circ q $ and $ q \circ p $ are both the identity morphism, then $ p $ and $ q $ are {\bf isomorphisms} of persistence modules. In this case, $ (V, \pi) $ and $ (W, \theta) $ are said to be {\bf isomorphic} persistence modules.
+\end{definition}
+
+For now on, to simplify notation, we will limit our totally order set to be the real numbers, $ T = \R $. Also, when there is no possible confusion, we might denote the persistence module $ (V, \pi) $ by just is collection of vector spaces $ V $.
+
+\begin{definition}[Persistence module shift]
+    Let $ (V, \pi) $ be a persistence module and let $ \delta \in \R $. The {\bf $\delta$-shift} of $ (V, \pi) $ is the persistence module $ (V_\delta, \pi_\delta) $ defined by taking
+    \begin{align}
+        (V_\delta)_t &\coloneq V_{t+\delta}, \quad & (\pi_\delta)_{s\leq t} &\coloneq \pi_{s+\delta \leq t+\delta}.
+    \end{align}
+\end{definition}
+
+\begin{proposition}[Exercise 1.2.3, \cite{polterovich}] \label{prop:shift-morphism}
+    Let $ \delta > 0 $. Let $(V, \pi), (V_\delta, \pi_\delta) $ be a persistence module and its shift. The map $ \phi_\delta \colon (V, \pi) \to (V_\delta, \pi_\delta) $, defined as
+    $$
+        \phi_\delta (V_t) \coloneq \pi_{t \leq t + \delta}(V_t) = V_{t+\delta},
+    $$
+    is a persistence module morphism.
+\end{proposition}
+\begin{proof}
+    As $ \delta > 0 $, then $ t \leq t+\delta $. Hence
+    \begin{align}
+        \phi_\delta \circ \pi_{t \leq t+\delta} (V_t) &= \phi_\delta (V_{t+\delta}) = V_{t+\delta+\delta} = V_{t+2 \delta}, \\
+        \pi_{t+\delta \leq t+2\delta} \circ \phi_\delta (V_t) &= \pi_{t+\delta \leq t+2\delta}(V_{t+\delta}) = V_{t+2 \delta}.
+    \end{align}
+\end{proof}
+
+\begin{definition}[Shift morphism]
+    The persistence module morphism $ \phi_\delta $ defined as in Proposition \ref{prop:shift-morphism} is named {\bf $\delta$-shift morphism}.
+\end{definition}
+
+\begin{definition}[$\delta$-interleaved modules]
+    Let $ (V, \pi), (W, \theta) $ be two persistence modules and let $ \delta > 0 $. $ V $ and $ W $ are {\bf $\delta$-interleaved } if there exists two persistence module morphisms $ \phi \colon V \to W_\delta $ and $ \psi \colon W \to V_\delta $ such that the following diagrams commute:
+\end{definition}
+$$
+\begin{array}{ccc}
+\begin{tikzcd}
+    V \arrow[r, "\phi"] \arrow[rr, "\pi_{2\delta}"', bend right] & W_\delta \arrow[r, "\psi_\delta"] & V_{2\delta}
+\end{tikzcd},
+&
+\quad \quad
+&
+\begin{tikzcd}
+    W \arrow[r, "\psi"] \arrow[rr, "\theta_{2\delta}"', bend right] & V_\delta \arrow[r, "\phi_\delta"] & W_{2\delta}
+\end{tikzcd}.
+\end{array}
+$$
+
+Persistence modules are a vast abstract algebraic tool. In order to make it more manejable, we give it some more structure, restricting the dimension of the vector spaces, Also, we limit as the amount of different up to isomorphism vector spaces there are.
+
+\begin{definition}[Tame persistence module]
+    A a persistence module $ (V, \pi) $ over $ \R $ is {\bf tame} if
     \begin{enumerate}
-    \renewcommand{\labelenumi}{(\roman{enumi})}
-    \item a
+        \renewcommand{\labelenumi}{(\roman{enumi})}
+        \item For all $ t \geq 0 $, $ \dim(V_t) $ is finite.
+        \item For any $\varepsilon > 0 $, there exists a finite subset $ K \subset \R $ such that for all $ t \in \R \setminus K $, the map $ \pi_{t-\varepsilon \leq t+\varepsilon} \colon V_{t-\varepsilon} \to V_{t+\varepsilon} $ is not an isomorphism.
     \end{enumerate}
 \end{definition}
 
-\begin{definition}[Module morphism, shift]
-    
+\begin{definition}[Interleaving distance]
+    Let $ (V, \pi) $ and $ (W, \theta) $ be tame two persistence modules. The {\bf interleaving distance} between them is defined as
+    $$
+        \di(V, W) \coloneq \inf \{ \delta > 0 \mid V \text{ and } W \text{ are } \delta\text{-interleaved}\}.
+    $$
 \end{definition}
+
+\begin{proposition}
+    The interleaving distance between two tame persistence modules is actually a distance.
+\end{proposition}
 
 \begin{definition}[Interval module]
     
@@ -66,16 +141,14 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
     
 \end{definition}
 
+\section{Barcodes, persistence diagrams and the bottleneck distance}
+
 \begin{definition}[Barcode]
 
 \end{definition}
 
-\begin{definition}[$\delta$-interleaving moudules]
-    
-\end{definition}
+\begin{definition}[Persistence diagrams]
 
-\begin{definition}[Interleaving distance]
-    
 \end{definition}
 
 \begin{definition}[Multiset matching]
@@ -89,3 +162,32 @@ The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \
 \begin{definition}[Bottleneck distance]
     
 \end{definition}
+
+
+\section{The Hausdorff and Gromov-Hausdorff distances}
+
+\begin{definition}[Hausdorff distance]
+    
+\end{definition}
+
+\begin{definition}[Gromov-Hausdorff distance]
+    
+\end{definition}
+
+\begin{proposition}[Theorem 7.3.25, \cite{burago}]
+    Let $ (X, d_X), (Y, d_Y) $ be two metric spaces. The Gromov-Housdorff distance between them can be characterized as
+    $$
+        \dgh((X, d_X), (Y, d_Y)) = \frac{1}{2} \inf_{\mathcal R} \operatorname{dis}(\mathcal R)
+    $$  
+\end{proposition}
+
+\begin{lemma}[Proposition 7.3.16, \cite{burago}]
+    Gromov-Hausdorff distance satisfies the triangle inequality. That is, for any $ (X_1, d_{X_1}), (X_1, d_{X_1}), (X_1, d_{X_1}) $,
+    $$
+        \dgh(X_1, X_3) \leq \dgh(X_1, X_2) + \dgh(X_2, X_3).
+    $$
+\end{lemma}
+
+\begin{theorem}[Theorem 7.3.30, \cite{burago}]
+    Gromov-Hausdorff distance is in fact a metric over the space of isometry clases of compact metric spaces.    
+\end{theorem}
