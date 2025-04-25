@@ -1,5 +1,5 @@
 \chapter{Preliminaries}
-The contents of this chapter are based on \cite{nanda}, \cite{polterovich} and \cite{wang}.
+The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{polterovich} and \cite{wang}.
 
 \section{Persistence modules and the interleaving distance}
 
@@ -166,11 +166,39 @@ Persistence modules are a vast abstract algebraic tool. In order to make it more
 
 \section{The Hausdorff and Gromov-Hausdorff distances}
 
+The Hausdorff distance is a way of measuring distances of different sets contained into a same metric space. This concept can be generalized defining a metric which allow us to measure distances between different metric spaces.
+
 \begin{definition}[Hausdorff distance]
-    
+    Let $ (M, d) $ be a metric space, and let $ A \subseteq M $, $ B \subseteq M $ two compact subspaces of $ M $. Define the {\bf $r$-neighborhood} of a set $ S \subset M $ as
+    $$
+        U_r(S) \coloneq \left\{ x \in S \mid d(x, S) \leq r \right\}.
+    $$
+    The {\bf Hausdorff distance} can be defined as
+    $$
+        \dhf(A, B) \coloneq \inf \left\{ r > 0 \mid A \subset U_r(B) \text{ and } B \subset U_r(A) \right\}.
+    $$
+\end{definition}
+
+\begin{definition}[Isometric metric spaces]
+    Let $ (X, d_X), (Y, d_Y) $ be metric spaces. $ X $ and $ Y $ are said to be {\bf isometric} if there exists a bijective map $ f: X \to Y $ such that distances are preserved. That is, for all $ x_1, x_2 \in X $,
+    $$
+        d_X(x_1, x_2) = d_Y(f(x_1), f(x_2)).
+    $$
 \end{definition}
 
 \begin{definition}[Gromov-Hausdorff distance]
+    Let $ (X, d_X), (Y, d_Y) $ be metric spaces. The {\bf Gromov-Hausdorff} distance is defined as
+    $$
+        \dgh \coloneq \inf \left\{ r > 0 \mid \exists (Z, \dhf) \text{ metric space such that}, \exists X', Y' \subseteq Z, \dhf(X', Y') , r \right\},
+    $$
+    where $ X', Y' $ are isometric spaces to $ X $ and $ Y $ respectively.
+\end{definition}
+
+\begin{definition}[Correspondance between sets]
+    
+\end{definition}
+
+\begin{definition}[Distortion of a correspondance]
     
 \end{definition}
 
