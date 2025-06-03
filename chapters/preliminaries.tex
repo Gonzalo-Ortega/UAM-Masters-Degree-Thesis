@@ -49,10 +49,10 @@ The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{pol
 \end{definition}
 
 \begin{definition}[Persistence module]
-    Let $F$ be a field and let $T$ be a totally ordered set. Let $ V = \{V_t\}_{t \in T} $ be a collection of $F$-vector spaces. A $T$-indexed {\bf persistence module} is a pair $ (V, \pi) $ such that $ \pi = \{ \pi_{s \leq t} \} $ is a collection of linear maps $ \pi_{s \leq t}\colon V_s \rightarrow V_t $ that verifies that for all $ r, s, t \in T $,
-    $$
+    Let $/F$ be a field and let $T$ be a totally ordered set. Let $ V = \{V_t\}_{t \in T} $ be a collection of $F$-vector spaces. A $T$-indexed {\bf persistence module} is a pair $ (V, \pi) $ such that $ \pi = \{ \pi_{s \leq t} \} $ is a collection of linear maps $ \pi_{s \leq t}\colon V_s \rightarrow V_t $ that verifies that for all $ r, s, t \in T $,
+    \begin{equation}
         \pi_{r \leq s} \circ \pi_{s \leq t} = \pi_{r \leq t}.
-    $$
+    \end{equation}
 \end{definition}
 
 \begin{definition}[Morphism between persistence modules]
@@ -96,20 +96,20 @@ For now on, to simplify notation, we will limit our totally order set to be the 
 
 \begin{definition}[$\delta$-interleaved modules]
     Let $ (V, \pi), (W, \theta) $ be two persistence modules and let $ \delta > 0 $. $ V $ and $ W $ are {\bf $\delta$-interleaved } if there exists two persistence module morphisms $ \phi \colon V \to W_\delta $ and $ \psi \colon W \to V_\delta $ such that the following diagrams commute:
+    $$
+    \begin{array}{ccc}
+    \begin{tikzcd}
+        V \arrow[r, "\phi"] \arrow[rr, "\pi_{2\delta}"', bend right] & W_\delta \arrow[r, "\psi_\delta"] & V_{2\delta}
+    \end{tikzcd},
+    &
+    \quad \quad
+    &
+    \begin{tikzcd}
+        W \arrow[r, "\psi"] \arrow[rr, "\theta_{2\delta}"', bend right] & V_\delta \arrow[r, "\phi_\delta"] & W_{2\delta}
+    \end{tikzcd}.
+    \end{array}
+    $$
 \end{definition}
-$$
-\begin{array}{ccc}
-\begin{tikzcd}
-    V \arrow[r, "\phi"] \arrow[rr, "\pi_{2\delta}"', bend right] & W_\delta \arrow[r, "\psi_\delta"] & V_{2\delta}
-\end{tikzcd},
-&
-\quad \quad
-&
-\begin{tikzcd}
-    W \arrow[r, "\psi"] \arrow[rr, "\theta_{2\delta}"', bend right] & V_\delta \arrow[r, "\phi_\delta"] & W_{2\delta}
-\end{tikzcd}.
-\end{array}
-$$
 
 Persistence modules are a vast abstract algebraic tool. In order to make it more manejable, we give it some more structure, restricting the dimension of the vector spaces, Also, we limit as the amount of different up to isomorphism vector spaces there are.
 
@@ -134,33 +134,71 @@ Persistence modules are a vast abstract algebraic tool. In order to make it more
 \end{proposition}
 
 \begin{definition}[Interval module]
-    
+    Let $ I = (a, b] $ be an interval with $ b \leq \infty $ and let $ \F $ be a field. An {\bf interval module} $\F(I)$ is a persistence module defined as
+    \begin{align}
+        & \F(I)_t \coloneq \begin{cases}
+            &\F \text{ if } t \in I, \\
+            &0 \text{ else}, 
+        \end{cases}
+        &
+        & \pi_{s \leq t} = \begin{cases}
+            & \id \text{ if } t \in I, \\
+            &0 \text{ else}.
+        \end{cases}
+    \end{align}
 \end{definition}
 
 \begin{definition}[Direct sum of persistance modules]
-    
+    Let $ (V, \pi) $ and $ (V', \pi') $ be two persistence modules. Their {\bf direct sum} $ (W, \theta) $ is a persistence module where
+    \begin{align}
+        W_t &\coloneq V_t \oplus V_t', \text{ the direct sum of both vector spaces, and} \\
+        \theta_{s \leq t} &\coloneq \pi_{s \leq t} \oplus \pi'_{s \leq t}.
+    \end{align}
 \end{definition}
 
 \section{Barcodes, persistence diagrams and the bottleneck distance}
 
 \begin{definition}[Barcode]
-
+    A {\bf barcode} $B$ is a finite multiset of intervals. That is, a collection $\{(I_i, m_i)\}$ of intervals $I_i$ with multiplicities $m_i \in N$, where each interval $ I_i $ is either finite of the form $(a, b]$ or infinite of the form $(a, \infty)$. Each interval $I_i$ is named to be a {\bf bar} of $B$.
 \end{definition}
 
-\begin{definition}[Persistence diagrams]
+Given an interval $ I = (a, b]$, and some $ \delta \geq 0 $, we will denote
+\begin{equation}
+    I^\delta \coloneq (a-\delta, b+\delta].
+\end{equation}
+We will denote the strict upper triangular region of the Euclidean plane as
+\begin{equation}
+   \upr := \{(x, y) \in \R^2 : x < y\}, 
+\end{equation}
+and the diagonal of the plane as
+\begin{equation}
+    \Delta := \{(x, y) \in \R^2 : x = y\}.
+\end{equation}
 
+\begin{definition}[Persistence diagrams]
+    Let $ I $ be a countable set. A {\it persistence diagram} is a function $ D: I \to \upr $.
 \end{definition}
 
 \begin{definition}[Multiset matching]
-     
+    Let $ X $ and $ Y $ be two multi-sets and let $ X' \subseteq X $, $ Y' \subseteq Y$. A {\bf matching} between them is a bijection $ \mu \colon X' \to Y' $. The elements in $ X' $ and $ Y' $ are said to be {\bf matched} by $ \mu $.
 \end{definition}
+
+Note that $ X' = \coim(\mu) $ and $ Y' = \im(\mu) $. Also note that as $ X $ and $ Y $ are multisets, it might happen that one same element appears several times in one of the multisets, ans that some, but not all of its copies are matched to some element in the other multiset. 
+
 
 \begin{definition}[$\delta$-matching barcodes] \label{delta-matching}
-    
+    A delta matching between two barcodes $ B $ and $ C $ is a multiset matching that verifies
+    \begin{enumerate}
+        \item $B_{2\delta} \subseteq \coim(\mu) $,
+        \item $C_{2\delta} \subseteq \im(\mu) $,
+        \item If $\mu(I) = J$, then $I \subseteq J^\delta$ and $J \subseteq I^\delta$.
+    \end{enumerate}
 \end{definition}
 
+There are various ways of defining the bottleneck distance, all of them equivalent to one an other. We first give the natural definition that comes up following the use of $\delta$-matchings.
+
 \begin{definition}[Bottleneck distance]
-    
+    The {\bf bottleneck distance} between two barcodes $ B $ and $ C $ is the infimum over all $ \delta \in \R $ such that there exists a $\delta$-matching between $ B $ and $ C $.
 \end{definition}
 
 
