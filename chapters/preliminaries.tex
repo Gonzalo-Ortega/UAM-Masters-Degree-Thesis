@@ -1,7 +1,7 @@
 \chapter{Preliminaries}
 The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{polterovich} and \cite{wang}.
 
-\section{Persistence modules and the interleaving distance}
+\section{Persistence modules and interleaving distance}
 
 \begin{definition}[Graded ring]
     Let $ R $ be a ring. It is said that $ R $ is a {\bf graded ring} if it can be decomposed into a direct sum of additive groups
@@ -226,34 +226,129 @@ The Hausdorff distance is a way of measuring distances of different sets contain
 
 \begin{definition}[Gromov-Hausdorff distance]
     Let $ (X, d_X), (Y, d_Y) $ be metric spaces. The {\bf Gromov-Hausdorff} distance is defined as
-    $$
-        \dgh \coloneq \inf \left\{ r > 0 \mid \exists (Z, \dhf) \text{ metric space such that}, \exists X', Y' \subseteq Z, \dhf(X', Y') , r \right\},
-    $$
+    \begin{equation}
+        \dgh \coloneq \inf \left\{ r > 0 \mid \exists (Z, d_Z) \text{ metric space such that}, \exists X', Y' \subseteq Z, \dhf(X', Y') < r \right\},
+    \end{equation}
     where $ X', Y' $ are isometric spaces to $ X $ and $ Y $ respectively.
 \end{definition}
 
+\begin{lemma}[Proposition 7.3.16, \cite{burago}] \label{lemma:gh-triangle}
+    Gromov-Hausdorff distance satisfy the triangle inequality. That is, for any metric spaces $ X_1, X_2, X_3 $ it is verified that
+    \begin{equation}
+        \dgh(X_1, X_3) \leq \dgh(X_1, X_2) + \dgh(X_2, X_3).
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    Let $ d_{12} $ be a metric over $ X_1 \cup X_2 $ and let $ d_{23} $ be a metric over $ X_2 \cup X_3 $. Over $ X_1 \cap X_3 $, define
+    \begin{equation}
+        d_{13} \coloneq \begin{cases}
+        &d_{X_1}(x_1, x_3) \text{ if } x_1, x_3 \in X_1, \\
+        &d_{X_2}(x_1, x_3) \text{ if } x_1, x_3 \in X_3, \\
+        &\inf_{x_2 \in X_2} \{d_{12}(x_1, x_2) + d_{23}(x_2, x_3)\} \text{ if } x_1 \in X_1, x_3 \in X_3.
+        \end{cases}
+    \end{equation}
+    For the first two cases we clearly have a metric. For the third one observe that taking $ x_1 \in X_1, x_3 \in X_3 $ and some $ x \in X_1 $ we have
+    \begin{align}
+        d_{13}(x_1, x) + d_{13}(x, x_3) &= d_{X_1}(x_1, x) + \inf_{x_2 \in X_2} \{d_{12}(x, x_2) + d_{23}(x_2, x_3)\} \\
+        &= \inf_{x_2 \in X_2} \{d_{12}(x_1, x) + d_{12}(x, x_2) + d_{23}(x_2, x_3)\} \\
+        &\geq \inf_{x_2 \in X_2} \{d_{12}(x_1, x_2) + d_{23}(x_2, x_3)\} \\
+        &= d_{13}(x_1, x_3).
+    \end{align}
+    This implies, taking the corresponding metric $ d_{ij} $ where $ i, j = 1, 2, 3$, that 
+    \begin{equation}
+        \dhf(X_1, X_3) \leq \dhf(X_1, X_2) + \dhf(X_2, X_3),
+    \end{equation}
+    and, taking the infimum over the metrics $ d_{12} $ and $ d_{23} $ we have
+    \begin{equation}
+        \dgh(X_1, X_3) \leq \dgh(X_1, X_2) + \dgh(X_2, X_3).
+    \end{equation}
+\end{proof}
+
+To check that Gromov-Hausdorff distance is actually a distance we first give a useful characterization in \ref{prop:gh-characterization}. It is expressed in terms of correspondance distortions.
+
 \begin{definition}[Correspondance between sets]
-    
+    Given two sets $ X $ and $ Y $, a {\bf correspondance} between them is a set $ R \subseteq X \times Y $ verifying that for every $ x \in X $, there exists at least one $ y \in Y $ such that $(x, y) \in R $ and, for every $ y \in Y $, there exists an $ x \in X $ such that $(x, y) \in R $. 
 \end{definition}
 
 \begin{definition}[Distortion of a correspondance]
-    
+    Let $ (X, d_X), (Y, d_Y) $ be two metric spaces, and let $ R $ be a correspondance between them. The {\bf distortion} of $ R $ is defined as
+    \begin{equation}
+        \operatorname{dis}(R) \coloneq \sup \left\{|d_X(x, x') - d_Y(y, y')| \colon (x, y), (x', y') \in R\right\}.
+    \end{equation}
 \end{definition}
 
-\begin{proposition}[Theorem 7.3.25, \cite{burago}]
-    Let $ (X, d_X), (Y, d_Y) $ be two metric spaces. The Gromov-Housdorff distance between them can be characterized as
-    $$
-        \dgh((X, d_X), (Y, d_Y)) = \frac{1}{2} \inf_{\mathcal R} \operatorname{dis}(\mathcal R)
-    $$  
+\begin{proposition}[Theorem 7.3.25, \cite{burago}] \label{prop:gh-characterization}
+    Let $ (X, d_X), (Y, d_Y) $ be two metric spaces. The Gromov-Hausdorff distance between them can be characterized as
+    \begin{equation}
+        \dgh((X, d_X), (Y, d_Y)) = \frac{1}{2} \inf_{R} \operatorname{dis}(R).   
+    \end{equation}
 \end{proposition}
+\begin{proof}
+    Given $ r \geq \dgh(X, Y) $, for some metric space $(Z, d_Z)$, we can take $ X', Y' \subseteq Z $ such that $ X' $ and $ Y' $ are isometric embeddings of $ X $ and $ Y $ respectively and $ \dhf(X', Y') < r $ in $ Z $. Thus, we can see every element of $ X $ and $ Y $ as elements od $ Z $ trough some isometry. Therefore, we can define the correspondance
+    \begin{equation}
+        R \coloneq \{(x, y) \in X \times Y \colon d_Z(x, y) < r\}.
+    \end{equation}
+    The set $ R $ is actually a correspondance because the fact that $ \dhf(X', Y') < r $ implies that for every $ x \in X $ and every $ y \in Y $, $ d_Z(x, y) < r $, so every $ x $ and every $ y $ have some correspondance. Now, let $ (x, y), (x', y') \in R $. Using the triangle inequality of $ Z $ we have
+    \begin{align}
+        \operatorname{dis}(R) &\leq |d_X(x, x') - d_Y(y - y')| \\
+        &= |d_Z(x, x') - d_Z(y - y')| \\
+        &\leq |d_Z(x, y) + d_Z(y, x') - d_Z(y - y')| \\
+        &\leq d_Z(x, y) + d_Z(x', y) + d_Z(y - y') \\
+        &\leq d_Z(x, y) + d_Z(x', y') \leq 2r.
+    \end{align}
+    This shows
+    \begin{equation}
+        2 \dgh(X, Y) \geq \inf_{R} \operatorname{dis}(R).
+    \end{equation}
+    To see the reverse inequality, let $ R $ be any correspondance, and lets take $ \operatorname{dis}(R) = 2r $. Lets construct a metric space $ (Z, d_Z) $ formed by the disjoint union of spaces $ Z = X \cup Y $. For every $ z_1, z_2 \in Z $, we define $ d_Z $ as
+    \begin{equation}
+        d_Z(z_1, z_2) \coloneq \begin{cases}
+            &d_X(z_1, z_2) \text{ if } z_1, z_2 \in X, \\
+            &d_Y(z_1, z_2) \text{ if } z_1, z_2 \in Y, \\
+            &\inf\{d_X(z_1, x') + r + d_Y(z_2, y') \colon (x', y') \in R\} \text{ if } z_1 \in X, z_2 \in Y.
+        \end{cases}
+    \end{equation}
+    By definition, it is clear that $ d_Z $ respects isometrically both $ d_X $ and $ d_Y $. By the same reason $ d_Z(z_1, z_2) = d_Z(z_2, z_1) $  and $ d_Z(z_1, z_2) \geq 0 $ for every $ z_1, z_2 \in Z$, where $ d_Z(z_1, z_2) = 0 $ only if either $ z_1 = z_2 $ or $ r = 0$. To check the triangle inequality we take $ z_1, z_2, z_3 \in Z $. If either all three are elements of $ X $, or all three are elements of $ Y $, the inequality is verified as it is granted in $ X $ and $ Y $ with $ d_X $ and $ d_Y $ respectively. In case $ z_1, z_2 \in X $ and $ z_3 \in Y $ we can take some $ y \in Y $ such that $ (z_2, y) \in R $. Thus, we have
+    \begin{align}
+        d_Z(z_1, z_2) + d_Z(z_2, z_3) &\geq d_X(z_1, z_2) + d_X(z_2, z_2) + r + d_Y(z_3, y) \\
+        &\geq d_X(z_1, z_2) + r + d_Y(z_3, y) \\
+        &\geq d_Z(z_1, z_3).
+    \end{align}
+    Analogously, the argument follows for $ z_1 \in X $ and $ z_2, z_3 \in Y $. Thus, all is left to prove is to check $ \dhf(X, Y) < r $.
 
-\begin{lemma}[Proposition 7.3.16, \cite{burago}]
-    Gromov-Hausdorff distance satisfies the triangle inequality. That is, for any $ (X_1, d_{X_1}), (X_1, d_{X_1}), (X_1, d_{X_1}) $,
-    $$
-        \dgh(X_1, X_3) \leq \dgh(X_1, X_2) + \dgh(X_2, X_3).
-    $$
-\end{lemma}
+    ...
+\end{proof}
+
+\begin{definition}[Distortion of a map]
+    Let $ (X, d_X), (Y, d_Y) $ be two metric spaces and let $ f \colon X \to Y $ an arbitrary map. The {\bf distortion} of $ f $ is defined as
+    \begin{equation}
+        \operatorname{dis}(f) \coloneq \sup_{x_1, x_2 \in X} |d_Y(d(x_1), f(x_2)) - d_X(x_1, x_2)|.
+    \end{equation}
+\end{definition}
+
+\begin{definition}[$\e$-isometry]
+    Let $ X $ and $ Y $ be two metric spaces and let $ \e > 0 $. A {\bf $\e$-isometry} between two metric spaces is a map $ f \colon X \to Y $ such that $ \operatorname{dis}(f) \leq \e $. The image $ f(X) $ is called an {\bf $\e$-net}.
+\end{definition}
+
+\begin{proposition}[Theorem 7.3.28.1, \cite{burago}] \label{prop:e-isometry}
+    Let $ X $ and $ Y $ be two metric spaces and let $ \e > 0 $. If $ \dgh < \e $, them there exists a $ 2 \e -isometry $ from $ X $ to $ Y $.
+\end{proposition}
+\begin{proof}
+    Let $ R $ be a correspondance between $ X $ and $ Y $. By \ref{prop:gh-characterization} it holds that $\operatorname{dis}(R) < 2 \e$. For every $ x \in X $ we choose some $ y \in Y $ such that $(x, y) \in R$ and define $ f(x) \coloneq y $. This defines a map $ f \colon X \to Y $. We then have
+    \begin{equation}
+        \operatorname{dis}(f) \leq \operatorname{dis}(R) < 2 \e.
+    \end{equation}
+
+    ...
+\end{proof}
 
 \begin{theorem}[Theorem 7.3.30, \cite{burago}]
     Gromov-Hausdorff distance is in fact a metric over the space of isometry clases of compact metric spaces.    
 \end{theorem}
+\begin{proof}
+    By definition, Gromov-Hausdorff distance is nonnegative and symmetric and, by Lemma \ref{lemma:gh-triangle}, it verifies the triangle inequality. It only remains to prove that given two metric spaces $ X $ and $ Y $, $ \dgh(X, Y) = 0 $ if and only if $ X $ and $ Y $ are isometric. It comes directly of the definition that if $ X $ and $ Y $ are isometric, then $ \dgh(X, Y) = 0 $. 
+    
+    Now, let $ X $ and $ Y $ be two compact spaces such that $ \dgh(X, Y) = 0 $. By Proposition \ref{prop:e-isometry}, there exists a sequence of maps $ f_n \colon X \to Y $ such that $ \operatorname{dis}(f_n) \to 0 $. As $ X $ is compact, we can fix a countable dense set $ S \subset X $.
+    
+    ...
+\end{proof}
