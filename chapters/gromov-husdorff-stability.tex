@@ -1,8 +1,43 @@
 \chapter{Gromov-Hausdorff's Stability Theorem}
 \section{Gromov-Hausdorff stability}
+
+
+
 \begin{lemma}[Exercise 3.5.4, \cite{burago}]
     Any finite metric space of cardinality $ n $ can be isometrically embedded into $(\R^n, \ell^n)$.
 \end{lemma}
+\begin{proof}
+    Let $ X $ be a compact metric space and let $ C(X) $ be the space of all continuous functions from $ X $ to $ \R $. Let $ f, g \in C(X) $. Recall the uniform distance given by
+    \begin{equation}
+        d_\infty(f, g) \colon \sup | f(x) - g(x) |.
+    \end{equation}
+    First, we will check that the pair $ (C(X), d_\infty) $ is a metric space. Naturally nonnegativity holds and 
+    \begin{equation}
+        d_\infty(f, f) = \sup | f(x) - f(x) | = 0.
+    \end{equation}
+    Commutativity also holds as 
+    \begin{equation}
+        d_\infty(f, g) = \sup | f(x) - g(x) | = \sup | g(x) - f(x) | = d_\infty(g, f).
+    \end{equation}
+    Finally, if $ h \in C(X) $, triangle inequality holds because
+    \begin{align}
+        d_\infty(f, h) &= \sup | f(x) - h(x) | = \sup | f(x) + g(x) - g(x) - h(x) | \\
+        &\leq \sup | f(x)- g(x) | + \sup | g(x) - h(x) | = d_\infty(f, h) + d_\infty(h, g).
+    \end{align}
+    Now we are going to verify that the map $ E \colon X \to C(X) $ defined by $ E(x) = d(x, \cdot) $ is an isometric embedding onto its image. Note that
+    \begin{equation}
+        d_\infty(d(x, \cdot), d(y, \cdot)) = \sup_z |d(x, z) - d(y, z)| \leq  \sup_z |d(x, y)| = d(x, y).
+    \end{equation}
+    On the other hand if we take $ z = y $ we then have
+    \begin{equation}
+        |d(x, y) - d(y, y)| = d(x, y),
+    \end{equation}
+    and therefore
+    \begin{equation}
+        \sup_z |d(x, z) - d(y, z)| \geq = d(x, y).
+    \end{equation}
+    The proof of the lemma is just an analogous case taking $ C_n(X) $ as the set of continuous functions $ f \colon X \to \R^n $, and, for every $ x = (x_1, \dots, x_n), y = (y_1, \dots, y_n) \in \R^n $, $ \ell^\infty(x, y) = \max_i |x_i - y_i|$.
+\end{proof}
 
 \begin{lemma}[Lemma VII, \cite{ghrist}]
     Let $ X \subset \R^n $ and $ \alpha > 0 $. Then the $\alpha$-\v Cech and the $\alpha$-Rips complexes coincide when using the $ \ell^\infty $-norm. That is
@@ -16,7 +51,11 @@
 \end{definition}
 
 \begin{definition}[Good cover]
-
+    Let $ S $ be a topological space and $ I $ a set of indexes. A {\bf good cover} of $ S $ is a family $ \mathcal U = {U_i} $ of open subsets covering $ S $ such that for every finite subset $ J \subset I $, the common intersection
+    \begin{equation}
+        \bigcap_{j\in J} U_j
+    \end{equation}
+    is either empty or contractible.
 \end{definition}
 
 \begin{lemma}[\cite{oudot}]
