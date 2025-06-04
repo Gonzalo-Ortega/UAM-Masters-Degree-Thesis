@@ -343,7 +343,7 @@ The Hausdorff distance is a way of measuring distances of different sets contain
     $$
 \end{definition}
 
-\begin{definition}[Gromov-Hausdorff distance]
+\begin{definition}[Gromov-Hausdorff distance] \label{def:dgh}
     Let $ (X, d_X), (Y, d_Y) $ be metric spaces. The {\bf Gromov-Hausdorff} distance is defined as
     \begin{equation}
         \dgh \coloneq \inf \left\{ r > 0 \mid \exists (Z, d_Z) \text{ metric space such that}, \exists X', Y' \subseteq Z, \dhf(X', Y') < r \right\},
@@ -461,13 +461,34 @@ To check that Gromov-Hausdorff distance is actually a distance we first give a u
     ...
 \end{proof}
 
-\begin{theorem}[Theorem 7.3.30, \cite{burago}]
+Up to this moment we have seen that Gromov-Hausdorff distance defines a pseudo-metric over the set of metric spaces. Note that if $ X $ and $ Y $ are isometric, directly of the definition ge get, $ \dgh(X, Y) = 0 $. To make Gromov-Hausdorff distance an actual metric we need to ask one more thing to our metric spaces. That is, to be compact. Denote
+\begin{equation}
+    \mathcal{X} \coloneq \{ (X, d_X) \colon (X, d_X) \text{ is a metric compact space} \}.
+\end{equation}
+
+\begin{theorem}[Theorem 7.3.30, \cite{burago}] \label{theorem:gh-distance}
     Gromov-Hausdorff distance is in fact a metric over the space of isometry clases of compact metric spaces.    
 \end{theorem}
 \begin{proof}
-    By definition, Gromov-Hausdorff distance is nonnegative and symmetric and, by Lemma \ref{lemma:gh-triangle}, it verifies the triangle inequality. It only remains to prove that given two metric spaces $ X $ and $ Y $, $ \dgh(X, Y) = 0 $ if and only if $ X $ and $ Y $ are isometric. It comes directly of the definition that if $ X $ and $ Y $ are isometric, then $ \dgh(X, Y) = 0 $. 
+    We just seen that if $ X $ and $ Y $ are isometric, directly of the definition ge get, $ \dgh(X, Y) = 0 $. By definition, Gromov-Hausdorff distance is nonnegative and symmetric and, by Lemma \ref{lemma:gh-triangle}, it verifies the triangle inequality. It only remains to prove that given two metric spaces $ X, Y \in \mathcal{X} $, if $ \dgh(X, Y) = 0 $ then $ X $ and $ Y $ are isometric.  
     
-    Now, let $ X $ and $ Y $ be two compact spaces such that $ \dgh(X, Y) = 0 $. By Proposition \ref{prop:e-isometry}, there exists a sequence of maps $ f_n \colon X \to Y $ such that $ \operatorname{dis}(f_n) \to 0 $. As $ X $ is compact, we can fix a countable dense set $ S \subset X $.
+    Let  $ X, Y \in \mathcal{X} $ such that $ \dgh(X, Y) = 0 $. By Proposition \ref{prop:e-isometry}, there exists a sequence of maps $ f_n \colon X \to Y $ such that $ \operatorname{dis}(f_n) \to 0 $. As $ X $ is compact, we can fix a countable dense set $ S \subset X $.
     
     ...
 \end{proof}
+
+In order to extend the scope of Gromov-Hausdorff distance we can endow our compact metric spaces with real-valued functions, which will still maintain good stability properties as we will see in Chapter \ref{chapter:gromov-hausdorf-stability}.
+
+Denote the collection of such spaces as
+\begin{align}
+    \mathcal{X}_1 \coloneq \{ (X, d_x, f) \colon (X, d_x) \in \mathcal(X), f_X \colon X \to \R \text{ continuous}\}.
+\end{align}
+
+\begin{definition} \label{def:dgh1}
+    Let $ X, Y \in \mathcal{X}_1 $. We extend the {\bf Gromov-Hausdorff distance over $ X_1 $} as
+    \begin{equation}
+        \dgh^1((X, d_X, f_X), (Y, d_Y, f_Y)) = \inf_{R} \max \left\{ \frac{1}{2} \operatorname{dis}(R), \|f_X - f_Y \|_{\ell^\infty} \right\}.   
+    \end{equation}
+\end{definition}
+
+An analogous adaptation of Theorem \ref{theorem:gh-distance} and the previous results proofs that $ \dgh^1 $ defines a metric over the set of isomorphism clases od $ \mathcal{X}_1 $.

@@ -1,5 +1,22 @@
-\chapter{Gromov-Hausdorff's Stability Theorem}
+\chapter{Gromov-Hausdorff's Stability Theorem} \label{chapter:gromov-hausdorf-stability}
 \section{Gromov-Hausdorff stability}
+
+\begin{definition}[Vietoris-Rips filtration]
+    Let $ (X, d) $ be a finite metric space and let $ \alpha > 0 $. The {\bf Vietoris-Rips complex} associated with $ X $ of radius $ \alpha $, $\rf_\alpha(X, d)$, is the simplicial complex whose $0$-simplices are the elements of $X$ and, for $k \geq 1$, its $k$-dimensional simplices are formed by every subset $ \{x_0, x_1, \dots, x_k\} \subseteq X $ such that $d(x_i, x_j) \leq \alpha $ for every $i, j = 1, \dots, k$.
+
+    The family $ \rf(X, d) \coloneq \{\rf_\alpha(X, d)\}_{\alpha>0}$ is named {\bf Vietoris-Rips filtration}. 
+
+    Given a real function $ f \colon X \to R $, let $ X_\alpha \coloneq f^{-1}((-\infty, \alpha]) \subseteq X $ be the {\bf pre-image of $f$ delimited by $ \alpha $}. We define the {\bf Vietoris-Rips filtration associated with $ f $} as $ \rf(X, d, f) \coloneq \{\rf_\alpha(X_\alpha, d)\}_{\alpha>0}$.
+
+\end{definition}
+
+\begin{definition}[Čech filtration]
+    Let $ (X, d) $ be a finite metric space and let $ \alpha > 0 $. The {\bf Čech complex} associated with $ X $ of radius $ \alpha $, $\cf_\alpha(Z, d)$, is the simplicial complex whose $0$-simplices are the elements of $X$ and, for $k \geq 1$, its $k$-dimensional simplices are formed by every subset $ \{x_0, x_1, \dots, x_k\} \subseteq X $ such that there exists some $ x \in X $ such that $ d(x, x_i) \leq \alpha $ for all $i = 1, \dots, k$.
+
+    The family $\cf(Z, d) \coloneq \{\cf_\alpha(Z, d)\}_{\alpha > 0}$ is named {\bf Čech filtration}.
+
+    Given a real function $ f \colon X \to R $, let $ X_\alpha \coloneq f^{-1}((-\infty, \alpha]) \subseteq X $. We define the {\bf Čech filtration associated with $ f $} as $ \cf(X, d, f) \coloneq \{\cf_\alpha(X_\alpha, d)\}_{\alpha>0}$.
+\end{definition}
 
 \begin{lemma}[Exercise 3.5.4, \cite{burago}] \label{lemma:haus-aux-1}
     Any finite metric space of cardinality $ n $ can be isometrically embedded into $(\R^n, \ell^n)$.
@@ -60,14 +77,14 @@
     Let $ S \subset S' $ be two paracompact spaces. Let $ \mathcal U = \{U_x\}_{x \in A}$, $ \mathcal U' = \{U'_x\}_{x \in A'}$ be two good covers of $ S $ and $ S'$ respectively, based on finite parameter sets $ A \subset A ' $ such that $ U_x \subset U_x' $ for all $ x \in A $. Then the homotopy equivalences $ \n \mathcal U \to S $ and $\n U' \to S' $ commute with the canonical inclusions $ S \to S' $ and $ \n \mathcal U \to \n \mathcal U' $ at homology level.
 \end{lemma}
 
-\begin{theorem}[Theorem 3.1, \cite{chazal}]
+\begin{theorem}[Theorem 3.1, \cite{chazal}] \label{theorem:gh-stability}
     Let $ (X, d_X) $, $ (Y, d_Y) $ be finite metric spaces. Then, for any $ k \in \N$, 
     \begin{equation}
         \db(  (\rf(X, d_X)), D_k(\rf(Y, d_Y))) \leq \dgh((X, d_X), (Y, d_Y)).
     \end{equation}
 \end{theorem}
 \begin{proof}
-    Let $ \e = \dgh((X, d_X), (Y, d_Y)) $. As $ X $ and $ Y $ are finite, they are compact, and therefore the infimum when computing Gromov-Hausdorff distance is in fact a minimum. That is, there exists a metric space $ (Z, d_Z) $ and two isometric embeddings $ \gamma_X \colon X \to Z $ and $ \gamma_Y \colon Y \to Z $ such that
+    Let $ \e = \dgh((X, d_X), (Y, d_Y)) $. As $ X $ and $ Y $ are finite, they are compact, and therefore the infimum when computing Gromov-Hausdorff distance using Definition \ref{def:dgh} is in fact a minimum. That is, there exists a metric space $ (Z, d_Z) $ and two isometric embeddings $ \gamma_X \colon X \to Z $ and $ \gamma_Y \colon Y \to Z $ such that
     \begin{equation}
         \dhf^Z(\gamma_X(X), \gamma_Y(Y)) = \e,
     \end{equation}
@@ -92,9 +109,9 @@
         \db(D(\delta_X), D(\delta_Y)) \leq \| \delta_X - \delta_Y \|_\infty \leq \e.
     \end{equation}
 
-    Let $\alpha \in \R $. Define an off-set of radius $ \alpha $ around the image of the embedded of $ X $ into $ R^n $ as
+    Let $\alpha \in \R $. Define an off-set of radius $ \alpha $ around the image of the embedding of $ X $ into $ \R^n $ as
     \begin{equation}
-        \gamma \circ \gamma_X(X) \coloneq \bigcup_{x \in \gamma \circ \gamma_X(X)} B_\alpha^{\ell^\infty}(x),
+        \gamma \circ \gamma_X(X)^\alpha \coloneq \bigcup_{x \in \gamma \circ \gamma_X(X)} B_\alpha^{\ell^\infty}(x),
     \end{equation}
     where $ B_\alpha^{\ell^\infty}(x) $ denotes de ball of radius $ \alpha $ and center $ x $ using distance $ d_\infty $. As balls in $ \ell^\infty $ are hypercubes, they are convex, and therefore their intersection is either empty or contractible. By Lemma \ref{lemma:haus-aux-3} know that $ \delta_X $ has the same persistence diagram as the Čech complex $ \cf(\gamma \circ \gamma_X, \ell^\infty) $. By Lemma \ref{lemma:haus-aux-2}, when using the $ \ell^\infty $-norm, Čech and Rips complexes coincide and so do their filtrations. As $ \gamma \circ \gamma_X $ is an isometric embedding, we then have
     \begin{equation}
@@ -106,22 +123,85 @@
     \end{equation}
 \end{proof}
 
-
 \begin{proposition}
     Let $ (X, d_X) $, $ (Y, d_Y) $ be finite metric spaces. Then, for any $ k \in \N$, the bottleneck distance
-    $$
+    \begin{equation}
         \db(D_k(\rf(X, d_X)), D_k(\rf(Y, d_Y))),
-    $$
+    \end{equation}
     is a tight lower bound of
-    $$
+    \begin{equation}
         \dgh((X, d_X), (Y, d_Y)).
-    $$
+    \end{equation}
     That is, it is the largest possible lower bound.
 \end{proposition}
+\begin{proof}
+    Its enough to find an example were both distances are equal. For so, take the two point spaces $ X = \{a, b\} $ with distance $ d_X(a, b) = 2 $, and $ Y = \{ c, d \} $ with $ d_Y(c, d) = 2 + 2 \e $. Both spaces can be isometrically mapped into the real line $ \R $, with $ X $ mapped to $ \{0, 2\} $ and $ Y $ mapped to $ \{ -\e, 2 + \e \} $. Hence $ \dgh(X, Y) \leq \epsilon $. 
+
+    On the other hand, the $0$-dimensional persistence diagram of the Rips filtration of $ (X, d_X) $ and $ (Y, d_Y) $ are
+    \begin{align}
+        D_0(\rf(X, d_X)) &= \{ (0, \infty), (0, 1)\}, \\
+        D_0(\rf(Y, d_Y)) &= \{ (0, \infty), (0, 1 = \e)\},
+    \end{align}
+    and therefore, $ \db(D_k(\rf(X, d_X)), D_k(\rf(Y, d_Y))) = \e $.
+\end{proof}
+
+The following theorem generalizes Theorem \ref{theorem:gh-stability}.
 
 \begin{theorem}[Theorem 3.2, \cite{chazal}]
     Let $ (X, d_X) $, $ (Y, d_Y) $ be finite metric spaces endowed with the functions $ f \colon X \to \R $ and $ g \colon Y \to \R $. Then
-    $$
+    \begin{equation}
         \db(D_k(\rf(X, d_X, f)), D_k(\rf(Y, d_Y, g))) \leq \dgh^1((X, d_X, f), (Y, d_Y, g)).
-    $$
+    \end{equation}
 \end{theorem}
+\begin{proof}
+    We follow a similar procedure to the proof of Theorem \ref{theorem:gh-stability}. Start setting
+    \begin{equation}
+        \e \coloneq \dgh^1((X, d_X, f), (Y, d_Y, g)).
+    \end{equation}
+    For every $ \alpha \in \R $, recall the notation for the pre-images of $ f $ and $ g $ by $ \alpha $,
+    \begin{align}
+        X_\alpha &\coloneq f^{-1}((-\infty, \alpha]) \subseteq X, \\
+        Y_\alpha &\coloneq g^{-1}((-\infty, \alpha]) \subseteq Y. \\
+    \end{align}
+    As before, as $ X $ and $ Y $ are finite, the infimum in $ \dgh^1 $ of Definition \ref{def:dgh1} is actually a minimum realized by some correspondance $ R \in (X \times Y) $. Also, the disjoint union $ Z = X \cup Y $, can be endowed with a metric $ d_Z $ and a pair of inclusions $ \gamma_X \colon X \to Z $, $ \gamma_Y \colon Y \to Z $ such that for every $ (x, y) \in R $, 
+    \begin{align}
+        d_Z(\gamma_X(X), \gamma_Y(Y)) &\leq \frac{1}{2} \operatorname{dis}(R) \leq \e, \text{ and} \\
+        |f(x) - g(y)| &\leq \|f-g\|_{\ell^\infty} \leq \e.
+    \end{align}
+    By Lemma \ref{lemma:haus-aux-1}, $ (\gamma_X(X) \cup \gamma_Y(Y), d_Z) $ can be isometrically embedded by some $ \gamma $ into $ (\R^n, \ell^\infty) $, where
+    \begin{equation}
+        n \coloneq \#(X) + \#(Y).
+    \end{equation}
+    Hence, for every $ (x, y) \in R $ we have
+    \begin{equation}
+        \|\gamma \circ \gamma_X(X) - \gamma \circ \gamma_Y(Y) \|_{\ell^\infty}.
+    \end{equation}
+
+    Note that the filtrations given by the off-set defined in the proof of Theorem \ref{theorem:gh-stability}, can be seen as persistence modules $ V \coloneq \{\gamma \circ \gamma_X(X_\alpha)^\alpha\}_{\alpha > 0}$ and $ W \coloneq \{\gamma \circ \gamma_Y(Y_\alpha)^\alpha\}_{\alpha > 0}$ are $\e$-interleaved. That is, for all $ \alpha > 0 $,
+    \begin{equation}
+        \gamma \circ \gamma_X(X_\alpha)^\alpha \subseteq \gamma \circ \gamma_Y(Y_\alpha)^{\alpha + \e} \subseteq \gamma \circ \gamma_X(X_\alpha)^{\alpha + 2\e}.
+    \end{equation}
+    This is because for every element $ p \in \gamma \circ \gamma_X(X_\alpha)^\alpha $, there exists some $ x \in X $ such that
+    \begin{equation}
+        \|p - \gamma \circ \gamma_X(x) \|_{\ell^\infty} \leq \alpha.
+    \end{equation}
+    Hence, taking some $ y \in Y $ such that $ (x, y) \in R $ we have that
+    \begin{equation}
+        \| \gamma \circ \gamma_X(x) - \gamma \circ \gamma_Y(y) \|_{\ell^\infty} \leq \e,
+    \end{equation}
+    and as
+    \begin{equation}
+        g(y) \leq f(x) + \e \leq \alpha + \e,
+    \end{equation}
+    we have that $ y \in Y_{\alpha + \e} $ and therefore
+    \begin{equation}
+        \| p - \gamma \circ \gamma_Y(y) \|_{\ell^\infty} \leq \alpha + \e,
+    \end{equation}
+    and so $ p \in \gamma \circ \gamma_Y(Y_\alpha)^{\alpha + \e} $. The second inclusion follows analogously.
+
+    Note that as we have two $\e$-interleaved modules we can use \ref{theorem:stability} to expresses the bottleneck distance as the interleaving distance. Thus
+    \begin{align}
+        \db(D_k(V), D_k(W)) = \di(V, W) \leq \epsilon.
+    \end{align}
+    Analogously to the previous proof, Lemma \ref{lemma:haus-aux-3} tells this inequality is also valid taking the Čech filtrations, and Lemma \ref{lemma:haus-aux-2} let us take the Rips filtrations, completing the proof.
+\end{proof}
