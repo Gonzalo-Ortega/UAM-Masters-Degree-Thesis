@@ -156,7 +156,7 @@ Persistence modules are a vast abstract algebraic tool. In order to make it more
     \end{align}
 \end{definition}
 
-\section{Barcodes, persistence diagrams and the bottleneck distance}
+\section{Barcodes and the bottleneck distance}
 
 \begin{definition}[Barcode]
     A {\bf barcode} $B$ is a finite multiset of intervals. That is, a collection $\{(I_i, m_i)\}$ of intervals $I_i$ with multiplicities $m_i \in N$, where each interval $ I_i $ is either finite of the form $(a, b]$ or infinite of the form $(a, \infty)$. Each interval $I_i$ is named to be a {\bf bar} of $B$.
@@ -175,16 +175,11 @@ and the diagonal of the plane as
     \Delta := \{(x, y) \in \R^2 : x = y\}.
 \end{equation}
 
-\begin{definition}[Persistence diagrams]
-    Let $ I $ be a countable set. A {\it persistence diagram} is a function $ D: I \to \upr $.
-\end{definition}
-
 \begin{definition}[Multiset matching]
     Let $ X $ and $ Y $ be two multi-sets and let $ X' \subseteq X $, $ Y' \subseteq Y$. A {\bf matching} between them is a bijection $ \mu \colon X' \to Y' $. The elements in $ X' $ and $ Y' $ are said to be {\bf matched} by $ \mu $.
 \end{definition}
 
 Note that $ X' = \coim(\mu) $ and $ Y' = \im(\mu) $. Also note that as $ X $ and $ Y $ are multisets, it might happen that one same element appears several times in one of the multisets, ans that some, but not all of its copies are matched to some element in the other multiset. 
-
 
 \begin{definition}[$\delta$-matching barcodes] \label{delta-matching}
     A delta matching between two barcodes $ B $ and $ C $ is a multiset matching that verifies
@@ -201,6 +196,130 @@ There are various ways of defining the bottleneck distance, all of them equivale
     The {\bf bottleneck distance} between two barcodes $ B $ and $ C $ is the infimum over all $ \delta \in \R $ such that there exists a $\delta$-matching between $ B $ and $ C $.
 \end{definition}
 
+\section{Persistence diagrams and the Wasserstein distance} \label{sec:wp-persistance}
+We will denote the strict upper triangular region of the Euclidean plane as
+\begin{equation}
+    \upr := \{(x, y) \in \R^2 : x < y\},
+\end{equation}
+and the diagonal of the plane as
+\begin{equation}
+  \Delta := \{(x, y) \in \R^2 : x = y\}.
+\end{equation}
+
+\begin{definition}[Persistence diagram]
+    Let $ I $ be a countable set. A {\it persistence diagram} is a function $ D: I \to \upr $.
+\end{definition}
+
+Persistence diagrams are just a way of presenting the out coming from computing the persistence homology groups of a set of data. This output comes in the so called {\it barcodes}, which are multisets of intervals. As every interval is given with its {\it birth} and {\it death} parameters, it can as well be seen as a point in $ \upr $.
+
+\begin{definition}[Partial matching]
+    Let $ D_1: I_1 \to \upr $ and $ D_2: I_2 \to \upr $ be persistence diagrams. A {\it partial matching} between $ D_1 $ and $ D_2 $ is the triple $ (I_1', I_2', f) $ such that $ f: I_1' \to I_2' $ is a bijection with $ I_1' \subseteq I_1 $ and $ I_2' \subseteq I_2 $.
+\end{definition}
+
+Instead of probability measures, now we are actually dealing with countable sets of points in $ \R $. We will make use of the $ l^p $ norm at countable spaces to measure the distance between matched pairs and the distance between unmatched pairs and the diagonal $ \Delta $. For a more detailed explanation of Lebesgue measures check \cite{rudin}[Definition 3.7]. This norm is named after Pafnuty Chebyshev.
+
+\begin{definition}[Chebyshev distance]
+    Let $ a, b \in \R^2 $ with $a = (a_x, a_y) $ and $ b = (b_x, b_y) $. The {\it Chebyshev distance} is defined as
+    \begin{equation}
+        d_\infty(a, b) := ||a-b||_{\infty} := \max \{|a_x - b_x|, |a_y - b_y|\}.
+    \end{equation}
+\end{definition}
+
+To define our adapted Wasserstein distance we need to check how Chebyshev distance measures distances between points of $ \upr $ and $ \Delta $.
+
+\begin{proposition} \label{prop:distance-delta}
+    If $ a = (a_x, a_y) \in \upr $, then $ d_\infty(a, \Delta) = \inf_{t \in \Delta} d_\infty(a, t) = \frac{a_y - a_x}{2} $.
+\end{proposition}
+\begin{proof}
+    The $ t $ which minimizes the distance is the midpoint of $ a_x $ and $ a_y $, that is $t = \left(\frac{a_x+a_y}{2}, \frac{a_x+a_y}{2}\right)  $. Then,
+    \begin{equation}
+        \left| a_x - \frac{a_x+a_y}{2} \right| = \left| \frac{a_x-a_y}{2}\right| = \left| \frac{a_y-a_x}{2}\right| = \left| a_y - \frac{a_x+a_y}{2} \right|,
+    \end{equation}
+    and as $ a_y > a_x $ we have
+    \begin{equation}
+        d_\infty(a, t) = \left|\frac{a_y - a_x}{2}\right| = \frac{a_y - a_x}{2}.
+    \end{equation}
+\end{proof}
+
+We now verify that the upper triangular region of the Euclidean plane with the Chebyshev distance adapted to measure distances in $ \Delta $ is a metric space.
+\begin{proposition}
+    The function $ d_\infty $ is a distance in $ \upr $ with the diagonal $ \Delta $.
+\end{proposition}
+\begin{proof}
+    For points $ a, b \in \upr \subset \R^2 $, $ d_\infty $ is a distance as usual Lebesgue norms are well defined. See \cite{rudin}[Chapter 3]. To verify that the metric requirements are fulfilled for $ d_\infty(a, \Delta) $, it is enough to consider $ t = \frac{a_y - a_x}{2} $ as in Proposition \ref{prop:distance-delta}.
+\end{proof}
+
+\begin{definition}[$p$-cost] \label{def:pcost}
+    Let $ D_1: I_1 \to \upr $ and $ D_2: I_2 \to \upr $ be persistence diagrams. Let $ (I_1', I_2', f) $ be a partial matching between them. If $ p < \infty $, the {\it $p$-cost of $ f $} is defined as
+    \begin{align*}
+        \costp(f) := \bigg(&\sum_{i \in I_1'} d_\infty(D_1(i), D_2(f(i)))^p \\
+        &+ \sum_{i \in I_1 \setminus I_1'} d_\infty(D_1(i), \Delta)^p \\
+        &+ \sum_{i \in I_2 \setminus I_2'} d_\infty(D_2(i), \Delta)^p \bigg)^{\frac{1}{p}}.
+    \end{align*}
+    For $ p = \infty $, the {\it $\infty$-cost of $ f $} is defined as
+    \begin{align*}
+        \costi(f) := \max \bigg\{&\sup_{i \in I_1'} d_\infty(D_1(i), D_2(f_i)), \\
+        &\sup_{i\in I_1 \setminus I_1'} d_\infty(D_1(i), \Delta), \\
+        &\sup_{i\in I_2 \setminus I_2'} d_\infty(D_2(i), \Delta)\bigg\}.
+    \end{align*}
+\end{definition}
+
+\begin{definition}[p-Wasserstein distance] \label{def:Wasserstein}
+    Let $ D_1, D_2 $ be persistence diagrams. Let $ 1 \leq p \leq \infty $. Define
+    $$
+        \twdp (D_1, D_2) = \inf \{\costp(f) : f \text{ is a partial matching between } D_1 \text{ and } D_2 \}.
+    $$
+    Let $ \emptyset $ denote the unique persistence diagram with empty indexing set. Let $ (\dgmp, \wdp) $ be the space of persistence diagrams $ D $ that satisfy $ \twdp(D, \emptyset) < \infty $ modulo the equivalence relation $ D_1 \sim D_2 $ if $ \twdp (D_1, D_2) = 0 $. The metric $ \wdp $ is called the {\it $p$-Wasserstein distance}.
+\end{definition}
+
+\begin{definition}[Bottleneck distance]
+    In the conditions of Definition \ref{def:Wasserstein}, if $ p = \infty $, the metric $ \wdi $ is called the {\it bottleneck distance}.
+\end{definition}
+
+\begin{proposition} \label{prop-empty-mathing-distance}
+    There is only one matching between $ D: I \to \upr $ and $ \emptyset $. Hence, if $ p \leq \infty $,
+    \begin{equation}
+        \twdp(D, \emptyset) = \left(\sum_{i\in I} d_\infty(D(i), \Delta)^p\right)^{\frac{1}{p}},
+    \end{equation}
+    and, if $ p = \infty $,
+    \begin{equation}
+        \twdi(D, \emptyset) = \sup_{i\in I} d_\infty(D_1(i), \Delta)
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    Let $ I' \subseteq D $. If $ f $ is a partial matching between $ D $ and $ \emptyset $, means that $ f(I') = \emptyset$ is a bijection. That is only posible if $ I' = \emptyset $ too. Therefore $ I \setminus I' = I \setminus \emptyset = I $ and following Definition \ref{def:pcost} we conclude our proof.
+\end{proof}
+
+Next proposition will prove that, in indeed, the space of persistence diagrams with the $p$-Wasserstein distance $(\dgmp, \wdp)$ is a metric space. Its proof is usually omitted in literature, as it based on the simple fact that $ d_\infty $ is a distance. We will give, however, an step by step version here.
+
+\begin{proposition}
+    $\wdp$ is a distance on the space $ (\dgmp, \wdp) $.
+\end{proposition}
+\begin{proof}
+    Let $ D_1, D_2, D_3 \in \dgmp$, with $ 1 \leq p \leq \infty $. First of all, $ \wdp (D_1, D_2) \geq 0 $ because $ d_\infty \geq 0 $. $ \wdp (D_1, D_2) = 0 $ if and only if $ \twdp (D_1, D_2) = 0 $. Thus, because of the equivalence relationship used to define $ \wdp $, it has to be $ D_1 \sim D_2 $.
+
+    To check symmetry, note that every partial matching $ f $ is bijective, therefore $ f^{-1} $ is a partial matching. But, for all $ i \in I_1'$, exists $ j \in I_2' $ such that $ f(i) = j $ and
+    \begin{align}
+        d_\infty (D_1(i), D_2(f(i))) = d_\infty (D_2(f(i)), D_1(i)) = d_\infty (D_2(j), D_1(f^{-1}(j))).
+    \end{align}
+    Then, $ \costp(f) = \costp(f^{-1}) $ and we have
+    \begin{align}
+        \wdp (D_1, D_2) &= \inf \{\costp(f) : f \text{ is a partial matching between } D_1 \text{ and } D_2 \} \\
+        &= \inf \{\costp(f^{-1}) : f^{-1} \text{ is a partial matching between } D_2 \text{ and } D_1 \} \\
+        &= \wdp (D_2, D_1).
+    \end{align}
+    
+    Finally, lets prove the triangle inequality. If $ f: I_1' \to I_2' $ is a partial matching between $ D_1 $ and $ D_2 $ and $ g: I_2' \to I_3' $ is a partial matching between $ D_2 $ and $ D_3 $, $ g \circ f: I_1' \to I_3' $ is a partial matching between $ D_1 $ and $ D_3 $ as both $ f $ and $ g $ are bijective. Computing the cost of the matchings for $ p < \infty$, we notice that
+    \begin{align}
+        &\sum_{i\in I_1'} d_\infty(D_1(i), D_2(f(i))) + \sum_{i\in I_1 \setminus I_1'} d_\infty(D_1(i), \Delta) + \sum_{i\in I_2 \setminus I_2'} d_\infty(D_2(i), \Delta) \\
+        + &\sum_{i\in I_2'} d_\infty(D_2(i), D_3(g(i))) + \sum_{i\in I_2 \setminus I_2'} d_\infty(D_2(i), \Delta) + \sum_{i\in I_3 \setminus I_3'} d_\infty(D_3(i), \Delta) \\
+        \geq &\sum_{i\in I_1'} d_\infty(D_1(i), D_3(g \circ f(i))) + \sum_{i\in I_1 \setminus I_1'} d_\infty(D_1(i), \Delta) + \sum_{i\in I_3 \setminus I_3'} d_\infty(D_3(i), \Delta)
+    \end{align}
+    as $ d_\infty(D_1(i), D_2(f(i))) + d_\infty(D_2(f(i)), D_2(g(f(i)))) \geq d_\infty(D_1(i), D_3(g \circ f(i))) $ using the triangle inequality of $ d_\infty $. Therefore, for all partial matchings $ f $ and $ g $ as described, we have $ \costp (f) + \costp (g) \geq \costp (g \circ f) $. Using the same reasoning, por $ p = \infty $ we also obtain $ \costi (f) + \costi (g) \geq \costi (g \circ f) $. Hence, we have verified that
+    \begin{align}
+        \wdp(D_1, D_2) + \wdp(D_2, D_3) \geq \wdp(D_1, D_3).
+    \end{align}
+\end{proof}
 
 \section{The Hausdorff and Gromov-Hausdorff distances}
 

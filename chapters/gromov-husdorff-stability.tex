@@ -1,9 +1,7 @@
 \chapter{Gromov-Hausdorff's Stability Theorem}
 \section{Gromov-Hausdorff stability}
 
-
-
-\begin{lemma}[Exercise 3.5.4, \cite{burago}]
+\begin{lemma}[Exercise 3.5.4, \cite{burago}] \label{lemma:haus-aux-1}
     Any finite metric space of cardinality $ n $ can be isometrically embedded into $(\R^n, \ell^n)$.
 \end{lemma}
 \begin{proof}
@@ -39,7 +37,7 @@
     The proof of the lemma is just an analogous case taking $ C_n(X) $ as the set of continuous functions $ f \colon X \to \R^n $, and, for every $ x = (x_1, \dots, x_n), y = (y_1, \dots, y_n) \in \R^n $, $ \ell^\infty(x, y) = \max_i |x_i - y_i|$.
 \end{proof}
 
-\begin{lemma}[Lemma VII, \cite{ghrist}]
+\begin{lemma}[Lemma VII, \cite{ghrist}] \label{lemma:haus-aux-2}
     Let $ X \subset \R^n $ and $ \alpha > 0 $. Then the $\alpha$-\v Cech and the $\alpha$-Rips complexes coincide when using the $ \ell^\infty $-norm. That is
     $$
         \check C_\alpha(X, \ell^\infty) = R_\alpha(X, \ell^\infty).
@@ -58,16 +56,56 @@
     is either empty or contractible.
 \end{definition}
 
-\begin{lemma}[\cite{oudot}]
+\begin{lemma}[\cite{oudot}] \label{lemma:haus-aux-3}
     Let $ S \subset S' $ be two paracompact spaces. Let $ \mathcal U = \{U_x\}_{x \in A}$, $ \mathcal U' = \{U'_x\}_{x \in A'}$ be two good covers of $ S $ and $ S'$ respectively, based on finite parameter sets $ A \subset A ' $ such that $ U_x \subset U_x' $ for all $ x \in A $. Then the homotopy equivalences $ \n \mathcal U \to S $ and $\n U' \to S' $ commute with the canonical inclusions $ S \to S' $ and $ \n \mathcal U \to \n \mathcal U' $ at homology level.
 \end{lemma}
 
 \begin{theorem}[Theorem 3.1, \cite{chazal}]
     Let $ (X, d_X) $, $ (Y, d_Y) $ be finite metric spaces. Then, for any $ k \in \N$, 
-    $$
-        \db(D_k(\rf(X, d_X)), D_k(\rf(Y, d_Y))) \leq \dgh((X, d_X), (Y, d_Y)).
-    $$
+    \begin{equation}
+        \db(  (\rf(X, d_X)), D_k(\rf(Y, d_Y))) \leq \dgh((X, d_X), (Y, d_Y)).
+    \end{equation}
 \end{theorem}
+\begin{proof}
+    Let $ \e = \dgh((X, d_X), (Y, d_Y)) $. As $ X $ and $ Y $ are finite, they are compact, and therefore the infimum when computing Gromov-Hausdorff distance is in fact a minimum. That is, there exists a metric space $ (Z, d_Z) $ and two isometric embeddings $ \gamma_X \colon X \to Z $ and $ \gamma_Y \colon Y \to Z $ such that
+    \begin{equation}
+        \dhf^Z(\gamma_X(X), \gamma_Y(Y)) = \e,
+    \end{equation}
+    where $ \dhf^Z $ denotes the Hausdorff distance respect the distance $ d_Z $. Consider the subspace $ \gamma_X(X) \cup \gamma_Y(Y) \subseteq Z $ with the induced metric from $ Z $. As both $ X $ and $ Y $ are finite, let
+    \begin{equation}
+        n \coloneq \#(X) + \#(Y). 
+    \end{equation}
+    Hence, by Lemma \ref{lemma:haus-aux-1}, there exists an isometric embedding
+    \begin{equation}
+        \gamma \colon (\gamma_X(X) \cup \gamma_Y(Y), d_Z) \to (\R^n, \ell^\infty).
+    \end{equation}
+    Let $ \dhf^\infty $ denote the Hausdorff distance respect the distance $ d_\infty $. We then have
+    \begin{equation}
+        \dhf^\infty(\gamma \circ \gamma_X(X), \gamma \circ \gamma_Y(Y)) = \dhf^Z(\gamma_X(X), \gamma_Y(Y)) = \e.
+    \end{equation}
+    Let $ \delta_X $ be the distance function from a point in $ \R^n $ to $ X $, and analogously, let $ \delta_X $ be the distance function to $ Y $. In $ \ell^\infty $ norm, by hoy we defined $\e$, we have
+    \begin{equation}
+        \| \delta_X - \delta_Y \|_\infty = \max_{i=1, \dots, n} | \delta_{x_i} - \delta_{y_i} | \leq \e.
+    \end{equation}
+    As distance functions are linear, both $ \delta_X $ and $ \delta_Y $ are lower envelopes of picewise-linear functions and therefore they are picewise-linear too. Hence,  both $ \delta_X $ and $ \delta_Y $ are tame and continuous so by Theorem \ref{theorem:edelsbrunner-stability} we have
+    \begin{equation}
+        \db(D(\delta_X), D(\delta_Y)) \leq \| \delta_X - \delta_Y \|_\infty \leq \e.
+    \end{equation}
+
+    Let $\alpha \in \R $. Define an off-set of radius $ \alpha $ around the image of the embedded of $ X $ into $ R^n $ as
+    \begin{equation}
+        \gamma \circ \gamma_X(X) \coloneq \bigcup_{x \in \gamma \circ \gamma_X(X)} B_\alpha^{\ell^\infty}(x),
+    \end{equation}
+    where $ B_\alpha^{\ell^\infty}(x) $ denotes de ball of radius $ \alpha $ and center $ x $ using distance $ d_\infty $. As balls in $ \ell^\infty $ are hypercubes, they are convex, and therefore their intersection is either empty or contractible. By Lemma \ref{lemma:haus-aux-3} know that $ \delta_X $ has the same persistence diagram as the Čech complex $ \cf(\gamma \circ \gamma_X, \ell^\infty) $. By Lemma \ref{lemma:haus-aux-2}, when using the $ \ell^\infty $-norm, Čech and Rips complexes coincide and so do their filtrations. As $ \gamma \circ \gamma_X $ is an isometric embedding, we then have
+    \begin{equation}
+        \cf(\gamma \circ \gamma_X, \ell^\infty) = \rf(\gamma \circ \gamma_X, \ell^\infty) = \rf(X, d_X).
+    \end{equation}
+    Hence, the persistence diagram of $ \rf(X, \ell^\infty) $ is the same as the persistence diagram of $ \gamma_X $. The same is true taking $ Y $ and therefore we have
+    \begin{equation}
+        \db(D(\rf(X, d_X)), D(\rf(Y, d_Y))) = \db(D(\gamma_X), D(\gamma_Y)) \leq \e.
+    \end{equation}
+\end{proof}
+
 
 \begin{proposition}
     Let $ (X, d_X) $, $ (Y, d_Y) $ be finite metric spaces. Then, for any $ k \in \N$, the bottleneck distance
@@ -81,7 +119,7 @@
     That is, it is the largest possible lower bound.
 \end{proposition}
 
-\begin{theorem}
+\begin{theorem}[Theorem 3.2, \cite{chazal}]
     Let $ (X, d_X) $, $ (Y, d_Y) $ be finite metric spaces endowed with the functions $ f \colon X \to \R $ and $ g \colon Y \to \R $. Then
     $$
         \db(D_k(\rf(X, d_X, f)), D_k(\rf(Y, d_Y, g))) \leq \dgh^1((X, d_X, f), (Y, d_Y, g)).
