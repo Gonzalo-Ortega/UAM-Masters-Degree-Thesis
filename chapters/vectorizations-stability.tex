@@ -1,5 +1,138 @@
 
 \chapter{Vectorizations' Stability Theorems}
+
 \section{Persistence landscapes}
+
+\begin{lemma}[Lemma 1, \cite{bubenik}] \label{lemma:landscapes-aux-1}
+    Let $ a \leq b \leq c \leq d $ be real numbers. Then $ \beta_b^c \geq \beta_a^d $.
+\end{lemma}
+\begin{proof}
+    ...
+\end{proof}
+
+\begin{lemma}[Lemma 2, \cite{bubenik}] \label{lemma:landscapes-aux-2}
+    Let $ 0 \leq h_1 \leq h_2 $ be real numbers. Then $ \beta_{t-h_1}^{t+h_1} \geq \beta_{t-h_2}^{t+h_2} $.
+\end{lemma}
+\begin{proof}
+    ...
+\end{proof}
+
+Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended real numbers. 
+
+\begin{definition}[Persistence landscape] 
+    A {\bf persistence landscape} is a function $ \lambda \colon \N \times \R \to \overline \R $, defined as
+    \begin{equation}
+        \lambda(k, t) \coloneq \sup \{ m \geq 0 \mid \beta^{t-m, t+m} \geq k\}.
+    \end{equation}
+    Note that this function can also be seen as a sequence of function $ \lambda_k \colon \R \to \overline{\R} $, where $ \lambda_k(t) = \lambda(k, t) $.
+\end{definition}
+
+\begin{definition}[$K$-Lipschitz]
+    Let $ (X, d_X) $, $ (Y, d_Y) $ be two metric spaces and let $ K > 0 $. A {\bf $K$-Lipschitz} map is a map $ f \colon (X, d_X) \to (Y, d_Y) $, such that for every $ x_1, x_2 \in X $, 
+    \begin{equation}
+        d_Y(f(x_1), f(x_2)) \leq K d_X(x_1, x_2).
+    \end{equation}
+\end{definition}
+
+\begin{lemma}[Lemma 3, \cite{bubenik}] \label{lemma:landscapes-aux-3}
+    Let $ \lambda_k \colon \R \to \overline{\R} $ be an element of a persistence diagram. The following properties are verified.
+    \begin{enumerate}
+        \item $\lambda_k(t) \geq 0$,
+        \item $\lambda_k(t) \geq \lambda_{k+1}(t)$,
+        \item $\lambda_k$ is $1$-Lipschitz, that is, for $ t, s \in \R $, $ | \lambda_k(t) - \lambda_k(s) | \leq |t-s| $.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Properties 1. and 2. came directly from the definition. For 3., suppose $ \lambda_k(s) \leq \lambda_k(t) $. If $ \lambda_k(t) \leq |t -s | $ then, of course, $ \lambda_k(t) - \lambda_k(s) \leq \lambda_k(t) \leq |t-s| $. Else, if $ \lambda_k(t) >  |t - s | $, we can take some $ h \in (0, \lambda_k(t) -  |t - s |) $ verifying
+    \begin{equation}
+        t - \lambda_k(t) < s- h < s + h < t + \lambda_k(t).
+    \end{equation}
+    Hence, by Lemma \ref{lemma:landscapes-aux-1}
+\end{proof}
+
+\begin{definition}[$p$-landscape distance]
+    Let $ W $ and $ W $ be two persistence modules, and let $ \lambda $ and $ \lambda' $ its corresponding persistence landscapes. Let $ 1 \leq p \leq \infty $. The {\bf $p$-landscape distance between persistence modules} $ V $ and $ W $ is defined as
+    \begin{equation}
+        \Lambda_p(V, W) \coloneq \|\lambda - \lambda' \|_p.
+    \end{equation}
+    Similarly, if $ D $ and $ D' $ are two persistence diagrams, and are $ \lambda $ and $ \lambda' $ its corresponding persistence landscapes, The {\bf $p$-landscape distance between persistence diagrams} $ V $ and $ W $ is defined as
+    \begin{equation}
+        \Lambda_p(D, D') \coloneq \|\lambda - \lambda' \|_p.
+    \end{equation}
+\end{definition}
+
+\begin{theorem}[Theorem 12, Lemma 1, \cite{bubenik}]
+    Consider the persistence modules $ V = F_x $, $ W = G_x $ given by the maps $ f, g \colon X \to \R $. Then
+    \begin{equation}
+        \Lambda_\infty(V, W) \leq \| f - g\|_\infty
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    ...
+\end{proof}
+
+\begin{theorem}[Theorem 13, Lemma 1, \cite{bubenik}]
+    Let $ D $ and $ D' $ be two persistence diagrams, then
+    \begin{equation}
+        \Lambda_\infty(D, D') \leq \db(D, D').
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    ...
+\end{proof}
+
+
 \section{Persistence images}
+\begin{definition}[Persistence surface]
+    Let $ D $ be a persistence diagram. Let $ T \colon \R^2 \to \R^2 $ be the linear transformation $ T(x, y) = (x, y-x) $. Fix a nonnegative weighting function $ f \colon \R^2 \to R $ that is zero along the horizontal axis, continuous and picewise differentiable. Fix a differentiable probability distribution $ \phi_u \colon \R^2 \to \R $, with mean $ u \in \R^2 $. The {\bf persistence surface} associated to $ D $, by $ f $ and $ \phi_u $ is a function $ \rho_D \colon \R^2 \to \R $ defined as
+    \begin{equation}
+        \rho_D(z) \coloneq \sum_{u \in T(D)} f(u) \phi_u(z).
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Persistence image]
+    Let $ D $ be a persistence diagram with an associated persistence surface $ \rho_D $. The {\bf persistence image} of $ D $ by $ \rho_D $ is the collection $ \rho $ of {\bf pixels}
+    \begin{equation}
+        I(\rho_D)_p \coloneq \iint_p \rho_B dy dx.
+    \end{equation}
+\end{definition}
+
+\begin{lemma}[Lemma 3, \cite{adams}]
+    Let $ u, v \in \R^2 $. The following inequality asserts.
+    \begin{equation}
+        \|f(u) \phi_u - f(v)\phi_v \|_\infty \leq (\|f\|_\infty |\nabla \phi| + \|\phi\|_\infty |\nabla f |) \| u - v \|_2.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    ...
+\end{proof}
+
+
+Persistence surfaces are stable with respect to the $1$-Wasserstein distance.
+
+\begin{theorem}[Theorem 4, \cite{adams}]
+    Let $ D, D' $ be two persistent diagrams and $ \rho_D, \rho_{D'} $ two  persistence surfaces associated to each diagram respectively. Then
+    \begin{equation}
+        \| \rho_B - \rho_{B'} \|_\infty \leq \sqrt{10} (\|f\|_\infty |\nabla \phi | + \|\phi\|_\infty |\nabla f |) \omega_1(D, D').
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    ...
+\end{proof}
+
+Persistence images are stable with respect to the $1$-Wasserstein distance.
+
+\begin{theorem}[Theorem 5, \cite{adams}]
+    Let $ A $ be be the maximum area of any pixel in the image, $ A' $ the total area of the image, and $ n $ the number of pixels in the image. Then
+    \begin{align}
+        &\| I(\rho_B) - I(\rho_{B'}) \|_\infty \leq \sqrt{10} A (\|f\|_\infty |\nabla \phi | + \|\phi\|_\infty |\nabla f |) \omega_1(D, D'), \\
+        &\| I(\rho_B) - I(\rho_{B'}) \|_1 \leq \sqrt{10} A' (\|f\|_\infty |\nabla \phi | + \|\phi\|_\infty |\nabla f |) \omega_1(D, D'), \\
+        &\| I(\rho_B) - I(\rho_{B'}) \|_2 \leq \sqrt{10n} A (\|f\|_\infty |\nabla \phi | + \|\phi\|_\infty |\nabla f |) \omega_1(D, D'). \\
+    \end{align}
+\end{theorem}
+\begin{proof}
+    ...
+\end{proof}
+
 \section{Euler curves}
+\cite{dlotko}
