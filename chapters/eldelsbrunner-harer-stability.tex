@@ -2,7 +2,7 @@
 
 Persistence diagrams help summarize the information given by the homology groups of a filtration over a certain data set. They represent the birth and death of every feature in an easy to analice format scattering points over the upper half of the plane $\R^2 $ and its diagonal $ \Delta $. Once we have computed the diagrams given by two datasets we can measure distances between them using the bottleneck distance, enabling us to decide wether two diagrams are close to each other. However, this would be kind of useless if the bottleneck distance were not stable. If minor differences in original data would cause great changes in the bottleneck distance between the corresponding persistence diagrams, then this data summary method would be as good as any other random method.
 
-Fortunately for us, David Cohen-Steiner, Herbert Edelsbrunner and John Harer, proved in their 2005 paper that bottleneck distance over persistence diagrams is indeed stable \cite{Edelsbrunner}. This means that, when comparing the bottleneck distance between the persistence diagrams formed by the pre images of two tame functions, the first will be always lower or equal that the Lebesgue $L_\infty$ norm between the two functions.
+Fortunately for us, David Cohen-Steiner, Herbert Edelsbrunner and John Harer, proved in their 2005 paper that the bottleneck distance over persistence diagrams is indeed stable \cite{Edelsbrunner}. This means that, when comparing the bottleneck distance between the persistence diagrams formed by the pre images of two tame functions, see Definition \ref{def:tame-function}, the first will be always lower or equal that the Lebesgue $L_\infty$ norm between the two functions.
 
 Along this chapter we will follow Edelsbrunner et al. paper \cite{Edelsbrunner} to prove Theorem \ref{theorem:edelsbrunner-stability}. To simplify notation, along this chapter we will adopt the following. Let $ H_k(X) $ be the $k$-th singular homology group of a topological space $ X $. The dimension of $ H_k(x) $ is denoted by the $k$-th Betti number $ \beta_k(X) \coloneq \dim H_k(x) $.
 
@@ -12,11 +12,11 @@ Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \inf
 
 
 \begin{definition}[Homological critical value]
-    Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
+    Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ is   a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
     $ \e > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \infty)) \to H_k(f_{-1}(-\infty, a + \e)) $ is not an isomorphism.
 \end{definition}
 
-\begin{definition}[Tame function]
+\begin{definition}[Tame function] \label{def:tame-function}
     A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z \in \Z $, and for all $ a \in \R $, $ \dim F_a < \infty $.
 \end{definition}
 
@@ -30,6 +30,8 @@ Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \inf
 
 Note that the total multiplicity of a multiset is the the generalized concept of cardinality of a normal set. While the cardinality of a set counts the number of elements in the set, the multiplicity of a multiset counts how many elements, different or not, are there in the multiset.
 
+Note that when a function $ f $ is tame, we can form a finite multiset of barcodes taking each pair of critical points $ (a_i, a_j) $ with their corresponding multiplicity $ \mu_i^j $, for each $ 0 \leq i < j \leq n+ 1 $. Hence we can form a persistence diagram $ D(f) $. The main theorem of this chapter states that the distance of two of those persistence diagrams is never grater that the $L^\infty $ norm between the functions that form them.
+
 \begin{restatable}[Main Theorem, \cite{Edelsbrunner}]{theorem}{Main} \label{theorem:edelsbrunner-stability}
     Let $ X $ be a triangulable space, and $ f, g\colon X \to \R $ continuous tame functions. Then,
     \begin{align}
@@ -39,7 +41,12 @@ Note that the total multiplicity of a multiset is the the generalized concept of
 
 \section{Hausdorff Stability}
 
-We will denote the closed upper left quadrant of a point $ (x, y) \in \R^2 $ as $ Q_x^y \coloneq [-\infty, x] \times [y, \infty] $.
+Before approaching the proof of Theorem \ref{theorem:edelsbrunner-stability}, this section shows how the claim of the theorem is true when the bottleneck distance is replaced by the Hausdorff distance. On Section \ref{sec:bot-stability} this assertion is used to give an upper limit of the bottleneck distance by Hausdorff distance, proving the main theorem.
+
+We will denote the closed upper left quadrant of a point $ (x, y) \in \R^2 $ as 
+\begin{equation}
+    Q_x^y \coloneq [-\infty, x] \times [y, \infty].
+\end{equation}
 
 \begin{lemma}[$k$-Triangle Lemma, \cite{Edelsbrunner}] \label{lemma:k-triangle}
     Let $ f\colon X \to \R $ be a tame function, $ x < y \in \R $ be non critical values of $ f $. Then the multiplicity $\mu $ of the persistence diagram of $ f $ in the closed upper left quadrant is 
@@ -203,7 +210,7 @@ $$
     As a direct consequence of Lemma \ref{lemma:box-lemma} if $ (x, y)\in D(f) $ then there must exist some point at $ D(g) $ at distance less than or equal to $ \varepsilon =  \| f - g \|_\infty $ from $(x, y) $ since the total multiplicity of $ D(g) \cap R_\varepsilon $ is at least one.
 \end{proof}
 
-\section{Bottleneck Stability}
+\section{Bottleneck Stability} \label{sec:bot-stability}
 In this section we are going to prove Theorem \ref{theorem:edelsbrunner-stability}. 
 
 \begin{definition}[Very close tame functions]

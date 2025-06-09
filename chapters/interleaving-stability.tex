@@ -1,14 +1,16 @@
-\chapter{Interleaving Stability Theorem}
-In this section we are going to give a detailed proof of the first stability theorem for persistence homology. This theorem is refer to as the ``geometry miracle'' of persistent homology, as it allows to describe an isometry between persistence modules and barcodes \cite{nanda}. This shows that {\it small} changes in a data sets will perform {\it small} changes in their persistence modules, and therefore small changes in how persistent homology groups vary through time. The theorem claims that given two persistence modules, the distance between them using the interleaving distance, is the same as the distance between their barcodes using the bottleneck distance.
+\chapter{Interleaving Stability Theorem} \label{chap:interleaving-stability}
+This Chapter gives a detailed proof of the first stability theorem for persistence homology. This theorem is referred to as the ``Geometry miracle'' of persistent homology, as it allows to describe an isometry between persistence modules and barcodes \cite{nanda}. This shows that {\it small} changes in a data sets will perform {\it small} changes in their persistence modules, and therefore small changes in how persistent homology groups vary through time. The theorem claims that given two persistence modules, the distance between them using the interleaving distance, is the same as the distance between their barcodes using the bottleneck distance.
 
 \begin{restatable}[Interleaving Stability, Theorem 2.2.8, \cite{polterovich}]{theorem}{Stability} \label{theorem:stability}
     There is an isometry between a persistence module with the interleaving distance and its barcode with the bottleneck distance. That is, given two persistence modules $ V $ and $ W $, it holds that
-    $$ 
-        d_{int} (V, W) = d_{bot} (\barc(V), \barc(W)).
-    $$
+    \begin{equation}
+        \di (V, W) = \db (\barc(V), \barc(W)).
+    \end{equation} 
 \end{restatable}
 
-For the presented proof we have followed \cite{polterovich}. Hence, we will divide the proof into proving two complementary inequalities separately. This implies checking that if there exists a $\delta$-matching between two given barcodes, then there exists a $\delta$-interleaving morphism between, Proposition \ref{prop:interleaving-if-matching}. Also, we need to check that, if there exists a $\delta$-interleaving morphism between two persistence modules, then there exists a $\delta$-matching between their barcodes, \ref{prop:matching-if-interleaving}.
+For the presented proof we have followed \cite{polterovich}. Hence, we will divide the proof into proving two complementary inequalities separately. This implies checking that if there exists a $\delta$-matching between two given barcodes, then there exists a $\delta$-interleaving morphism between their persistence modules, Proposition \ref{prop:interleaving-if-matching}. Also, we need to check that, if there exists a $\delta$-interleaving morphism between two persistence modules, then there exists a $\delta$-matching between their barcodes, \ref{prop:matching-if-interleaving}.
+
+\section{First inequality}
 
 The first claim can be deduced from the Structure Theorem in a rather direct way, proving first the case where our modules are just interval modules.
 
@@ -29,14 +31,17 @@ The first claim can be deduced from the Structure Theorem in a rather direct way
         \end{aligned}
     \end{equation*}
     are well defined as for any $ t \in (a,b], \ t + \delta \in (c, d] $, as $ a + \delta > c $ and $ b + \delta \leq d $. In the same way, for any $ t \in (c,d], \ t + \delta \in (a, b] $. Thus,
-    $$
-        \psi_\delta \circ \phi_\delta (\mathbb F(I)_t) = \psi_\delta(\mathbb F(J)_{(t+\delta)}) = \mathbb F(I)_{(t+2\delta)} = \pi_{t \leq t+2\delta}(\mathbb F(I)_t)
-    $$ and
-    $$ \phi_\delta \circ \psi_\delta (\mathbb F(J)_t) = \phi_\delta(\mathbb F(I)_{(t+\delta)}) = \mathbb F(J)_{(t+2\delta)} = \theta_{t \leq t+2\delta}(\mathbb F(J)_t). $$
+    \begin{equation}
+        \psi_\delta \circ \phi_\delta (\mathbb F(I)_t) = \psi_\delta(\mathbb F(J)_{(t+\delta)}) = \mathbb F(I)_{(t+2\delta)} = \pi_{t \leq t+2\delta}(\mathbb F(I)_t).
+    \end{equation}
+    and
+    \begin{equation}
+        \phi_\delta \circ \psi_\delta (\mathbb F(J)_t) = \phi_\delta(\mathbb F(I)_{(t+\delta)}) = \mathbb F(J)_{(t+2\delta)} = \theta_{t \leq t+2\delta}(\mathbb F(J)_t).
+    \end{equation}
     Therefore, $ \phi_\delta $ and $ \psi_\delta $ are a pair of $\delta$-interleaving morphisms.
 \end{proof}
 
-Once we are able to build a $\delta$-interleaving between two $\delta$-matched interval modules, we will use the Structure Theorem for persistence modules to generalice the construction for arbitrary persistence modules. This will prove useful to prove the first inequality needed to prove Theorem \ref{theorem:stability}.
+Once we are able to build a $\delta$-interleaving between two $\delta$-matched interval modules, we will use the Structure Theorem for persistence modules to generalice the construction for arbitrary persistence modules. This will be useful to prove the first inequality needed to prove Theorem \ref{theorem:stability}.
 
 \begin{proposition}[Theorem 3.0.1, \cite{polterovich}]\label{prop:interleaving-if-matching} 
     Given two persistence modules $ V $, $ W $, if there is a $ \delta$-matching between their barcodes, then there is a $ \delta$-interleaving morphism between them.
@@ -74,9 +79,11 @@ Once we are able to build a $\delta$-interleaving between two $\delta$-matched i
     Not matched intervals are of length smaller than $ 2 \delta $, therefore both, $V_N$ and $V_Y$ are $\delta$-interleaved with the empty set. We can now construct the $\delta$-interleaving morphism $ \phi\colon V \to W$ such as $\phi \vert_{V_Y} = \phi_Y$ and $\phi \vert_{V_N} = 0$. In a similar way, we also construct $ \psi\colon W \to V$.
 \end{proof}
 
-With Proposition \ref{prop:interleaving-if-matching} we have proven the first halve of Stability Theorem \ref{theorem:stability}. Now we need to prove that we can build a $\delta$-interleaving morphism from a $\delta$-matching. To verify this claim we need several previous lemmas that will lead us to prove Proposition \ref{prop:interleaving-if-matching}.
+\section{Second inequality}
 
-First, we will introduce some notation. Let $(V, \pi)$, $(W, \theta)$ be two persistence modules and let $ I = (b, d]$ be an interval with $ d \in \R \cup \{+ \infty\}$. Denote the set of bars of $\barc(V)$ that start before $b$ end exactly at $d$ as
+With Proposition \ref{prop:interleaving-if-matching} we have proven the first half of Stability Theorem \ref{theorem:stability}. Now we need to prove that we can build a $\delta$-interleaving morphism from a $\delta$-matching. To verify this claim we need several previous lemmas that will lead us to prove Proposition \ref{prop:interleaving-if-matching}.
+
+First, we will introduce some notation. Let $(V, \pi)$, $(W, \theta)$ be two persistence modules and let $ I = (b, d]$ be an interval with $ d \in \R \cup \{+ \infty\}$. Denote the set of bars of $\barc(V)$ that start before $b$ and end exactly at $d$ as
 $$
     \barc_{I-}(V) \coloneq \left\{ (a, d] \in \barc(V) \colon a \leq b\right\}.
 $$
@@ -309,7 +316,7 @@ Finally, we can claim the two main lemmas from which we will construct our desir
         & W_{2\delta} \\
     \end{tikzcd}.
     $$
-    As all morphisms in the diagram abobe are injections, we can use the functorial properties of Lemma \ref{lemma:functoriality} having a commutative diagram of the barcodes of each of the previous persistence modules:
+    As all morphisms in the diagram above are injections, we can use the functorial properties of Lemma \ref{lemma:functoriality} having a commutative diagram of the barcodes of each of the previous persistence modules:
     $$
     \begin{tikzcd}
         \barc(\im \theta_{t \leq t+2\delta}) \arrow[r, "\mu_{inj}(j)"] \arrow[rr, "\mu_{inj}(\theta_{t \leq t+2\delta})"', bend right] 
@@ -323,7 +330,7 @@ Finally, we can claim the two main lemmas from which we will construct our desir
         \barc(W_{2 \delta}) &= \{ (b - 2 \delta, d - 2\delta) \colon (b, d] \in \barc(W) \} \text{ and } \\
         \mu_{inj}(\theta_{t \leq t+2\delta})((b, d-2 \delta)) &= (b - 2 \delta, 2 - 2\delta)
     \end{align}
-    Therefore $ \im_\mu{inj}(i) \supseteq \im \mu_{inj}(\psi_{t \leq t+2\delta}) = \barc(W_{2 \delta})_{2 \delta}$. This, undoing the shifts made, make the prove.
+    Therefore $ \im_\mu{inj}(i) \supseteq \im \mu_{inj}(\psi_{t \leq t+2\delta}) = \barc(W_{2 \delta})_{2 \delta}$. Thus, undoing the shifts, the proof is complete.
 
     \item Let $ (b, d] \in \barc(\im f_\delta) $ such as for some $ b' $, $ \mu_{inj}(b, d] = (b', d] \in \barc(W) $. Because of Lemma \ref{lemma:inj-matching}, $ b' \leq b $. There are again two cases:
     

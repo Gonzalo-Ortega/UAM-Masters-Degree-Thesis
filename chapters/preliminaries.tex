@@ -1,7 +1,17 @@
 \chapter{Preliminaries}
+
+Topological Data Analysis is a wide topic, were results from all Mathematical branches are put together in order to compute topological invariants among real world data. Basic knowledge in both, Algebra and Analysis, as well as Geometry is needed to approach the theoretical results that strengthen the main theory that defines proves the needed structures and their stability. Therefore, in order to settle a common base and notation unifying the diverse procedures among bibliography, this chapter introduces the main definitions and basic results needed to tackle the rest of the thesis.
+
+Section \ref{sec:preliminaries-persistence-modules} introduces the main structure needed to compute persistence homology, the persistence modules. Section \ref{sec:preliminaries-barcodes} introduces a tool to summarize the data from the persistence homology groups, the barcodes. With this summary it is possible to compute how homologically different are two datasets. To make this measure, the interleaving and bottleneck distance are introduced. The first one measures distances between persistence modules, while the later one measures distance between the barcodes of those modules. One key aspect of them, is that they are actually equivalent, as its later proved in Chapter \ref{chap:interleaving-stability}.
+
+A visual way of presenting barcodes is through persistence diagrams, which are presented in Section \ref{sec:preliminaries-wp-persistance}. Both barcodes and persistence diagrams are equivalent manners of presenting the homological features of some datasets. To give a different perspective about how to measure distances between persistence diagrams, \ref{sec:preliminaries-wp-persistance} introduces the Wasserstein distance and redefines the bottleneck distance as a particular case.
+
+Finally, \ref{sec:preliminaries-hausdorff} recalls the Hausdorff distance to measure distance between subsets of metric spaces, and generalices it presenting the Gromov-Hausdorff distance, which allows to measure distance between sets located in different metric spaces. This will be useful to delimit bottleneck distance in order to proof its stability.
+
 The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{polterovich} and \cite{wang}.
 
-\section{Persistence modules and interleaving distance}
+
+\section{Persistence modules and interleaving distance} \label{sec:preliminaries-persistence-modules}
 
 \begin{definition}[Graded ring]
     Let $ R $ be a ring. It is said that $ R $ is a {\bf graded ring} if it can be decomposed into a direct sum of additive groups
@@ -22,7 +32,7 @@ The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{pol
     where each $n \geq 0 $, $ I_n = I \cap R_n $.
 \end{definition}
 
-\begin{definition}[Left moudule, Definition IV.1.1.1 \cite{hungerford}]
+\begin{definition}[Left module, Definition IV.1.1.1 \cite{hungerford}]
     Let $ R $ be a ring. A {\bf left $R$-module } is an abelian group $ (M, +) $ with an operation $ \cdot \colon R \times M \to M $ such that for all $ r, s \in R $ and for all $ x, y \in M $,
     \begin{enumerate}
     \renewcommand{\labelenumi}{(\roman{enumi})}
@@ -40,7 +50,7 @@ The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{pol
     a unitary $R$-module is called a {\bf left $R$-vector space}. Note that in this case, $R$ is in fact a field.
 \end{definition}
 
-\begin{definition}[Graded moudule, Definition 4.7 \cite{wang}]
+\begin{definition}[Graded module, Definition 4.7 \cite{wang}]
     Let $M$ be a left module over a graded ring $ R $. It is said that $ M $ is a {\bf left graded module} if it can be decomposed into a direct sum
     $$
         M = \bigoplus_{n=1}^{\infty} M_n
@@ -111,7 +121,7 @@ For now on, to simplify notation, we will limit our totally order set to be the 
     $$
 \end{definition}
 
-Persistence modules are a vast abstract algebraic tool. In order to make it more manejable, we give it some more structure, restricting the dimension of the vector spaces, Also, we limit as the amount of different up to isomorphism vector spaces there are.
+Persistence modules are a vast abstract algebraic tool. In order to make it more manageable, we give it some more structure, restricting the dimension of the vector spaces, Also, we limit as the amount of different up to isomorphism vector spaces there are.
 
 \begin{definition}[Tame persistence module]
     A a persistence module $ (V, \pi) $ over $ \R $ is {\bf tame} if
@@ -156,7 +166,7 @@ Persistence modules are a vast abstract algebraic tool. In order to make it more
     \end{align}
 \end{definition}
 
-\section{Barcodes and the bottleneck distance}
+\section{Barcodes and the bottleneck distance} \label{sec:preliminaries-barcodes}
 
 \begin{definition}[Barcode]
     A {\bf barcode} $B$ is a finite multiset of intervals. That is, a collection $\{(I_i, m_i)\}$ of intervals $I_i$ with multiplicities $m_i \in N$, where each interval $ I_i $ is either finite of the form $(a, b]$ or infinite of the form $(a, \infty)$. Each interval $I_i$ is named to be a {\bf bar} of $B$.
@@ -196,7 +206,7 @@ There are various ways of defining the bottleneck distance, all of them equivale
     The {\bf bottleneck distance} between two barcodes $ B $ and $ C $ is the infimum over all $ \delta \in \R $ such that there exists a $\delta$-matching between $ B $ and $ C $.
 \end{definition}
 
-\section{Persistence diagrams and the Wasserstein distance} \label{sec:wp-persistance}
+\section{Persistence diagrams and the Wasserstein distance} \label{sec:preliminaries-wp-persistance}
 We will denote the strict upper triangular region of the Euclidean plane as
 \begin{equation}
     \upr := \{(x, y) \in \R^2 : x < y\},
@@ -321,7 +331,7 @@ Next proposition will prove that, in indeed, the space of persistence diagrams w
     \end{align}
 \end{proof}
 
-\section{The Hausdorff and Gromov-Hausdorff distances}
+\section{The Hausdorff and Gromov-Hausdorff distances} \label{sec:preliminaries-hausdorff}
 
 The Hausdorff distance is a way of measuring distances of different sets contained into a same metric space. This concept can be generalized defining a metric which allow us to measure distances between different metric spaces.
 
