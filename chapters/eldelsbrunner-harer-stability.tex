@@ -1,4 +1,4 @@
-\chapter{Edelsbrunner \& Harer's (Hausdorff) Stability Theorem}
+\chapter{Hausdorff Stability Theorem}
 
 Persistence diagrams help summarize the information given by the homology groups of a filtration over a certain data set. They represent the birth and death of every feature in an easy to analice format scattering points over the upper half of the plane $\R^2 $ and its diagonal $ \Delta $. Once we have computed the diagrams given by two datasets we can measure distances between them using the bottleneck distance, enabling us to decide wether two diagrams are close to each other. However, this would be kind of useless if the bottleneck distance were not stable. If minor differences in original data would cause great changes in the bottleneck distance between the corresponding persistence diagrams, then this data summary method would be as good as any other random method.
 
@@ -9,7 +9,6 @@ Along this chapter we will follow Edelsbrunner et al. paper \cite{Edelsbrunner} 
 Let $ f\colon X \to \R $, $x < y \in \R$. Denote the $k$-th homology group of the pre-image by $ f $ of an interval $ (-\infty, x] $ as $ F_x \coloneq H_k(f^{-1}(-\infty, x])$. Denote the inclusion map from the $k$-th homology group $ F_x$ to the  $k$-th homology group $ F_y$ as $f_x^y \colon F_x \to F_y $. Finally, denote $ F_x^y \coloneq \im f_x^y $ and name the persistent Betti numbers as $ \beta_x^y \coloneq \dim(F_x^y) $.
 
 Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \infty $, then $ y = \infty $ too. 
-
 
 \begin{definition}[Homological critical value]
     Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ is   a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
@@ -113,13 +112,13 @@ Denote the {\bf upper left quadrants} $ Q \coloneq Q_b^c = [-\infty, b] \times [
     As if one homology group is contain in an other, the dimension of the first must be lower or equal to the one of the second. Also, the dimension is invariant under inclusion maps. Thus, the first inclusion of \eqref{eq:quadrant-3} asserts that $ F_{c-\e}^{c+\e} \subseteq \psi_c (G_b^c) $ and therefore we have proven that $ \dim F_{c-\e}^{c+\e} \leq  \dim G_b^c $.
 \end{proof}
 
-Before next lemma we will introduce some new notation. Let $ f\colon X \to \R $ fe a tame function. Let $ w < x < y < z \in \R $ be numbers different from critical values of $ f $. Recall that $ F_x = H_k(f^{-1}(-\infty, x]) $, $ f_x^y \colon F_x \to F_y $ and $ F_x^y = \dim f_x^y $. We denote
+Before next lemma we will introduce some new notation. Let $ f\colon X \to \R $ be a tame function. Let $ w < x < y < z \in \R $ be numbers different from critical values of $ f $. Recall that $ F_x = H_k(f^{-1}(-\infty, x]) $, $ f_x^y \colon F_x \to F_y $ and $ F_x^y = \dim f_x^y $. We denote
 \begin{align}
     f_x^{y, z} &\coloneq f_y^z \rvert_{F_x^y},
     \quad &
     F_x^{y, z} &\coloneq \dim f_x^{y, z}.
 \end{align}
-Note, from linear algebra, that $ \dim F_x^{y,z} = \dim F_x^y - \dim F_x^z $. Note too that $ F_w^y \subseteq F_x^y $. Therefore, $ \ker F_w^y \subseteq \ker F_x^y $ and we can define the quotient
+Note, from linear algebra, that $ \dim F_x^{y,z} = \dim F_x^y - \dim F_x^z $. Also note that $ F_w^y \subseteq F_x^y $. Therefore, $ \ker F_w^y \subseteq \ker F_x^y $ and we can define the quotient
 \begin{align}
     F_{w,x}^{y,z} \coloneq F_x^{y,z} / F_w^{y,z}.
 \end{align}
@@ -127,18 +126,18 @@ Note, from linear algebra, that $ \dim F_x^{y,z} = \dim F_x^y - \dim F_x^z $. No
 Let $ a < b < c < d \in \R $. Denote the {\bf rectangles} $ R \coloneq [a, b] \times [c, d] $, $ R_\e \coloneq [a+\e, b-\e] \times [c+\e, d -\e] $.
 
 \begin{lemma}[Box Lemma, \cite{Edelsbrunner}] \label{lemma:box-lemma}
-    With the notation abobe, the following inequality holds,
+    With the notation above, the following inequality holds,
     \begin{align}
         \#(D(f), \cap R_\e) \leq \#(D(g) \cap R).
     \end{align}
 \end{lemma}
 \begin{proof}
-Note that we can asume that $ a + \e < b - \e $ and $ c+\e < d - \e $. Otherwise there would not be rectangle $ R_\e $. Also note that
+Note that we can asume that $ a + \e < b - \e $ and $ c+\e < d - \e $. Otherwise the rectangle $ R_\e $ would not exist. Also note that
 \begin{align}
     \#(D(f) \cap R_\e) &= \dim F_{a+\e, b-\e}^{c+\e, d-\e} \\
     \#(D(g) \cap R) &= \dim G_{a, b}^{c, d} \\
 \end{align}
-To make our prove we draw diagram \ref{cd:box}. Lets analice every element of the diagram.
+To make our proof we draw diagram \ref{cd:box}. Lets analice every element of the diagram.
 \begin{equation} \label{cd:box}
 \begin{tikzcd}
     G_a^d \arrow[rrr, "r_1"]
@@ -155,7 +154,7 @@ First of all, the middle upside arrows, are
 \begin{align}
     u_2 &= f_{a+\e}^{c+\e, d-\e}, \quad & u_3 &= f_{b-\e}^{c+\e, d-\e}.
 \end{align}
-Right arrows $ r_1, r_2, r_3, r_4 $ represent the inclusions from its respective vector spaces to their destination. The objetive is to define que respective quotients to define $ G_{a, b}^{c, d} $. Recall the inclusion maps defined in the proof of Lemma \ref{lemma:quadrant-lemma}, $ \varphi_x \colon F_x \to G_{x+\e} $ and $ \psi_x \colon G_x \to F_{x+\e}$. We define
+Right arrows $ r_1, r_2, r_3, r_4 $ represent the inclusions from its respective vector spaces to their destination. The objetive is to define the respective quotients to define $ G_{a, b}^{c, d} $. Recall the inclusion maps defined in the proof of Lemma \ref{lemma:quadrant-lemma}, $ \varphi_x \colon F_x \to G_{x+\e} $ and $ \psi_x \colon G_x \to F_{x+\e}$. We define
 \begin{align}
     E_b^c &\coloneq \psi_c^{-1}(F_{b-\e}^{c+\e, d-\e}) \cap G_b^c, \quad & E_a^c \coloneq G_a^c \cap E_b^c.
 \end{align}
@@ -229,15 +228,15 @@ In this section we are going to prove Theorem \ref{theorem:edelsbrunner-stabilit
 \end{lemma}
 
 \begin{proof}
-    Let $ p \coloneq (a_i, a_j) \in D(f) - \Delta $ be a point in the diagram of $ f $ that is not in the diagonal, and let $ \mu \coloneq \beta_i^j $ denote its multiplicity. Let $S_\varepsilon$ be the square of center $ p $ and radius $\varepsilon = \| f- g \|_\infty $. That is, the square of side $ 2 \varepsilon $. By definition of the square $ S_\varepsilon $ we have that the number of points of its intersection with the diagram of $ g $ must be grater or equal than the multiplicity at $ p $. Hence, by the Box Lemma \ref{lemma:box-lemma} we have
-    $$
-        \mu \leq \# (D(g) \cap S_\varepsilon) \leq \#(D(f) \cap S_2\varepsilon).
-    $$
-    As $ g $ is very close to $ f $, we have $ 2\varepsilon \leq \delta_f $. Hence $ p $ is the only point of $ D(f) $ in $ S_\varepsilon$, and therefore the previous inequality is in fact an equivalence. If there was a point in the intersection which was not in $\mu $ then it would be inside the square $ S_\varepsilon $ and meaning the distance $\| f - g \| $ would be smaller. That is
-    $$
-        \mu = \# (D(g) \cap S_\varepsilon).
-    $$
-    Hence we can map every point in $ D(g) \cap S_epsilon $ with $ p $. We can then repeat this process for every other $ p \in D(f) \setminus \Delta $. After this process, every point of $ D(g) $ which have not been matched jet, must be at distance grater than $ \varepsilon $ from $ D(f) \setminus \Delta $. By Theorem \ref{theorem:hausdorff-stability}, every unmatched point must be at distance at most $ \varepsilon $ from the diagonal $ \Delta $. Hence, if we map each of this points to $ \Delta $, we have built a bijection between $ D(f) $ and $ D(g) $ that moves each point at most $ \varepsilon $.
+    Let $ p \coloneq (a_i, a_j) \in D(f) - \Delta $ be a point in the diagram of $ f $ that is not in the diagonal, and let $ \mu \coloneq \beta_i^j $ denote its multiplicity. Let $S_\e$ be the square of center $ p $ and radius $\e = \| f- g \|_\infty $. That is, the square of side $ 2 \e $. By definition of the square $ S_\e $ we have that the number of points of its intersection with the diagram of $ g $ must be grater or equal than the multiplicity at $ p $. Hence, by the Box Lemma \ref{lemma:box-lemma} we have
+    \begin{equation}
+        \mu \leq \# (D(g) \cap S_\e) \leq \#(D(f) \cap S_2\e).
+    \end{equation}
+    As $ g $ is very close to $ f $, we have $ 2\e \leq \delta_f $. Hence $ p $ is the only point of $ D(f) $ in $ S_\e$, and therefore the previous inequality is in fact an equivalence. If there was a point in the intersection which was not in $\mu $ then it would be inside the square $ S_\e $ and meaning the distance $\| f - g \| $ would be smaller. That is
+    \begin{equation}
+        \mu = \# (D(g) \cap S_\e).
+    \end{equation}
+    Hence we can map every point in $ D(g) \cap S_\e $ with $ p $. We can then repeat this process for every other $ p \in D(f) \setminus \Delta $. After this process, every point of $ D(g) $ which have not been matched yet, must be at distance greater than $ \e $ from $ D(f) \setminus \Delta $. By Theorem \ref{theorem:hausdorff-stability}, every unmatched point must be at distance at most $ \e $ from the diagonal $ \Delta $. Hence, if we map each of this points to $ \Delta $, we have built a bijection between $ D(f) $ and $ D(g) $ that moves each point at most $ \e $.
 \end{proof}
 
 \begin{definition}
@@ -248,7 +247,7 @@ In this section we are going to prove Theorem \ref{theorem:edelsbrunner-stabilit
 \end{definition}
 
 \begin{lemma}[Interpolation Lemma, \cite{Edelsbrunner}] \label{lemma:interpolation}
-    Let $ K $ be a simplicial complex. Take two picewise linear functions $ \hat f, \hat g \colon K \to \R $. Then, following holds,
+    Let $ K $ be a simplicial complex. Take two piecewise linear functions $ \hat f, \hat g \colon K \to \R $. Then, the following holds,
     \begin{align}
         \db(D(\hat f), D(\hat g)) \leq \|\hat f - \hat g \|_\infty.
     \end{align}
@@ -258,7 +257,7 @@ In this section we are going to prove Theorem \ref{theorem:edelsbrunner-stabilit
     $$
         C \coloneq \left\{J_\lambda \coloneq\left( \lambda - \frac{\delta(\lambda)}{4c}, \lambda + \frac{\delta(\lambda)}{4c}\right)\right\}.
     $$
-    The set $ C $ is an open cover of the interval $ [0, 1] $. Let $ C'$ be the minimal subcover of $ C $. As $ [0, 1] $ is compact, the subcover $ C' $ must be finite. Consider then $ \lambda_1 < \lambda_2 < \cdots < \lambda_n $ the midpoints of the intervals in $ C' $. As $ C' $ is minimal, the each intersection $ J_{\lambda_i} \cap J_{\lambda_{i+1}} $ is not empty. Hence
+    The set $ C $ is an open cover of the interval $ [0, 1] $. Let $ C'$ be the minimal subcover of $ C $. As $ [0, 1] $ is compact, the subcover $ C' $ must be finite. Consider then $ \lambda_1 < \lambda_2 < \cdots < \lambda_n $ the midpoints of the intervals in $ C' $. As $ C' $ is minimal, then each intersection $ J_{\lambda_i} \cap J_{\lambda_{i+1}} $ is not empty. Hence
     $$
         \lambda_i + \lambda_{i+1} \leq \frac{\delta(\lambda_i) + \delta(\lambda_{i+1})}{4c} \leq \frac{\max\{\delta(\lambda_i), \delta(\lambda_{i+1})\}}{2c}.
     $$
@@ -276,7 +275,7 @@ In this section we are going to prove Theorem \ref{theorem:edelsbrunner-stabilit
     $$
 \end{proof}
 
-For the final prove lets recall
+For the final proof lets recall what the star of a simplicial complex is.
 
 \begin{definition}[Star of a simplicial complex]
     Let $\sigma $ be a simplex in a simplicial complex $ L $. The {\bf star} $ \st(\sigma) $ of $ \sigma $ is the set of simplices in $ L $ which contain $ \sigma $ as a face. The {\bf star of a subset} $ K $ of $ L $, denoted $ \st(K) $, is the union of the stars of each simplex of $ K $.
@@ -289,26 +288,26 @@ For the final prove lets recall
         |f \circ \Phi (u) - f \circ \Phi(v)| &\leq \delta, \\
         |g \circ \Phi (u) - g \circ \Phi(v)| &\leq \delta.
     \end{align}
-    Let $ \hat f, \hat g \colon \st(K) \to \R $ be the picewise linear interpolations of $ f \circ \Phi $ and $ g \circ \Phi $ on $ K $. By construction of $ K $ and the definition of the $ L_\infty$-norm, this interpolations satisfy
+    Let $ \hat f, \hat g \colon \st(K) \to \R $ be the piecewise linear interpolations of $ f \circ \Phi $ and $ g \circ \Phi $ on $ K $. By construction of $ K $ and the definition of the $ L_\infty$-norm, these interpolations satisfy
     \begin{align}
         \| \hat f - f \circ \Phi \|_\infty &\leq \delta, \\
         \| \hat g - g \circ \Phi \|_\infty &\leq \delta.
     \end{align}
     Hence, by Lemma \ref{lemma:interpolation} and the triangle inequality
-    $$
+    \begin{equation}
         \db(D(\hat f), D(\hat g)) \leq \|\hat f - \hat g \|_\infty \leq \| f \circ \Phi - g \circ \Phi \|_\infty + 2 \delta \leq \| f - g \|_\infty + 2 \delta.
-    $$
-    Now, we can take some $ \delta $ such that $ \delta \leq \delta_f/2 $ so $ \hat f $ is very close to $ f $. This allows to use Lemma \ref{lemma:easy-biyection} to make a bijection that satisfy
-    $$
+    \end{equation}
+    Now, we can take some $ \delta $ such that $ \delta \leq \delta_f/2 $ so $ \hat f $ is very close to $ f $. This allows us to use Lemma \ref{lemma:easy-biyection} to make a bijection that satisfies
+    \begin{equation}
         \db(D(f), D(\hat f)) \leq \db(D(f \circ \Phi), D(\hat f)) \leq \delta.
-    $$
+    \end{equation}
     Analogously, also assuring $ \delta < \delta_g $ we also have
-    $$
+    \begin{equation}
         \db(D(g), D(\hat g)) \leq \db(D(g \circ \Phi), D(\hat g)) \leq \delta,
-    $$
+    \end{equation}
     and therefore, by triangle inequality again,
-    $$
+    \begin{equation}
         \db(D(f), D(g)) \leq \db(D(f), D(\hat f)) + \db(D(\hat f), D(\hat g)) + \db(D(\hat g), D(g)) \leq 4 \delta.
-    $$
+    \end{equation}
     As this holds for any $ \delta $ smaller that $ \delta_f $ and $ \delta_g $, taking the limit when $ \delta $ tends to $ 0 $, we complete the proof.
 \end{proof}
