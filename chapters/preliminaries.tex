@@ -11,7 +11,7 @@ Finally, Section \ref{sec:preliminaries-hausdorff} recalls the Hausdorff distanc
 The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{polterovich} and \cite{wang}.
 
 
-\section{Persistence modules and interleaving distance} \label{sec:preliminaries-persistence-modules}
+\section{Graded modules and filtrations} \label{sec:preliminaries-persistence-modules}
 
 \begin{definition}[Graded ring]
     Let $ R $ be a ring. It is said that $ R $ is a {\bf graded ring} if it can be decomposed into a direct sum of additive groups
@@ -114,6 +114,8 @@ In order to generalice this concept to make an in depth study, note that we it i
     Given a real function $ f \colon X \to R $, let $ X_\alpha \coloneq f^{-1}((-\infty, \alpha]) \subseteq X $. We define the {\bf Čech filtration associated with $ f $} as $ \cf(X, d, f) \coloneq \{\cf_\alpha(X_\alpha, d)\}_{\alpha>0}$.
 \end{definition}
 
+\section{Persistence modules and persistence homology}
+
 \begin{definition}[Persistence module]
     Let $\F$ be a field and let $T$ be a totally ordered set. Let $ V = \{V_t\}_{t \in T} $ be a collection of $F$-vector spaces. A $T$-indexed {\bf persistence module} is a pair $ (V, \pi) $ such that $ \pi = \{ \pi_{s \leq t} \} $ is a collection of linear maps $ \pi_{s \leq t}\colon V_s \rightarrow V_t $ that verifies that for all $ r, s, t \in T $,
     \begin{equation}
@@ -132,7 +134,39 @@ In order to generalice this concept to make an in depth study, note that we it i
     If a morphism $ i $ verifies that for all $ t \in T $, $ i_t \colon V_t \to V_t $ is the identity, then $ i $ is the {\bf identity morphism}. If there exists two morphisms $ p \colon (V, \pi) \to (W, \theta) $ and $ q \colon (W, \theta) \to (V, \pi) $ such that the compositions $ p \circ q $ and $ q \circ p $ are both the identity morphism, then $ p $ and $ q $ are {\bf isomorphisms} of persistence modules. In this case, $ (V, \pi) $ and $ (W, \theta) $ are said to be {\bf isomorphic} persistence modules.
 \end{definition}
 
-For now on, to simplify notation, we will limit our totally order set to be the real numbers, $ T = \R $. Also, when there is no possible confusion, we might denote the persistence module $ (V, \pi) $ by just is collection of vector spaces $ V $.
+For now on, to simplify notation, we will limit our totally order set to be the real numbers, $ T = \R $. Also, when there is no possible confusion, we might denote the persistence module $ (V, \pi) $ by just is collection of vector spaces $ V $. Note that using $ \R $ as an indexing set for a persistence module $ V $, we have a collection $ \{V_t\}_{t \in \R} $ where for every $ t \leq s $, $ V_t \subseteq V_s $. Hence, we could consider a function $ f \colon V \to \R $ such that for every $ v \in V $, $ f(v) = t $, where $ t $ is the index at which $ v $ first appears in the corresponding $ V_t $. 
+
+Now if $ X $ is a topological space, let $ H_k(X) $ be its $k$-th singular homology group. Recall that the dimension of $ H_k(X) $ is denoted by the $k$-th Betti number
+\begin{align}
+    \beta_k(X) \coloneq \dim H_k(X).
+\end{align}
+Analogously as with persistence modules, let now $ f \colon X \to \R $, $x < y \in \R$. Denote the $k$-th homology group of the pre-image by $ f $ of an interval of the form $ (-\infty, x] $ as 
+\begin{equation}
+    F_x \coloneq H_k(f^{-1}(-\infty, x]).
+\end{equation}
+Denote the inclusion map from the $k$-th homology group $ F_x $ to the $k$-th homology group $ F_y$ as
+\begin{equation}
+    f_x^y \colon F_x \to F_y.
+\end{equation}
+
+\begin{definition}[Persistence homology group]
+    Let X be a topological space and let $ x \leq y \in \R $ a pair of indices. The {\bf persistence homology group} of X associated to $ i $ and $ j $ is the subspace of $X$ given by
+    \begin{equation}
+        F_x^y \coloneq \im f_x^y.
+    \end{equation}
+    The {persistent Betti numbers} are defined as
+    \begin{equation}
+        \beta_x^y \coloneq \dim(F_x^y).
+    \end{equation}
+\end{definition}
+
+Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \infty $, then $ y = \infty $ too.
+
+When $ X $ is triangulable, it is homeomorphic to some simplicial complex $ K $, and therefore we can see each $ f_x^y $ as the inclusion map between two filtration steps of $ K $, that is the inclusion of $ F_x K $ into $ F_y K $.
+
+\section{The interleaving distance}
+
+This section defines a distance between persistence modules that will allow us to differentiate how far are two modules from each other. At first, it might seem an arbitrary way of measuring, but on Chapter \ref{chap:structure} we will to show that this distance is exactly the same as the bottleneck distance that we will define over barcodes.
 
 \begin{definition}[Persistence module shift]
     Let $ (V, \pi) $ be a persistence module and let $ \delta \in \R $. The {\bf $\delta$-shift} of $ (V, \pi) $ is the persistence module $ (V_\delta, \pi_\delta) $ defined by taking
@@ -197,6 +231,17 @@ Persistence modules are a vast abstract algebraic tool. In order to make it more
 
 Tameness property ensures that the persistence modules have manageable and well-behaved structures, which are essential for the infimum in the definition of the interleaving distance to exist and be meaningful. If there was some infinite dimensional vector space $ V_t $ or $ W_t$, they could lead to some pathological behavior, making it difficult to define or compute distances meaningfully. On the other hand, if there were infinite many different isomorphisms, then the infimum in the definition of the interleaving distance might not exist or could be zero for modules that are not "close" in any intuitive sense.
 
+When considering a general topological space $ X $, associated to some function $ f \colon X \to \R $, we can look for an analogous definition for to see when the homology groups change during a filtration.
+
+\begin{definition}[Homological critical value]
+    Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ is a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
+    $ \e > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \infty)) \to H_k(f_{-1}(-\infty, a + \e)) $ is not an isomorphism.
+\end{definition}
+
+\begin{definition}[Tame function] \label{def:tame-function}
+    A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z \in \Z $, and for all $ a \in \R $, $ \dim F_a < \infty $.
+\end{definition}
+
 \begin{proposition}
     The interleaving distance between two tame persistence modules is actually a distance.
 \end{proposition}
@@ -226,32 +271,6 @@ Tameness property ensures that the persistence modules have manageable and well-
         \theta_{s \leq t} &\coloneq \pi_{s \leq t} \oplus \pi'_{s \leq t}.
     \end{align}
 \end{definition}
-
-\section{Persistence homology}
- To simplify notation, along this chapter we will adopt the following. Let $ H_k(X) $ be the $k$-th singular homology group of a topological space $ X $. The dimension of $ H_k(x) $ is denoted by the $k$-th Betti number $ \beta_k(X) \coloneq \dim H_k(x) $.
-
-Let $ f\colon X \to \R $, $x < y \in \R$. Denote the $k$-th homology group of the pre-image by $ f $ of an interval $ (-\infty, x] $ as $ F_x \coloneq H_k(f^{-1}(-\infty, x])$. Denote the inclusion map from the $k$-th homology group $ F_x$ to the  $k$-th homology group $ F_y$ as $f_x^y \colon F_x \to F_y $. Finally, denote $ F_x^y \coloneq \im f_x^y $ and name the persistent Betti numbers as $ \beta_x^y \coloneq \dim(F_x^y) $.
-
-Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \infty $, then $ y = \infty $ too. 
-
-\begin{definition}[Homological critical value]
-    Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ is   a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
-    $ \e > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \infty)) \to H_k(f_{-1}(-\infty, a + \e)) $ is not an isomorphism.
-\end{definition}
-
-\begin{definition}[Tame function] \label{def:tame-function}
-    A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z \in \Z $, and for all $ a \in \R $, $ \dim F_a < \infty $.
-\end{definition}
-
-\begin{definition}[Multiplicity]
-    Let $f \colon X \to \R $ be tame, and $ (a_i)_{i = 1, \dots, n} $ be its homological critical values. Take $ (b_i)_{i = 1, \dots, n} $ be an interleaved sequence of non critical values such that $ b_{i-1} < a_i < b_i $ for all $ i = 1, \dots, n $. Define $ b_{-1} = a_0 = -\infty $, $b_{n+1} = a_{n+1} = \infty $. The {\bf multiplicity} of $ (a_i, a_j) \in D(f) $, denoted $ \mu_i^j $ is
-    \begin{align}
-        \mu_i^j \coloneq \beta_{b_{i-1}}^{b_j} - \beta_{b_{i}}^{b_j} + \beta_{b_{i}}^{b_{j-1}} - \beta_{b_{i-1}}^{b_{j-1}}.
-    \end{align}
-    The {\bf total multiplicity} of a multiset A, denoted $ \#(A) $ is the sum of the multiplicities of every element in $A$.
-\end{definition}
-
-Note that the total multiplicity of a multiset is the the generalized concept of cardinality of a normal set. While the cardinality of a set counts the number of elements in the set, the multiplicity of a multiset counts how many elements, different or not, are there in the multiset.
 
 \section{Barcodes and the bottleneck distance} \label{sec:preliminaries-barcodes}
 Barcodes are the main representation element that will allow us to resume the information given by the persistence homology groups of a dataset.
