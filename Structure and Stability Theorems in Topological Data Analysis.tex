@@ -13,6 +13,11 @@
 \input{tex-configuration/math-definitions.tex}
 \input{tex-configuration/commands.tex}
 
+\definecolor{BlueLink}{rgb}{0.165,0.322,0.745}
+\definecolor{PinkLink}{rgb}{0.8,0.22,0.5}
+\definecolor{gray}{rgb}{0.6,0.6,0.6}
+\hypersetup{hidelinks,pageanchor=true,colorlinks,citecolor=PinkLink,urlcolor=black,linkcolor=BlueLink}
+
 \begin{document}
 \input{tex-configuration/headers.tex}
 \input{tex-configuration/titlepage.tex}
@@ -22,13 +27,17 @@
 \pagenumbering{roman}
 
 \input{chapters/complements/abstract.tex}
+\input{chapters/complements/acknoledgments.tex}
 
+\setlength{\parskip}{1pt}
+\renewcommand{\baselinestretch}{1}
 \tableofcontents
 \newpage
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
+\input{chapters/complements/introduction.tex}
 \input{chapters/preliminaries.tex}
 \input{chapters/structure-theorem.tex}
 \input{chapters/interleaving-stability.tex}
