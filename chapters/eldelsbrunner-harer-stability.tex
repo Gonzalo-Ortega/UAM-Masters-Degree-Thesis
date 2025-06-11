@@ -4,30 +4,7 @@ Persistence diagrams help summarize the information given by the homology groups
 
 Fortunately for us, David Cohen-Steiner, Herbert Edelsbrunner and John Harer, proved in their 2005 paper that the bottleneck distance over persistence diagrams is indeed stable \cite{Edelsbrunner}. This means that, when comparing the bottleneck distance between the persistence diagrams formed by the pre images of two tame functions, see Definition \ref{def:tame-function}, the first will be always lower or equal that the Lebesgue $L_\infty$ norm between the two functions.
 
-Along this chapter we will follow Edelsbrunner et al. paper \cite{Edelsbrunner} to prove Theorem \ref{theorem:edelsbrunner-stability}. To simplify notation, along this chapter we will adopt the following. Let $ H_k(X) $ be the $k$-th singular homology group of a topological space $ X $. The dimension of $ H_k(x) $ is denoted by the $k$-th Betti number $ \beta_k(X) \coloneq \dim H_k(x) $.
-
-Let $ f\colon X \to \R $, $x < y \in \R$. Denote the $k$-th homology group of the pre-image by $ f $ of an interval $ (-\infty, x] $ as $ F_x \coloneq H_k(f^{-1}(-\infty, x])$. Denote the inclusion map from the $k$-th homology group $ F_x$ to the  $k$-th homology group $ F_y$ as $f_x^y \colon F_x \to F_y $. Finally, denote $ F_x^y \coloneq \im f_x^y $ and name the persistent Betti numbers as $ \beta_x^y \coloneq \dim(F_x^y) $.
-
-Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \infty $, then $ y = \infty $ too. 
-
-\begin{definition}[Homological critical value]
-    Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ is   a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
-    $ \e > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \infty)) \to H_k(f_{-1}(-\infty, a + \e)) $ is not an isomorphism.
-\end{definition}
-
-\begin{definition}[Tame function] \label{def:tame-function}
-    A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z \in \Z $, and for all $ a \in \R $, $ \dim F_a < \infty $.
-\end{definition}
-
-\begin{definition}[Multiplicity]
-    Let $f \colon X \to \R $ be tame, and $ (a_i)_{i = 1, \dots, n} $ be its homological critical values. Take $ (b_i)_{i = 1, \dots, n} $ be an interleaved sequence of non critical values such that $ b_{i-1} < a_i < b_i $ for all $ i = 1, \dots, n $. Define $ b_{-1} = a_0 = -\infty $, $b_{n+1} = a_{n+1} = \infty $. The {\bf multiplicity} of $ (a_i, a_j) \in D(f) $, denoted $ \mu_i^j $ is
-    \begin{align}
-        \mu_i^j \coloneq \beta_{b_{i-1}}^{b_j} - \beta_{b_{i}}^{b_j} + \beta_{b_{i}}^{b_{j-1}} - \beta_{b_{i-1}}^{b_{j-1}}.
-    \end{align}
-    The {\bf total multiplicity} of a multiset A, denoted $ \#(A) $ is the sum of the multiplicities of every element in $A$.
-\end{definition}
-
-Note that the total multiplicity of a multiset is the the generalized concept of cardinality of a normal set. While the cardinality of a set counts the number of elements in the set, the multiplicity of a multiset counts how many elements, different or not, are there in the multiset.
+Along this chapter we will follow Edelsbrunner et al. paper \cite{Edelsbrunner} to prove Theorem \ref{theorem:edelsbrunner-stability}.
 
 Note that when a function $ f $ is tame, we can form a finite multiset of barcodes taking each pair of critical points $ (a_i, a_j) $ with their corresponding multiplicity $ \mu_i^j $, for each $ 0 \leq i < j \leq n+ 1 $. Hence we can form a persistence diagram $ D(f) $. The main theorem of this chapter states that the distance of two of those persistence diagrams is never grater that the $L^\infty $ norm between the functions that form them.
 

@@ -1,5 +1,9 @@
 \chapter{Structure Theorem} \label{chap:structure}
-\section{Structure theorem for finitely generated modules over a principal ideal domain}
+The Structure Theorem for persistence modules is referred to as the ``first miracle'' of persistence homology \cite{nanda}. This algebraic property allows to express a persistence module of finite type as a direct sum of finitely many interval modules. This enables to express a persistence module by the bars in a barcode, which latter allows to compare bottleneck distance between the barcodes, with the interleaving distance between the modules.
+
+The proof of the theorem requires the algebraic structure theorem for finitely generated modules over a principal domain. Section \ref{sec:structure-algebraic} proofs the algebraic structure theorem for finitely generated modules over a principal ideal domain. Section \ref{sec:structure-persistence} then gives a proof of the Structure Theorem for persistence diagrams.
+
+\section{Algebraic structure theorem} \label{sec:structure-algebraic}
 
 \begin{theorem}[Chapter IV, Theorem 6.12, \cite{hungerford}] \label{theorem:structure}
     Let $ M $ be a  finitely generated module over a principal ideal domain $R$. There exist a finite sequence of proper ideals $ (d_1) \supseteq (d_2) \supseteq \dots \supseteq (d_n) $ such that
@@ -7,9 +11,11 @@
         M \cong \bigoplus_{i=1}^n R / (d_i).
     $$
 \end{theorem}
+\begin{proof}
+    ...
+\end{proof}
 
-\section{Structure theorem for persistence diagrams}
-The Structure Theorem for persistence modules is referred to as the ``first miracle'' of persistence homology \cite{nanda}. This algebraic property allows to express a persistence module of finite type as a direct sum of finitely many interval modules. Its proof requires the algebraic structure theorem for finitely generated modules over a principal domain.
+\section{Structure theorem for persistence diagrams} \label{sec:structure-persistence}
 
 %Due to the lengthy concepts needed to prove it, we will refer to it as a well known fact. An introduction to module theory and a detailed proof of the theorem of Fact \ref{fact:structure} can be found at \cite[Chapter IV]{hungerford}.
 

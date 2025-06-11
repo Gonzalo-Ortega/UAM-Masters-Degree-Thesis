@@ -4,9 +4,9 @@ Topological Data Analysis is a wide topic, were results from all Mathematical br
 
 Section \ref{sec:preliminaries-persistence-modules} introduces the main structure needed to compute persistence homology, the persistence modules. Section \ref{sec:preliminaries-barcodes} introduces a tool to summarize the data from the persistence homology groups, the barcodes. With this summary it is possible to compute how homologically different are two datasets. To make this measure, the interleaving and bottleneck distance are introduced. The first one measures distances between persistence modules, while the later one measures distance between the barcodes of those modules. One key aspect of them, is that they are actually equivalent, as its later proved in Chapter \ref{chap:interleaving-stability}.
 
-A visual way of presenting barcodes is through persistence diagrams, which are presented in Section \ref{sec:preliminaries-wp-persistance}. Both barcodes and persistence diagrams are equivalent manners of presenting the homological features of some datasets. To give a different perspective about how to measure distances between persistence diagrams, \ref{sec:preliminaries-wp-persistance} introduces the Wasserstein distance and redefines the bottleneck distance as a particular case.
+A visual way of presenting barcodes is through persistence diagrams, which are presented in Section \ref{sec:preliminaries-wp-persistance}. Both barcodes and persistence diagrams are equivalent manners of presenting the homological features of some datasets. To give a different perspective about how to measure distances between persistence diagrams, Section \ref{sec:preliminaries-wp-persistance} introduces the Wasserstein distance and redefines the bottleneck distance as a particular case.
 
-Finally, \ref{sec:preliminaries-hausdorff} recalls the Hausdorff distance to measure distance between subsets of metric spaces, and generalices it presenting the Gromov-Hausdorff distance, which allows to measure distance between sets located in different metric spaces. This will be useful to delimit bottleneck distance in order to proof its stability.
+Finally, Section \ref{sec:preliminaries-hausdorff} recalls the Hausdorff distance to measure distance between subsets of metric spaces, and generalices it presenting the Gromov-Hausdorff distance, which allows to measure distance between sets located in different metric spaces. This will be useful to delimit bottleneck distance in order to proof its stability.
 
 The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{polterovich} and \cite{wang}.
 
@@ -72,8 +72,50 @@ The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{pol
     if for each $n, m \geq 0 $, $ R_n M_m \subseteq M_{n+m} $.
 \end{definition}
 
+\begin{definition}[Filtration]
+    Let $ K $ be a simplicial complex, a {\bf filtration} of $ K $ of length $ n $ is a nested sequence of subcomplexes $ F_i K $, $ i = 1, \dots , n $, of the form
+    \begin{equation}
+        F_1K \subset F_2K \subset \cdots \subset F_{n-1}K \subset F_nK = K.
+    \end{equation}
+    We will dente the {\bf inclusion simplicial maps} by $ g_i \colon F_i \hookrightarrow F_{i+1} K $.
+\end{definition}
+
+Filtrations are a natural way of obtaining simplicial complexes from datasets, as it is posible to set the first element of the filtration to be the points in the datasets, and then join in various steps each of the point to form a simplicial complex that connects every point by simplices of different dimensions. Naturally, depending on the procedure we follow we could get quite different filtration for one same dataset.
+
+Considering a filtration of a simplicial complex, we can compute the homology groups at each step of the filtration. Hence, for each $ k \geq 0 $, there are induced linear maps $ H_kg_i \colon H_k(F_iK) \to H_k(F_{i+1}K) $ that fit together into a sequence of vector spaces
+\begin{equation}
+\begin{tikzcd}
+    H_k(F_0K) \arrow[r, "H_kg_0"] & H_k(F_1K) \arrow[r, "H_kg_1"] & \cdots \arrow[r, "H_kg_{n-2}"] & H_k(F_{n-1}K) \arrow[r, "H_kg_{n-1}"] & H_k(F_nK).
+\end{tikzcd}
+\end{equation}
+As homology is functorial, when we consider the inclusion map formed by the composition of several others, the induced map at homology level also becomes a composition of the corresponding maps. That is, for any pair $ i \leq j $ of indices, where $ i, j = 1, \dots, n $, the map induced on homology by the inclusion map $ g_{i \leq j} \colon F_i K \hookrightarrow F_j K $, is given by the composition
+\begin{equation}
+    H_k g_{i \leq j} = H_k g_{j-1} \circ H_k g_{j-2} \circ \cdots \circ H_k g_{i+1} \circ H_k g_i.
+\end{equation}
+
+Such maps $ H_k g_{i \leq j} $ give really relevant information about our data, as they permit us to relate the $k$-th homology groups of every subcomplex $ F_i K $ that appear in a filtration of $ K $.
+
+In order to generalice this concept to make an in depth study, note that we it is possible to make filtrations with different indexed sets other than the natural numbers. We could also work with abstract fields that do not necessary need to came from homology computations. This structure is what motivates the introduction of the category of persistence modules and their morphisms.
+
+\begin{definition}[Vietoris-Rips filtration]
+    Let $ (X, d) $ be a finite metric space and let $ \alpha > 0 $. The {\bf Vietoris-Rips complex} associated with $ X $ of radius $ \alpha $, $\rf_\alpha(X, d)$, is the simplicial complex whose $0$-simplices are the elements of $X$ and, for $k \geq 1$, its $k$-dimensional simplices are formed by every subset $ \{x_0, x_1, \dots, x_k\} \subseteq X $ such that $d(x_i, x_j) \leq \alpha $ for every $i, j = 1, \dots, k$.
+
+    The family $ \rf(X, d) \coloneq \{\rf_\alpha(X, d)\}_{\alpha>0}$ is named {\bf Vietoris-Rips filtration}. 
+
+    Given a real function $ f \colon X \to R $, let $ X_\alpha \coloneq f^{-1}((-\infty, \alpha]) \subseteq X $ be the {\bf pre-image of $f$ delimited by $ \alpha $}. We define the {\bf Vietoris-Rips filtration associated with $ f $} as $ \rf(X, d, f) \coloneq \{\rf_\alpha(X_\alpha, d)\}_{\alpha>0}$.
+
+\end{definition}
+
+\begin{definition}[Čech filtration]
+    Let $ (X, d) $ be a finite metric space and let $ \alpha > 0 $. The {\bf Čech complex} associated with $ X $ of radius $ \alpha $, $\cf_\alpha(Z, d)$, is the simplicial complex whose $0$-simplices are the elements of $X$ and, for $k \geq 1$, its $k$-dimensional simplices are formed by every subset $ \{x_0, x_1, \dots, x_k\} \subseteq X $ such that there exists some $ x \in X $ such that $ d(x, x_i) \leq \alpha $ for all $i = 1, \dots, k$.
+
+    The family $\cf(Z, d) \coloneq \{\cf_\alpha(Z, d)\}_{\alpha > 0}$ is named {\bf Čech filtration}.
+
+    Given a real function $ f \colon X \to R $, let $ X_\alpha \coloneq f^{-1}((-\infty, \alpha]) \subseteq X $. We define the {\bf Čech filtration associated with $ f $} as $ \cf(X, d, f) \coloneq \{\cf_\alpha(X_\alpha, d)\}_{\alpha>0}$.
+\end{definition}
+
 \begin{definition}[Persistence module]
-    Let $/F$ be a field and let $T$ be a totally ordered set. Let $ V = \{V_t\}_{t \in T} $ be a collection of $F$-vector spaces. A $T$-indexed {\bf persistence module} is a pair $ (V, \pi) $ such that $ \pi = \{ \pi_{s \leq t} \} $ is a collection of linear maps $ \pi_{s \leq t}\colon V_s \rightarrow V_t $ that verifies that for all $ r, s, t \in T $,
+    Let $\F$ be a field and let $T$ be a totally ordered set. Let $ V = \{V_t\}_{t \in T} $ be a collection of $F$-vector spaces. A $T$-indexed {\bf persistence module} is a pair $ (V, \pi) $ such that $ \pi = \{ \pi_{s \leq t} \} $ is a collection of linear maps $ \pi_{s \leq t}\colon V_s \rightarrow V_t $ that verifies that for all $ r, s, t \in T $,
     \begin{equation}
         \pi_{r \leq s} \circ \pi_{s \leq t} = \pi_{r \leq t}.
     \end{equation}
@@ -101,9 +143,9 @@ For now on, to simplify notation, we will limit our totally order set to be the 
 
 \begin{proposition}[Exercise 1.2.3, \cite{polterovich}] \label{prop:shift-morphism}
     Let $ \delta > 0 $. Let $(V, \pi), (V_\delta, \pi_\delta) $ be a persistence module and its shift. The map $ \phi_\delta \colon (V, \pi) \to (V_\delta, \pi_\delta) $, defined as
-    $$
+    \begin{equation}
         \phi_\delta (V_t) \coloneq \pi_{t \leq t + \delta}(V_t) = V_{t+\delta},
-    $$
+    \end{equation}
     is a persistence module morphism.
 \end{proposition}
 \begin{proof}
@@ -120,19 +162,19 @@ For now on, to simplify notation, we will limit our totally order set to be the 
 
 \begin{definition}[$\delta$-interleaved modules]
     Let $ (V, \pi), (W, \theta) $ be two persistence modules and let $ \delta > 0 $. $ V $ and $ W $ are {\bf $\delta$-interleaved } if there exists two persistence module morphisms $ \phi \colon V \to W_\delta $ and $ \psi \colon W \to V_\delta $ such that the following diagrams commute:
-    $$
-    \begin{array}{ccc}
-    \begin{tikzcd}
-        V \arrow[r, "\phi"] \arrow[rr, "\pi_{2\delta}"', bend right] & W_\delta \arrow[r, "\psi_\delta"] & V_{2\delta}
-    \end{tikzcd},
-    &
-    \quad \quad
-    &
-    \begin{tikzcd}
-        W \arrow[r, "\psi"] \arrow[rr, "\theta_{2\delta}"', bend right] & V_\delta \arrow[r, "\phi_\delta"] & W_{2\delta}
-    \end{tikzcd}.
-    \end{array}
-    $$
+    \begin{equation}
+        \begin{array}{ccc}
+        \begin{tikzcd}
+            V \arrow[r, "\phi"] \arrow[rr, "\pi_{2\delta}"', bend right] & W_\delta \arrow[r, "\psi_\delta"] & V_{2\delta}
+        \end{tikzcd},
+        &
+        \quad \quad
+        &
+        \begin{tikzcd}
+            W \arrow[r, "\psi"] \arrow[rr, "\theta_{2\delta}"', bend right] & V_\delta \arrow[r, "\phi_\delta"] & W_{2\delta}
+        \end{tikzcd}.
+        \end{array}
+    \end{equation}
 \end{definition}
 
 Persistence modules are a vast abstract algebraic tool. In order to make it more manageable, we give it some more structure, restricting the dimension of the vector spaces, Also, we limit as the amount of different up to isomorphism vector spaces there are.
@@ -147,15 +189,20 @@ Persistence modules are a vast abstract algebraic tool. In order to make it more
 \end{definition}
 
 \begin{definition}[Interleaving distance]
-    Let $ (V, \pi) $ and $ (W, \theta) $ be tame two persistence modules. The {\bf interleaving distance} between them is defined as
-    $$
+    Let $ (V, \pi) $ and $ (W, \theta) $ be two tame persistence modules. The {\bf interleaving distance} between them is defined as
+    \begin{equation}
         \di(V, W) \coloneq \inf \{ \delta > 0 \mid V \text{ and } W \text{ are } \delta\text{-interleaved}\}.
-    $$
+    \end{equation}
 \end{definition}
+
+Tameness property ensures that the persistence modules have manageable and well-behaved structures, which are essential for the infimum in the definition of the interleaving distance to exist and be meaningful. If there was some infinite dimensional vector space $ V_t $ or $ W_t$, they could lead to some pathological behavior, making it difficult to define or compute distances meaningfully. On the other hand, if there were infinite many different isomorphisms, then the infimum in the definition of the interleaving distance might not exist or could be zero for modules that are not "close" in any intuitive sense.
 
 \begin{proposition}
     The interleaving distance between two tame persistence modules is actually a distance.
 \end{proposition}
+\begin{proof}
+    ...
+\end{proof}
 
 \begin{definition}[Interval module]
     Let $ I = (a, b] $ be an interval with $ b \leq \infty $ and let $ \F $ be a field. An {\bf interval module} $\F(I)$ is a persistence module defined as
@@ -180,6 +227,32 @@ Persistence modules are a vast abstract algebraic tool. In order to make it more
     \end{align}
 \end{definition}
 
+\section{Persistence homology}
+ To simplify notation, along this chapter we will adopt the following. Let $ H_k(X) $ be the $k$-th singular homology group of a topological space $ X $. The dimension of $ H_k(x) $ is denoted by the $k$-th Betti number $ \beta_k(X) \coloneq \dim H_k(x) $.
+
+Let $ f\colon X \to \R $, $x < y \in \R$. Denote the $k$-th homology group of the pre-image by $ f $ of an interval $ (-\infty, x] $ as $ F_x \coloneq H_k(f^{-1}(-\infty, x])$. Denote the inclusion map from the $k$-th homology group $ F_x$ to the  $k$-th homology group $ F_y$ as $f_x^y \colon F_x \to F_y $. Finally, denote $ F_x^y \coloneq \im f_x^y $ and name the persistent Betti numbers as $ \beta_x^y \coloneq \dim(F_x^y) $.
+
+Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \infty $, then $ y = \infty $ too. 
+
+\begin{definition}[Homological critical value]
+    Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ is   a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
+    $ \e > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \infty)) \to H_k(f_{-1}(-\infty, a + \e)) $ is not an isomorphism.
+\end{definition}
+
+\begin{definition}[Tame function] \label{def:tame-function}
+    A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z \in \Z $, and for all $ a \in \R $, $ \dim F_a < \infty $.
+\end{definition}
+
+\begin{definition}[Multiplicity]
+    Let $f \colon X \to \R $ be tame, and $ (a_i)_{i = 1, \dots, n} $ be its homological critical values. Take $ (b_i)_{i = 1, \dots, n} $ be an interleaved sequence of non critical values such that $ b_{i-1} < a_i < b_i $ for all $ i = 1, \dots, n $. Define $ b_{-1} = a_0 = -\infty $, $b_{n+1} = a_{n+1} = \infty $. The {\bf multiplicity} of $ (a_i, a_j) \in D(f) $, denoted $ \mu_i^j $ is
+    \begin{align}
+        \mu_i^j \coloneq \beta_{b_{i-1}}^{b_j} - \beta_{b_{i}}^{b_j} + \beta_{b_{i}}^{b_{j-1}} - \beta_{b_{i-1}}^{b_{j-1}}.
+    \end{align}
+    The {\bf total multiplicity} of a multiset A, denoted $ \#(A) $ is the sum of the multiplicities of every element in $A$.
+\end{definition}
+
+Note that the total multiplicity of a multiset is the the generalized concept of cardinality of a normal set. While the cardinality of a set counts the number of elements in the set, the multiplicity of a multiset counts how many elements, different or not, are there in the multiset.
+
 \section{Barcodes and the bottleneck distance} \label{sec:preliminaries-barcodes}
 Barcodes are the main representation element that will allow us to resume the information given by the persistence homology groups of a dataset.
 
@@ -187,7 +260,7 @@ Barcodes are the main representation element that will allow us to resume the in
     A {\bf barcode} $B$ is a finite multiset of intervals. That is, a collection $\{(I_i, m_i)\}$ of intervals $I_i$ with multiplicities $m_i \in N$, where each interval $ I_i $ is either finite of the form $(a, b]$ or infinite of the form $(a, \infty)$. Each interval $I_i$ is named to be a {\bf bar} of $B$. The first number, $ a $ is named the {\bf birth} of the barcode and is second number is its {\bf death}.
 \end{definition}
 
-Chapter \ref{chap:structure} proves the Structure Theorem of persistence modules, that asserts that it i possible to express any persistence module as a direct sum of the interval modules given by the intervals of a barcode. This is a key result in our purpose of introduce measures between the homological features of datasets. 
+Chapter \ref{chap:structure} proves the Structure Theorem of persistence modules, that asserts that it i possible to express any persistence module as a direct sum of the interval modules given by the bars of a barcode. This is a key result in our purpose of introduce measures between the homological features of datasets. 
 
 Given an interval $ I = (a, b]$, and some $ \delta \geq 0 $, we will denote
 \begin{equation}
