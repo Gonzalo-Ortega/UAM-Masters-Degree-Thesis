@@ -1,10 +1,27 @@
-\chapter{Hausdorff Stability Theorem}
+\chapter{Hausdorff Stability Theorem} \label{chap:hausdorff-stability}
 
 Persistence diagrams help summarize the information given by the homology groups of a filtration over a certain data set. They represent the birth and death of every feature in an easy to analice format scattering points over the upper half of the plane $\R^2 $ and its diagonal $ \Delta $. Once we have computed the diagrams given by two datasets we can measure distances between them using the bottleneck distance, enabling us to decide wether two diagrams are close to each other. However, this would be kind of useless if the bottleneck distance were not stable. If minor differences in original data would cause great changes in the bottleneck distance between the corresponding persistence diagrams, then this data summary method would be as good as any other random method.
 
 Fortunately for us, David Cohen-Steiner, Herbert Edelsbrunner and John Harer, proved in their 2005 paper that the bottleneck distance over persistence diagrams is indeed stable \cite{Edelsbrunner}. This means that, when comparing the bottleneck distance between the persistence diagrams formed by the pre images of two tame functions, see Definition \ref{def:tame-function}, the first will be always lower or equal that the Lebesgue $L_\infty$ norm between the two functions.
 
-Along this chapter we will follow Edelsbrunner et al. paper \cite{Edelsbrunner} to prove Theorem \ref{theorem:edelsbrunner-stability}.
+Along this chapter we will follow Edelsbrunner et al. paper \cite{Edelsbrunner} to prove Theorem \ref{theorem:edelsbrunner-stability}. Recall from Definition \ref{def:critical-value} that homological critical values are the real numbers at where homology changes. Recall too the notation given in Definition \ref{def:persistent-homology}. For a triangulable topological space $X$, let $ f \colon X \to \R $ and fix some $ k \in \Z $, we denoted
+\begin{equation}
+    F_x \coloneq H_k(f^{-1}(-\infty, x]),
+\end{equation}
+and for every $ x \leq y $, we denoted the induced inclusion map from $ X_x $ to $ X_y $ as
+\begin{equation}
+    f_x^y \colon F_x \to F_y.
+\end{equation}
+The persistent homology module associated to $ x $ and $ y $ was the subspace of $X_y$ given by 
+\begin{equation}
+    F_x^y \coloneq \im f_x^y.
+\end{equation}
+The persistent Betti numbers were defined as
+\begin{equation}
+    \beta_x^y \coloneq \dim(F_x^y).
+\end{equation}
+
+We can define the multiplicity of each critical point as follows.
 
 \begin{definition}[Multiplicity]
     Let $f \colon X \to \R $ be tame, and $ (a_i)_{i = 1, \dots, n} $ be its homological critical values. Take $ (b_i)_{i = 1, \dots, n} $ be an interleaved sequence of non critical values such that $ b_{i-1} < a_i < b_i $ for all $ i = 1, \dots, n $. Define $ b_{-1} = a_0 = -\infty $, $b_{n+1} = a_{n+1} = \infty $. The {\bf multiplicity} of $ (a_i, a_j) \in D(f) $, denoted $ \mu_i^j $ is

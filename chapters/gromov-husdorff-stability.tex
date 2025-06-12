@@ -1,7 +1,13 @@
 \chapter{Gromov-Hausdorff's Stability Theorem} \label{chapter:gromov-hausdorf-stability}
-\section{Gromov-Hausdorff stability}
+Chapter \ref{chap:hausdorff-stability} established the stability of persistence diagrams under small-amplitude perturbations of filtering functions. Specifically, for two tame functions defined on the same topological space, the bottleneck distance between their persistence diagrams is bounded by the uniform norm of the function difference.
 
-This is an introduction
+In this chapter, we extend this stability framework to distinct metric spaces, enabling quantitative comparisons of real-world datasets (e.g., point clouds representing different shapes). We achieve this through two classic filtrations from computational geometry, the Vietoris-Rips and the Čech filtrations, to obtain the corresponding modules from finite metric spaces and then prove how the bottleneck distance between their persistence diagrams is stable respect the Gromov-Hausdorff (see Definition \ref{def:dgh}) distance between the metric spaces. This bound facilitates efficient clustering and differentiation of metric spaces with distinct topological features (e.g., non-isometric shapes), as validated by experiments on 3D models. 
+
+Section \ref{sec:hausdorf-stab} details Vietoris-Rips and the Čech filtrations and sets the necessary lemmas to prove the stability Theorem \ref{theorem:gh-stability}. Section \ref{sec:hausdorf-stab-generaliced} generalices the result comparing the distance between filtrations given by some functions with the generalized Gromov-Hausdorff distance from Definition \ref{def:dgh1}.
+
+Along all the chapter we follow the 2009 paper from Frédéric Chazal and David Cohen-Steiner, \cite{chazal}.
+
+\section{Gromov-Hausdorff stability} \label{sec:hausdorf-stab}
 
 \begin{definition}[Vietoris-Rips filtration]
     Let $ (X, d) $ be a finite metric space and let $ \alpha > 0 $. The {\bf Vietoris-Rips complex} associated with $ X $ of radius $ \alpha $, $\rf_\alpha(X, d)$, is the simplicial complex whose $0$-simplices are the elements of $X$ and, for $k \geq 1$, its $k$-dimensional simplices are formed by every subset $ \{x_0, x_1, \dots, x_k\} \subseteq X $ such that $d(x_i, x_j) \leq \alpha $ for every $i, j = 1, \dots, k$.
@@ -20,8 +26,10 @@ This is an introduction
     Given a real function $ f \colon X \to R $, let $ X_\alpha \coloneq f^{-1}((-\infty, \alpha]) \subseteq X $. We define the {\bf Čech filtration associated with $ f $} as $ \cf(X, d, f) \coloneq \{\cf_\alpha(X_\alpha, d)\}_{\alpha>0}$.
 \end{definition}
 
+To prove Theorem \ref{theorem:gh-stability} we first give tree auxiliary lemmas that we will need. The first, just shows how to embed a finite metric space into the Euclidean space with the uniform norm.
+
 \begin{lemma}[Exercise 3.5.4, \cite{burago}] \label{lemma:haus-aux-1}
-    Any finite metric space of cardinality $ n $ can be isometrically embedded into $(\R^n, \ell^n)$.
+    Any finite metric space of cardinality $ n $ can be isometrically embedded into $(\R^n, \ell^\infty)$.
 \end{lemma}
 \begin{proof}
     Let $ X $ be a compact metric space and let $ C(X) $ be the space of all continuous functions from $ X $ to $ \R $. Let $ f, g \in C(X) $. Recall the uniform distance given by
@@ -62,6 +70,9 @@ This is an introduction
         \check C_\alpha(X, \ell^\infty) = R_\alpha(X, \ell^\infty).
     $$
 \end{lemma}
+\begin{proof}
+    ...
+\end{proof}
 
 \begin{definition}[Paracompact space]
     Let $ X $ be a topological space. It is said to be {\bf paracompact} if for all covering $ U $ of $ X $, there exists $ \mathcal V \subseteq \mathcal U $ such that $ \mathcal V $ is a finite covering.
@@ -147,7 +158,7 @@ This is an introduction
     and therefore, $ \db(D_k(\rf(X, d_X)), D_k(\rf(Y, d_Y))) = \e $.
 \end{proof}
 
-\section{A generalization with endowed functions}
+\section{A generalization with endowed functions}  \label{sec:hausdorf-stab-generaliced}
 
 The following theorem generalizes Theorem \ref{theorem:gh-stability}.
 

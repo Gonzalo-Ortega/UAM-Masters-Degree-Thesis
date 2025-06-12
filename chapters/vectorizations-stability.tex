@@ -1,7 +1,13 @@
 
-\chapter{Vectorizations' Stability Theorems}
+\chapter{Vectorizations' Stability Theorems} \label{chap:vectorizations}
 
-\section{Persistence landscapes}
+The study of stability in topological data analysis is crucial for ensuring that small perturbations in the input data lead to controlled changes in its topological representations. This chapter explores various vectorization methods—persistence landscapes, persistence images, and Euler curves—and their associated stability theorems. By establishing bounds on how these vectorizations change with respect to distances between persistence modules or diagrams, we gain a deeper understanding of their robustness in practical applications.
+
+Section \ref{sec:landscapes} reviews the results of the 2015 paper from Peter Bubenik \cite{bubenik}. Section \ref{sec:images} follows the 2020 paper Henry Adams et al. \cite{adams} and Section \ref{sec:euler-curves} presents the results from Paweł Dłotko and Davide Gurnari 2023 paper, \cite{dlotko}.
+
+\section{Persistence landscapes} \label{sec:landscapes}
+
+Persistence landscapes provide a functional summary of persistence diagrams, converting them into a sequence of real-valued functions that capture topological features in a more tractable form. This section introduces the definition of persistence landscapes, their key properties, and stability results that relate the landscape distance to the bottleneck and Wasserstein distances between persistence diagrams.
 
 \begin{lemma}[Lemma 1, \cite{bubenik}] \label{lemma:landscapes-aux-1}
     Let $ a \leq b \leq c \leq d $ be real numbers. Then $ \beta_b^c \geq \beta_a^d $.
@@ -82,7 +88,10 @@ Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended r
 \end{proof}
 
 
-\section{Persistence images}
+\section{Persistence images} \label{sec:images}
+
+Persistence images offer an alternative vectorization by transforming persistence diagrams into finite-dimensional representations through kernel density estimation. Here, we define persistence surfaces and images, analyze their stability under the 1-Wasserstein distance, and derive bounds that ensure their reliability in machine learning and statistical applications.
+
 \begin{definition}[Persistence surface]
     Let $ D $ be a persistence diagram. Let $ T \colon \R^2 \to \R^2 $ be the linear transformation $ T(x, y) = (x, y-x) $. Fix a nonnegative weighting function $ f \colon \R^2 \to R $ that is zero along the horizontal axis, continuous and picewise differentiable. Fix a differentiable probability distribution $ \phi_u \colon \R^2 \to \R $, with mean $ u \in \R^2 $. The {\bf persistence surface} associated to $ D $, by $ f $ and $ \phi_u $ is a function $ \rho_D \colon \R^2 \to \R $ defined as
     \begin{equation}
@@ -134,7 +143,9 @@ Persistence images are stable with respect to the $1$-Wasserstein distance.
     ...
 \end{proof}
 
-\section{Euler curves}
+\section{Euler curves}  \label{sec:euler-curves}
+
+The Euler characteristic curve provides a concise topological signature by tracking the evolution of the Euler characteristic across a filtration. This section examines its definition, connection to persistence diagrams, and stability properties, demonstrating how it serves as a stable summary for comparing filtered cell complexes.
 
 \begin{definition}[Euler characteristic]
     Let $ K $ be a simplicial complex, and let $ K^p $ be its $p$-skeleton. The {\bf Euler characteristic} of $ K $ is the alternating sum of the number of cells in its dimension

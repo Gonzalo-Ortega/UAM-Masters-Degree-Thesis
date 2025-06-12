@@ -2,9 +2,18 @@
 \renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter.\ #1}{}}
 \fancyhf{}
 \fancyhead[LO]{\thepage}
-\fancyhead[RO]{\leftmark}
+\fancyhead[RO]{\nouppercase\leftmark}
 \fancyhead[RE]{\thepage}
 \fancyhead[LE]{\nouppercase\rightmark}
 \fancyfoot[C]{}
 \setlength{\headsep}{30pt}
 \setlength{\headheight}{14.5pt}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[LO]{\thepage}
+  \fancyhead[RO]{\nouppercase\leftmark}
+  \fancyhead[RE]{\thepage}
+  \fancyhead[LE]{\nouppercase\rightmark}
+  \fancyfoot[C]{}
+}

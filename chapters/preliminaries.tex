@@ -10,7 +10,7 @@ A visual way of presenting barcodes is through persistence diagrams. Both barcod
 Finally, Section \ref{sec:preliminaries-hausdorff} recalls the Hausdorff distance to measure distance between subsets of metric spaces, and generalices it presenting the Gromov-Hausdorff distance, which allows to measure distances between sets located in different metric spaces. This will be useful to delimit bottleneck distance in order to proof its stability.
 
 
-Section \ref{sec:preliminaries-homology} primarily follows \cite{wang}. Sections \ref{sec:preliminaries-modules} and \ref{sec:preliminaries-barcodes} are based on the presentation at \cite{polterovich}. Section \ref{sec:preliminaries-wp-persistance} takes the definitions given at \cite{bubenik} and Section \ref{sec:preliminaries-hausdorff} follows \cite{burago}.
+Section \ref{sec:preliminaries-homology} primarily follows \cite{wang}. Sections \ref{sec:preliminaries-modules} and \ref{sec:preliminaries-barcodes} are based on the presentation at \cite{polterovich}. Section \ref{sec:preliminaries-wp-persistance} takes the definitions given at \cite{bubenik2} and Section \ref{sec:preliminaries-hausdorff} follows \cite{burago}.
 
 \section{Persistent homology} \label{sec:preliminaries-homology}
 
@@ -123,7 +123,7 @@ Now if $ X $ is a triangulable topological space, and $ f \colon X \to T $, we c
 \end{equation}
 As $ X $ is triangulable, we will look for functions that satisfy that each $ X_a $ is triangulable too. An therefore we can compute its homology module.
 
-\begin{definition}[Homological critical value]
+\begin{definition}[Homological critical value] \label{def:critical-value}
     Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ is a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
     $ \e > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \e]) \to H_k(f_{-1}(-\infty, a + \e]) $ is not an isomorphism.
 \end{definition}
@@ -132,7 +132,7 @@ As $ X $ is triangulable, we will look for functions that satisfy that each $ X_
     A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z \in \Z $, and for all $ a \in \R $, $ \dim F_a < \infty $.
 \end{definition}
 
-\begin{definition}[Persistence homology module]
+\begin{definition}[Persistent homology module] \label{def:persistent-homology}
     Let $X$ be a triangulable topological space and let $ f \colon X \to \R $. For every fixed $ k \in \Z $, we denote
     \begin{equation}
         F_x \coloneq H_k(f^{-1}(-\infty, x]),
@@ -141,7 +141,7 @@ As $ X $ is triangulable, we will look for functions that satisfy that each $ X_
     \begin{equation}
         f_x^y \colon F_x \to F_y.
     \end{equation}
-    The {\bf persistence homology module} associated to $ x $ and $ y $ is the subspace of $X_y$ given by 
+    The {\bf persistent homology module} associated to $ x $ and $ y $ is the subspace of $X_y$ given by 
     \begin{equation}
         F_x^y \coloneq \im f_x^y.
     \end{equation}
@@ -438,7 +438,7 @@ Next proposition will prove that, in indeed, the space of persistence diagrams w
 
 The Hausdorff distance is a way of measuring distances of different sets contained into a same metric space. This concept can be generalized defining a metric which allow us to measure distances between different metric spaces.
 
-\begin{definition}[Hausdorff distance]
+\begin{definition}[Hausdorff distance] \label{def:hausdorff-distance}
     Let $ (M, d) $ be a metric space, and let $ A \subseteq M $, $ B \subseteq M $ two compact subspaces of $ M $. Define the {\bf $r$-neighborhood} of a set $ S \subset M $ as
     $$
         U_r(S) \coloneq \left\{ x \in S \mid d(x, S) \leq r \right\}.
