@@ -2,56 +2,26 @@
 
 Topological Data Analysis is a wide topic, were results from all Mathematical branches are put together in order to compute topological invariants among real world data. Basic knowledge in both, Algebra and Analysis, as well as Geometry is needed to approach the theoretical results that strengthen the main theory that defines proves the needed structures and their stability. Therefore, in order to settle a common base and notation unifying the diverse procedures among bibliography, this chapter introduces the main definitions and basic results needed to tackle the rest of the thesis.
 
-Section \ref{sec:preliminaries-persistence-modules} introduces the main structure needed to compute persistence homology, the persistence modules. Section \ref{sec:preliminaries-barcodes} introduces a tool to summarize the data from the persistence homology groups, the barcodes. With this summary it is possible to compute how homologically different are two datasets. To make this measure, the interleaving and bottleneck distance are introduced. The first one measures distances between persistence modules, while the later one measures distance between the barcodes of those modules. One key aspect of them, is that they are actually equivalent, as its later proved in Chapter \ref{chap:interleaving-stability}.
+Section \ref{sec:preliminaries-homology} makes a 
+brief recall of simplicial homology in order to define persistent homology modules. Section \ref{sec:preliminaries-modules} then introduces persistence modules, the algebraic tool used to study the structure of persistence homology groups. Section \ref{sec:preliminaries-barcodes} introduces a tool to summarize the data from the persistence homology groups, the barcodes. With this summary it is possible to compute how homologically different are two datasets, or how different are two filtrations among the same data. To make this measure, the interleaving and bottleneck distance are introduced. The first one measures distances between persistence modules, while the later one measures distance between the barcodes of those modules. One key aspect of them, is that they are actually equivalent, as its later proved in Chapter \ref{chap:interleaving-stability}.
 
-A visual way of presenting barcodes is through persistence diagrams, which are presented in Section \ref{sec:preliminaries-wp-persistance}. Both barcodes and persistence diagrams are equivalent manners of presenting the homological features of some datasets. To give a different perspective about how to measure distances between persistence diagrams, Section \ref{sec:preliminaries-wp-persistance} introduces the Wasserstein distance and redefines the bottleneck distance as a particular case.
+A visual way of presenting barcodes is through persistence diagrams. Both barcodes and persistence diagrams are equivalent manners of presenting the homological features of data. To give a different perspective about how to measure distances between persistence diagrams, Section \ref{sec:preliminaries-wp-persistance} introduces the Wasserstein distance and redefines the bottleneck distance as a particular case.
 
-Finally, Section \ref{sec:preliminaries-hausdorff} recalls the Hausdorff distance to measure distance between subsets of metric spaces, and generalices it presenting the Gromov-Hausdorff distance, which allows to measure distance between sets located in different metric spaces. This will be useful to delimit bottleneck distance in order to proof its stability.
-
-The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{polterovich} and \cite{wang}.
+Finally, Section \ref{sec:preliminaries-hausdorff} recalls the Hausdorff distance to measure distance between subsets of metric spaces, and generalices it presenting the Gromov-Hausdorff distance, which allows to measure distances between sets located in different metric spaces. This will be useful to delimit bottleneck distance in order to proof its stability.
 
 
-\section{Graded modules and filtrations} \label{sec:preliminaries-persistence-modules}
+Section \ref{sec:preliminaries-homology} primarily follows \cite{wang}. Sections \ref{sec:preliminaries-modules} and \ref{sec:preliminaries-barcodes} are based on the presentation at \cite{polterovich}. Section \ref{sec:preliminaries-wp-persistance} takes the definitions given at \cite{bubenik} and Section \ref{sec:preliminaries-hausdorff} follows \cite{burago}.
 
-\begin{definition}[Graded ring]
-    Let $ R $ be a ring. It is said that $ R $ is a {\bf graded ring} if it can be decomposed into a direct sum of additive groups
-    \begin{equation}
-        R = \bigoplus_{n=1}^{\infty} R_n = R_1 \oplus R_2 \oplus \dots
-    \end{equation}
-    such that for all $ n, m \geq 0 $, 
-    \begin{equation}
-        R_n \cdot R_m \subseteq R_{n+m}.
-    \end{equation}
-\end{definition}
+\section{Persistent homology} \label{sec:preliminaries-homology}
 
-\begin{example}[Example 4.4, \cite{wang}] \label{ex:graded-ring}
-    Let $ \F $ be a field, the polynomial ring over it, $ \F[x] $, is a graded ring. It can be decomposed as
-    \begin{equation}
-        \F[x] = \bigoplus_{i=0}^\infty x^i \cdot \F = \bigoplus_{i=0}^\infty \{c x^i \mid c \in \F\}.
-    \end{equation}
-    Also, polynomial multiplication verifies the degree of the product of two monomials is the sum of the degrees of the factors.
-\end{example}
+In most Algebraic Topology introductory texts, homology is first presented in the form of homology groups (see \cite{munkres}, \cite{hatcher}). We are going to generalize homology groups to homology $R$-modules based on the notes by Wang \cite{wang}. This makes possible to take coefficients over an arbitrary commutative ring $ R $ and will lead us to introduce persistent homology and the persistence modules. Lets star recalling what an $R$-module is, to be followed by a brief presentation of simplicial homology.
 
-\begin{definition}[Graded ideal]
-    Let $ R $ be a graded ring. A {\bf graded ideal} is a two sided ideal $ I \subseteq R $ that can be decomposed into a direct sum
-    \begin{equation}
-        I = \bigoplus_{n=0}^{\infty} I_n
-    \end{equation}
-    where for each $n \geq 0 $, $ I_n = I \cap R_n $.
-\end{definition}
-
-\begin{example}
-    Note that in Example \ref{ex:graded-ring}, every ideal is a graded ideal. No see an example of non graded ideals take the two-dimensional polynomial ring over a field, $ R = \F[x, y] $. There are also many graded ideals in $ R $, take, for example, the ideal generated by the two dimensional monomials $ I = \langle x^2, xy \rangle $.
-
-    Take now an ideal generated by non homogeneous elements as $ I' = \langle x^2 + y \rangle $. Then it happens that $ x^2 \in I'_2 = I' \cap R^2 $ and $ y \in I'_1 = I' \cap R^1 $, but either $ x^2 \in I' $ nor $ y \in I' $.
-\end{example}
-
-\begin{definition}[Left module, Definition IV.1.1.1 \cite{hungerford}]
-    Let $ R $ be a ring. A {\bf left $R$-module } is an abelian group $ (M, +) $ with an operation $ \cdot \colon R \times M \to M $ such that for all $ r, s \in R $ and for all $ x, y \in M $,
+\begin{definition}[$R$-module, Definition IV.1.1.1 \cite{hungerford}]
+    Let $ R $ be a commutative ring. An {\bf $R$-module } is an abelian group $ (M, +) $ with an operation $ \cdot \colon R \times M \to M $ such that for all $ r, s \in R $ and for all $ x, y \in M $,
     \begin{enumerate}
     \renewcommand{\labelenumi}{(\roman{enumi})}
         \item $ (rs) \cdot x = r (s \cdot x) $,
-        \item $ (r + s) = r \cdot x + s \cdot x $,
+        \item $ (r + s) \cdot x = r \cdot x + s \cdot x $,
         \item $ r \cdot (x + y) = r \cdot x + r \cdot y $.
     \end{enumerate}
     If $ R $ has a multiplicative identity $ 1 $, then $ M $ is said to be a {\bf unitary $R$-module} and 
@@ -61,23 +31,75 @@ The contents of this chapter are based on \cite{burago}, \cite{nanda}, \cite{pol
         \item $1 \cdot x = x $.
     \end{enumerate}
     If $ R $ is a division ring, that is, a ring with identity where every non cero element is a unit, then 
-    a unitary $R$-module is called a {\bf left $R$-vector space}. Note that in this case, $R$ is in fact a field.
+    a unitary $R$-module is called a {\bf left $R$-vector space}. Note that in this case, $R$ is in fact a field. Also note that, when we take $ R = (\Z, +, \cdot) $, a $\Z$ module is actually an abelian group.
 \end{definition}
 
-\begin{definition}[Graded module, Definition 4.7 \cite{wang}]
-    Let $M$ be a left module over a graded ring $ R $. It is said that $ M $ is a {\bf left graded module} if it can be decomposed into a direct sum
-    $$
-        M = \bigoplus_{n=1}^{\infty} M_n
-    $$
-    if for each $n, m \geq 0 $, $ R_n M_m \subseteq M_{n+m} $.
+\begin{definition}[Affinely independent touple]
+    A $ (k+1)$-tuple of points $ (x_0, \dots, x_k) $ in $ \R^n $, where each 
+    $ x_i \in \R^n $ is said to be {\bf affinely independent} if the set of vectors $ \{ x_j - x_0 \mid 1 \leq j \leq k \}$ is linearly independent.
 \end{definition}
+
+\begin{definition}[$k$-simplex]
+    A {\bf $k$-simplex} is an ordered $(k+1)$-tuple of affinely independent points $\sigma = (x_0, \dots, x_k)$. The {\bf vertices} of $\sigma$ are the points of the set $ V = \{ x_0, \dots, x_k \} $. Every simplex $\sigma$ induces a total ordering $\preccurlyeq_{\sigma}$ on its set of vertices $V$, where if $p \leq q$, then $x_p \preccurlyeq_{\sigma} x_q$ in $V$. For $m \leq n$, an $(m + 1)$-tuple $(y_0, \dots, y_m)$, where each $y_j \in V$ and if $j \leq k$, then $y_j \preccurlyeq_{\sigma} y_k$, is called an {\bf $m$-face} of $\sigma$.
+\end{definition}
+
+\begin{definition}[Abstract simplicial complex]
+    An {\bf abstract simplicial complex} $K $ is a finite collection of simplices such that for every face of a simplex in $ K $ is also a simplex in $ K $.
+\end{definition}
+
+\begin{definition}[Siplicial $k$-chain]
+    Let $R$ be a commutative ring with additive identity $0 $ and multiplicative identity $1$ and let $K$ be a simplicial complex. A {\bf simplicial $k$-chain} is a formal sum of $k$-simplices,
+    \begin{equation}
+        \sum_{i=1}^{N} r_i \sigma_i,
+    \end{equation}
+    such that $r_i \in R$ and $\sigma_i \in K $.
+\end{definition}
+
+Note that that set of simplicial $k$-chains with formal addition over $R$ form a $R$-module. Denote that $R$-module as $K_k$.
+
+\begin{definition}[Boundary map]
+    Let $ K $ be a simplicial complex, and let $ K_k $ and $ K_{k-1} $ be two $ R$-modules from $ K $. For every $k$-simplex $\sigma =  (x_0, \dots, x_k) \in K $, the {\bf boundary} map $ \partial_k \colon K_k \to K_{k-1} $ is defined as
+    \begin{equation}
+        \partial_k(\sigma) = \sum_{i=0}^{k} (-1)^i (x_0, \dots, \hat x_i, \dots, x_k),
+    \end{equation}
+    where $ (x_0, \dots, \hat x_i, \dots, x_k) $ denotes the $(k-1)$-face of $\sigma $ obtained by removing the vertex $x_i$.
+\end{definition}
+
+As the boundary map can be extends linearly to arbitrary $k$-chains, it forms an $R$-module homomorphism $\partial_k \colon K_k \to K_{k-1}$.
+
+\begin{definition}[Chain complex]
+    A {\bf chain complex} $(K, d)$ is a sequence of $R$-modules $ A_k $ with boundary maps $ d_k \colon A_k \to A_{k-1} $, such that the composition $ d_{k-1} \circ d_k = 0 $ for all $k \leq 0$.
+\end{definition}
+
+\begin{lemma}[Lemma 2.7, \cite{wang}]
+    The collection of $R$-modules $K_k$ connected by boundary maps $\partial_k$ forms a chain complex $(K, \partial)$.
+\end{lemma}
+\begin{proof}
+    ...
+\end{proof}
+
+\begin{corolary}
+    The boundary maps $\partial_k$ satisfy that for every $k \leq 0$, $\im \partial_{k+1} \subseteq \ker \partial_k $.
+\end{corolary}
+\begin{proof}
+    ...
+\end{proof}
+
+\begin{definition}[Homology module]
+    Let $K $ be a simplicial complex. The {\bf $k$-th homology module} of $K$ is the $R$-module given by
+    \begin{equation}
+        H_k(K) \coloneq \frac{\ker \partial_k}{\im \partial_{k+1}}.
+    \end{equation} 
+\end{definition}
+
+Homology can be extended to every topological space, not just those that are triangulable by introducing singular homology. However, in this work, we will restrict ourselves to simplicial homology. This choice is motivated by the nature of the data typically encountered in topological data analysis. The spaces involved are usually "sufficiently nice" and therefore triangulable. Moreover, real-world data intended for computational analysis is finite by nature, and hence, triangulable. Furthermore, simplicial homology of a finite simplicial complex $K$ is computable (see \cite{munkres}[Chapter 4, Theorem 11.5]) what makes it a prefect tool for computational studies.
 
 \begin{definition}[Filtration]
-    Let $ K $ be a simplicial complex, a {\bf filtration} of $ K $ of length $ n $ is a nested sequence of subcomplexes $ F_i K $, $ i = 1, \dots , n $, of the form
+    Let $ K $ be a simplicial complex and let $ T $ be a complete ordered index set. A {\bf filtration} of $ K $ is a nested sequence of subcomplexes $ F_i K $, $ i \in T $, such that for every $ i \in T $, 
     \begin{equation}
-        F_1K \subset F_2K \subset \cdots \subset F_{n-1}K \subset F_nK = K.
+        F_i \subseteq F_{i+1}.
     \end{equation}
-    We will dente the {\bf inclusion simplicial maps} by $ g_i \colon F_i \hookrightarrow F_{i+1} K $.
+    We will denote the {\bf inclusion simplicial maps} by $ g_i \colon F_i \hookrightarrow F_{i+1} K $.
 \end{definition}
 
 Filtrations are a natural way of obtaining simplicial complexes from datasets, as it is posible to set the first element of the filtration to be the points in the datasets, and then join in various steps each of the point to form a simplicial complex that connects every point by simplices of different dimensions. Naturally, depending on the procedure we follow we could get quite different filtration for one same dataset.
@@ -95,26 +117,43 @@ As homology is functorial, when we consider the inclusion map formed by the comp
 
 Such maps $ H_k g_{i \leq j} $ give really relevant information about our data, as they permit us to relate the $k$-th homology groups of every subcomplex $ F_i K $ that appear in a filtration of $ K $.
 
-In order to generalice this concept to make an in depth study, note that we it is possible to make filtrations with different indexed sets other than the natural numbers. We could also work with abstract fields that do not necessary need to came from homology computations. This structure is what motivates the introduction of the category of persistence modules and their morphisms.
+Now if $ X $ is a triangulable topological space, and $ f \colon X \to T $, we can extend the concept of filtration to be attained to $ X $. For clarity, fix $ T = \R $. Hence, for each $ a \in \R $, the pre image of the interval $(-\infty, a] $ by $ f $ is some subspace $ X_a $ of $ X $. That is,
+\begin{equation}
+    f^{-1}((-\infty, a]) = X_a.
+\end{equation}
+As $ X $ is triangulable, we will look for functions that satisfy that each $ X_a $ is triangulable too. An therefore we can compute its homology module.
 
-\begin{definition}[Vietoris-Rips filtration]
-    Let $ (X, d) $ be a finite metric space and let $ \alpha > 0 $. The {\bf Vietoris-Rips complex} associated with $ X $ of radius $ \alpha $, $\rf_\alpha(X, d)$, is the simplicial complex whose $0$-simplices are the elements of $X$ and, for $k \geq 1$, its $k$-dimensional simplices are formed by every subset $ \{x_0, x_1, \dots, x_k\} \subseteq X $ such that $d(x_i, x_j) \leq \alpha $ for every $i, j = 1, \dots, k$.
-
-    The family $ \rf(X, d) \coloneq \{\rf_\alpha(X, d)\}_{\alpha>0}$ is named {\bf Vietoris-Rips filtration}. 
-
-    Given a real function $ f \colon X \to R $, let $ X_\alpha \coloneq f^{-1}((-\infty, \alpha]) \subseteq X $ be the {\bf pre-image of $f$ delimited by $ \alpha $}. We define the {\bf Vietoris-Rips filtration associated with $ f $} as $ \rf(X, d, f) \coloneq \{\rf_\alpha(X_\alpha, d)\}_{\alpha>0}$.
-
+\begin{definition}[Homological critical value]
+    Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ is a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
+    $ \e > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \e]) \to H_k(f_{-1}(-\infty, a + \e]) $ is not an isomorphism.
 \end{definition}
 
-\begin{definition}[Čech filtration]
-    Let $ (X, d) $ be a finite metric space and let $ \alpha > 0 $. The {\bf Čech complex} associated with $ X $ of radius $ \alpha $, $\cf_\alpha(Z, d)$, is the simplicial complex whose $0$-simplices are the elements of $X$ and, for $k \geq 1$, its $k$-dimensional simplices are formed by every subset $ \{x_0, x_1, \dots, x_k\} \subseteq X $ such that there exists some $ x \in X $ such that $ d(x, x_i) \leq \alpha $ for all $i = 1, \dots, k$.
-
-    The family $\cf(Z, d) \coloneq \{\cf_\alpha(Z, d)\}_{\alpha > 0}$ is named {\bf Čech filtration}.
-
-    Given a real function $ f \colon X \to R $, let $ X_\alpha \coloneq f^{-1}((-\infty, \alpha]) \subseteq X $. We define the {\bf Čech filtration associated with $ f $} as $ \cf(X, d, f) \coloneq \{\cf_\alpha(X_\alpha, d)\}_{\alpha>0}$.
+\begin{definition}[Tame function] \label{def:tame-function}
+    A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z \in \Z $, and for all $ a \in \R $, $ \dim F_a < \infty $.
 \end{definition}
 
-\section{Persistence modules and persistence homology}
+\begin{definition}[Persistence homology module]
+    Let $X$ be a triangulable topological space and let $ f \colon X \to \R $. For every fixed $ k \in \Z $, we denote
+    \begin{equation}
+        F_x \coloneq H_k(f^{-1}(-\infty, x]),
+    \end{equation}
+    and for every $ x \leq y $, we denote the induced inclusion map from $ X_x $ to $ X_y $ as
+    \begin{equation}
+        f_x^y \colon F_x \to F_y.
+    \end{equation}
+    The {\bf persistence homology module} associated to $ x $ and $ y $ is the subspace of $X_y$ given by 
+    \begin{equation}
+        F_x^y \coloneq \im f_x^y.
+    \end{equation}
+    The {\bf persistent Betti numbers} are defined as
+    \begin{equation}
+        \beta_x^y \coloneq \dim(F_x^y).
+    \end{equation}
+\end{definition}
+
+\section{Persistence modules and interleaving distance} \label{sec:preliminaries-modules}
+
+To enable a more rigorous and structured study, we introduce the category of persistence modules along with their morphisms. This categorical framework provides the foundation for analyzing the stability and structure of persistent homology.
 
 \begin{definition}[Persistence module]
     Let $\F$ be a field and let $T$ be a totally ordered set. Let $ V = \{V_t\}_{t \in T} $ be a collection of $F$-vector spaces. A $T$-indexed {\bf persistence module} is a pair $ (V, \pi) $ such that $ \pi = \{ \pi_{s \leq t} \} $ is a collection of linear maps $ \pi_{s \leq t}\colon V_s \rightarrow V_t $ that verifies that for all $ r, s, t \in T $,
@@ -134,39 +173,9 @@ In order to generalice this concept to make an in depth study, note that we it i
     If a morphism $ i $ verifies that for all $ t \in T $, $ i_t \colon V_t \to V_t $ is the identity, then $ i $ is the {\bf identity morphism}. If there exists two morphisms $ p \colon (V, \pi) \to (W, \theta) $ and $ q \colon (W, \theta) \to (V, \pi) $ such that the compositions $ p \circ q $ and $ q \circ p $ are both the identity morphism, then $ p $ and $ q $ are {\bf isomorphisms} of persistence modules. In this case, $ (V, \pi) $ and $ (W, \theta) $ are said to be {\bf isomorphic} persistence modules.
 \end{definition}
 
-For now on, to simplify notation, we will limit our totally order set to be the real numbers, $ T = \R $. Also, when there is no possible confusion, we might denote the persistence module $ (V, \pi) $ by just is collection of vector spaces $ V $. Note that using $ \R $ as an indexing set for a persistence module $ V $, we have a collection $ \{V_t\}_{t \in \R} $ where for every $ t \leq s $, $ V_t \subseteq V_s $. Hence, we could consider a function $ f \colon V \to \R $ such that for every $ v \in V $, $ f(v) = t $, where $ t $ is the index at which $ v $ first appears in the corresponding $ V_t $. 
+For now on, to simplify notation, we will limit our totally order set to be the real numbers, $ T = \R $. Also, when there is no possible confusion, we might denote the persistence module $ (V, \pi) $ by just is collection of vector spaces $ V $. 
 
-Now if $ X $ is a topological space, let $ H_k(X) $ be its $k$-th singular homology group. Recall that the dimension of $ H_k(X) $ is denoted by the $k$-th Betti number
-\begin{align}
-    \beta_k(X) \coloneq \dim H_k(X).
-\end{align}
-Analogously as with persistence modules, let now $ f \colon X \to \R $, $x < y \in \R$. Denote the $k$-th homology group of the pre-image by $ f $ of an interval of the form $ (-\infty, x] $ as 
-\begin{equation}
-    F_x \coloneq H_k(f^{-1}(-\infty, x]).
-\end{equation}
-Denote the inclusion map from the $k$-th homology group $ F_x $ to the $k$-th homology group $ F_y$ as
-\begin{equation}
-    f_x^y \colon F_x \to F_y.
-\end{equation}
-
-\begin{definition}[Persistence homology group]
-    Let X be a topological space and let $ x \leq y \in \R $ a pair of indices. The {\bf persistence homology group} of X associated to $ i $ and $ j $ is the subspace of $X$ given by
-    \begin{equation}
-        F_x^y \coloneq \im f_x^y.
-    \end{equation}
-    The {persistent Betti numbers} are defined as
-    \begin{equation}
-        \beta_x^y \coloneq \dim(F_x^y).
-    \end{equation}
-\end{definition}
-
-Note that if $ y = \infty $, $ F_x^y $ is the trivial group. Also, if $ x = \infty $, then $ y = \infty $ too.
-
-When $ X $ is triangulable, it is homeomorphic to some simplicial complex $ K $, and therefore we can see each $ f_x^y $ as the inclusion map between two filtration steps of $ K $, that is the inclusion of $ F_x K $ into $ F_y K $.
-
-\section{The interleaving distance}
-
-This section defines a distance between persistence modules that will allow us to differentiate how far are two modules from each other. At first, it might seem an arbitrary way of measuring, but on Chapter \ref{chap:structure} we will to show that this distance is exactly the same as the bottleneck distance that we will define over barcodes.
+This section defines a distance between persistence modules that will allow us to differentiate how far are two modules from each other.
 
 \begin{definition}[Persistence module shift]
     Let $ (V, \pi) $ be a persistence module and let $ \delta \in \R $. The {\bf $\delta$-shift} of $ (V, \pi) $ is the persistence module $ (V_\delta, \pi_\delta) $ defined by taking
@@ -211,7 +220,7 @@ This section defines a distance between persistence modules that will allow us t
     \end{equation}
 \end{definition}
 
-Persistence modules are a vast abstract algebraic tool. In order to make it more manageable, we give it some more structure, restricting the dimension of the vector spaces, Also, we limit as the amount of different up to isomorphism vector spaces there are.
+Persistence modules are a vast abstract algebraic tool. In order to make it more manageable, we give it some more structure, restricting the dimension of the vector spaces, Also, we limit as the amount of different up to isomorphism vector spaces there are. Note that this is analogous to the tame functions we used in order to define persistent homology.
 
 \begin{definition}[Tame persistence module]
     A a persistence module $ (V, \pi) $ over $ \R $ is {\bf tame} if
@@ -230,17 +239,6 @@ Persistence modules are a vast abstract algebraic tool. In order to make it more
 \end{definition}
 
 Tameness property ensures that the persistence modules have manageable and well-behaved structures, which are essential for the infimum in the definition of the interleaving distance to exist and be meaningful. If there was some infinite dimensional vector space $ V_t $ or $ W_t$, they could lead to some pathological behavior, making it difficult to define or compute distances meaningfully. On the other hand, if there were infinite many different isomorphisms, then the infimum in the definition of the interleaving distance might not exist or could be zero for modules that are not "close" in any intuitive sense.
-
-When considering a general topological space $ X $, associated to some function $ f \colon X \to \R $, we can look for an analogous definition for to see when the homology groups change during a filtration.
-
-\begin{definition}[Homological critical value]
-    Let $ X $ be a topological space and let $ f\colon X \to \R $. A {\bf homological critical value} of $ f $ is a number $ a \in \R $ such that there exists $k \in \Z$ such that for all 
-    $ \e > 0 $, the morphism $ H_k(f^{-1}(-\infty, a - \infty)) \to H_k(f_{-1}(-\infty, a + \e)) $ is not an isomorphism.
-\end{definition}
-
-\begin{definition}[Tame function] \label{def:tame-function}
-    A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z \in \Z $, and for all $ a \in \R $, $ \dim F_a < \infty $.
-\end{definition}
 
 \begin{proposition}
     The interleaving distance between two tame persistence modules is actually a distance.
@@ -273,6 +271,7 @@ When considering a general topological space $ X $, associated to some function 
 \end{definition}
 
 \section{Barcodes and the bottleneck distance} \label{sec:preliminaries-barcodes}
+
 Barcodes are the main representation element that will allow us to resume the information given by the persistence homology groups of a dataset.
 
 \begin{definition}[Barcode]
@@ -308,6 +307,7 @@ There are various ways of defining the bottleneck distance, all of them equivale
 \end{definition}
 
 \section{Persistence diagrams and the Wasserstein distance} \label{sec:preliminaries-wp-persistance}
+
 Barcodes can be seen as multisets of pair of points $ (a, b) $, where $ b > a $. Hence we could treat each interval $ (a, b] $ in a barcode as a point $ (a, b) $ in the Euclidean plane. We will denote the strict upper triangular region of the Euclidean plane as
 \begin{equation}
    \upr := \{(x, y) \in \R^2 : x < y\}, 

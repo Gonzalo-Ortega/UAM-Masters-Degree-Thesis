@@ -3,6 +3,23 @@
 
 This is an introduction
 
+\begin{definition}[Vietoris-Rips filtration]
+    Let $ (X, d) $ be a finite metric space and let $ \alpha > 0 $. The {\bf Vietoris-Rips complex} associated with $ X $ of radius $ \alpha $, $\rf_\alpha(X, d)$, is the simplicial complex whose $0$-simplices are the elements of $X$ and, for $k \geq 1$, its $k$-dimensional simplices are formed by every subset $ \{x_0, x_1, \dots, x_k\} \subseteq X $ such that $d(x_i, x_j) \leq \alpha $ for every $i, j = 1, \dots, k$.
+
+    The family $ \rf(X, d) \coloneq \{\rf_\alpha(X, d)\}_{\alpha>0}$ is named {\bf Vietoris-Rips filtration}. 
+
+    Given a real function $ f \colon X \to R $, let $ X_\alpha \coloneq f^{-1}((-\infty, \alpha]) \subseteq X $ be the {\bf pre-image of $f$ delimited by $ \alpha $}. We define the {\bf Vietoris-Rips filtration associated with $ f $} as $ \rf(X, d, f) \coloneq \{\rf_\alpha(X_\alpha, d)\}_{\alpha>0}$.
+
+\end{definition}
+
+\begin{definition}[Čech filtration]
+    Let $ (X, d) $ be a finite metric space and let $ \alpha > 0 $. The {\bf Čech complex} associated with $ X $ of radius $ \alpha $, $\cf_\alpha(Z, d)$, is the simplicial complex whose $0$-simplices are the elements of $X$ and, for $k \geq 1$, its $k$-dimensional simplices are formed by every subset $ \{x_0, x_1, \dots, x_k\} \subseteq X $ such that there exists some $ x \in X $ such that $ d(x, x_i) \leq \alpha $ for all $i = 1, \dots, k$.
+
+    The family $\cf(Z, d) \coloneq \{\cf_\alpha(Z, d)\}_{\alpha > 0}$ is named {\bf Čech filtration}.
+
+    Given a real function $ f \colon X \to R $, let $ X_\alpha \coloneq f^{-1}((-\infty, \alpha]) \subseteq X $. We define the {\bf Čech filtration associated with $ f $} as $ \cf(X, d, f) \coloneq \{\cf_\alpha(X_\alpha, d)\}_{\alpha>0}$.
+\end{definition}
+
 \begin{lemma}[Exercise 3.5.4, \cite{burago}] \label{lemma:haus-aux-1}
     Any finite metric space of cardinality $ n $ can be isometrically embedded into $(\R^n, \ell^n)$.
 \end{lemma}
