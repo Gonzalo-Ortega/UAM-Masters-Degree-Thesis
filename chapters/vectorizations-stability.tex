@@ -9,11 +9,16 @@ Section \ref{sec:landscapes} reviews the results of the 2015 paper from Peter Bu
 
 Persistence landscapes provide a functional summary of persistence diagrams, converting them into a sequence of real-valued functions that capture topological features in a more tractable form. This section introduces the definition of persistence landscapes, their key properties, and stability results that relate the landscape distance to the bottleneck and Wasserstein distances between persistence diagrams.
 
+Recall from Definition \ref{def:persistent-homology} that given some persistence module $ (V, \pi) $ and a fixed $k$ the $k$-th persistent Betti number associated to $ x \leq y \in \R $ is given by
+\begin{equation}
+    \beta_x^y(V) = \dim (\im \pi_{x \leq y}).
+\end{equation}
+
 \begin{lemma}[Lemma 1, \cite{bubenik}] \label{lemma:landscapes-aux-1}
-    Let $ a \leq b \leq c \leq d $ be real numbers. Then $ \beta_b^c \geq \beta_a^d $.
+    Let $ (V, \pi) $ be a persistence module and let $ a \leq b \leq c \leq d \in \R $. Then $ \beta_b^c \geq \beta_a^d $.
 \end{lemma}
 \begin{proof}
-    ...
+    Since $ \pi_{a \leq d} = \pi_{c \leq d} \circ \pi_{b \leq c} \circ \pi_{a \leq b} $, the dimension of the image of $ \pi_{a \leq d} $ must be smaller than the one of just $ \pi_{b \leq c} $.
 \end{proof}
 
 \begin{lemma}[Lemma 2, \cite{bubenik}] \label{lemma:landscapes-aux-2}
@@ -25,7 +30,7 @@ Persistence landscapes provide a functional summary of persistence diagrams, con
 
 Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended real numbers. 
 
-\begin{definition}[Persistence landscape] 
+\begin{definition}[Persistence landscape] \label{def:persistence-landscape}
     A {\bf persistence landscape} is a function $ \lambda \colon \N \times \R \to \overline \R $, defined as
     \begin{equation}
         \lambda(k, t) \coloneq \sup \{ m \geq 0 \mid \beta^{t-m, t+m} \geq k\}.
@@ -41,7 +46,7 @@ Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended r
 \end{definition}
 
 \begin{lemma}[Lemma 3, \cite{bubenik}] \label{lemma:landscapes-aux-3}
-    Let $ \lambda_k \colon \R \to \overline{\R} $ be an element of a persistence diagram. The following properties are verified.
+    Let $ \lambda_k \colon \R \to \overline{\R} $ be an element of a persistence landscape. The following properties are verified.
     \begin{enumerate}
         \item $\lambda_k(t) \geq 0$,
         \item $\lambda_k(t) \geq \lambda_{k+1}(t)$,
@@ -67,17 +72,37 @@ Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended r
     \end{equation}
 \end{definition}
 
-\begin{theorem}[Theorem 12, Lemma 1, \cite{bubenik}]
+\begin{theorem}[Theorem 17, \cite{bubenik}] \label{theorem:landscapes-aux}
+    Let $ (V, \pi) $ and $ (W, \theta) $ two persistence modules. Then their $\infty$-landscape distance between them is a lower bound of their interleaving distance. That is
+    \begin{equation}
+        \Lambda_{\infty}(V, W) \leq \di(V, W)
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Suppose $ V $ and $ W $ are $\delta$-interleaved, recall definition \ref{def:interleaved-modules}. Then, considering $ \pi_{t-m \leq t+m} $ and $ \pi_{t-m + \delta \leq t+m - \delta } $, we have that $ t-m \leq t-m + \delta \leq t+m - \delta \leq t+m $, hence by Lemma \ref{lemma:landscapes-aux-1} we have
+    \begin{equation}
+        \beta_{t-m+\delta}^{t+m-\delta}(W) \geq \beta_{t-m}^{t+m}(V).
+    \end{equation}
+    Now if $ \delta $ and $ \delta' $ are the corresponding persistence landscapes of $ V $ and $ W $, by Definition \ref{def:persistence-landscape}, for every $ k \leq 1 $, $ \lambda'(k, t) \geq \lambda(k, t) - \delta $. Hence, it follows
+    \begin{equation}
+        \|\lambda - \lambda'\|_\infty \leq \delta.
+    \end{equation}
+\end{proof}
+
+\begin{theorem}[Theorem 12, \cite{bubenik}]
     Consider the persistence modules $ V = F_x $, $ W = G_x $ given by the maps $ f, g \colon X \to \R $. Then
     \begin{equation}
         \Lambda_\infty(V, W) \leq \| f - g\|_\infty
     \end{equation}
 \end{theorem}
 \begin{proof}
-    ...
+    The proofs follows from applying Theorem \ref{theorem:landscapes-aux}, Theorem \ref{chap:interleaving-stability} and Theorem \ref{theorem:edelsbrunner-stability}, in such order. Hence
+    \begin{equation}
+        \Lambda_\infty(V, W) \leq \di(V, W) = \db(D(f), D(g)) \leq \| f - g\|_\infty.
+    \end{equation}
 \end{proof}
 
-\begin{theorem}[Theorem 13, Lemma 1, \cite{bubenik}]
+\begin{theorem}[Theorem 13, \cite{bubenik}]
     Let $ D $ and $ D' $ be two persistence diagrams, then
     \begin{equation}
         \Lambda_\infty(D, D') \leq \db(D, D').
@@ -86,7 +111,6 @@ Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended r
 \begin{proof}
     ...
 \end{proof}
-
 
 \section{Persistence images} \label{sec:images}
 
@@ -106,32 +130,69 @@ Persistence images offer an alternative vectorization by transforming persistenc
     \end{equation}
 \end{definition}
 
-\begin{lemma}[Lemma 3, \cite{adams}]
-    Let $ u, v \in \R^2 $. The following inequality asserts.
+Let $ h \colon \R^2 \to \R $ be a differentiable function. We will denote the maximal norm of the gradient vector of $ h $ as
+\begin{equation}
+    |\nabla h | = \sup_{z \in \R^2} \| \nabla h(z) \|_2.
+\end{equation}
+Hence, by the fundamental theorem of calculus for line integrals, for every $ u, v \in \R^2 $, we have
+\begin{equation}
+    |h(u) - h(v)| \leq |\nabla h| \|u-v\|_2.
+\end{equation}
+Now, for a differentiable probability distribution $ \phi_u \colon \R^2 \to \R $, with mean $ u \in \R^2 $ we can denote $ |\nabla \phi_u| $ as $ |\nabla \phi| $ and $ \|\phi_u\| $ as $ \|\phi\| $ because both the maximal directional derivative and the uniform norm of a fixed differentiable probability function are invariable under translation.
+
+\begin{lemma}[Lemma 3, \cite{adams}] \label{lemma:images-aux}
+    Let $ u, v \in \R^2 $. Fix a nonnegative weighting function $ f \colon \R^2 \to R $ that is zero along the horizontal axis, continuous and picewise differentiable. Fix a differentiable probability distribution $ \phi_u \colon \R^2 \to \R $, with mean $ u \in \R^2 $. The following inequality asserts.
     \begin{equation}
         \|f(u) \phi_u - f(v)\phi_v \|_\infty \leq (\|f\|_\infty |\nabla \phi| + \|\phi\|_\infty |\nabla f |) \| u - v \|_2.
     \end{equation}
 \end{lemma}
 \begin{proof}
-    ...
+    For any $ z \in \R^2 $ we have
+    \begin{equation}
+        | \phi_u(z) - \phi_v(z) | = | \phi_u(z) - \phi_u(z + u - v) | \leq |\nabla \phi | \|u - v \|_2.
+    \end{equation}
+    Hence,
+    \begin{equation}
+        \| \phi_u - \phi_v \| \leq |\nabla \phi | \|u - v \|_2.
+    \end{equation}
+    Applying this, we can now develop    
+    \begin{align}
+        |f(u)\phi_u(z) - f(v)\phi_v(z)| &= |f(u)(\phi_u(z) - \phi_v(z)) + (f(u) - f(v))\phi_v(z)| \\
+        &\leq \|f\|_\infty |\phi_u(z) - \phi_v(z)| + \|\phi\|_\infty |f(u) - f(v)| \\
+        &\leq \|f\|_\infty \|\nabla \phi\| \|u - v\|_2 + \|\phi\|_\infty \|\nabla f\| \|u - v\|_2 \\
+        &= (\|f\|_\infty \|\nabla \phi\| + \|\phi\|_\infty \|\nabla f\|)\|u - v\|_2.
+    \end{align}
 \end{proof}
 
+Persistence surfaces are stable with respect to the $1$-Wasserstein distance (see \ref{def:Wasserstein}).
 
-Persistence surfaces are stable with respect to the $1$-Wasserstein distance.
-
-\begin{theorem}[Theorem 4, \cite{adams}]
+\begin{theorem}[Theorem 4, \cite{adams}] \label{theorem:images-1}
     Let $ D, D' $ be two persistent diagrams and $ \rho_D, \rho_{D'} $ two  persistence surfaces associated to each diagram respectively. Then
     \begin{equation}
         \| \rho_B - \rho_{B'} \|_\infty \leq \sqrt{10} (\|f\|_\infty |\nabla \phi | + \|\phi\|_\infty |\nabla f |) \omega_1(D, D').
     \end{equation}
 \end{theorem}
 \begin{proof}
-    ...
+    Since $D$ and $D'$ consist of finitely many points, there exists a matching $\gamma$ that achieves the infimum in the Wasserstein distance. Then
+    \begin{align}
+        \|\rho_B - \rho_{B'}\|_{\infty} 
+        &= \left\| \sum_{u \in T(B)} f(u)\phi_u - \sum_{u \in T(B)} f(\gamma(u))\phi_{\gamma(u)} \right\|_{\infty} \\
+        &\leq \sum_{u \in T(B)} \left\| f(u)\phi_u - f(\gamma(u))\phi_{\gamma(u)} \right\|_{\infty},
+    \end{align}
+    We now apply Lemma \ref{lemma:images-aux} and then note that $ \|\cdot \|_2 \leq \sqrt{2} \| \cdot \| in \R^2 $. and that $ \|T(\cdot) \|_2 \leq \sqrt{5} \| \cdot \| $,
+    \begin{align}
+        \sum_{u \in T(B)} \left\| f(u)\phi_u - f(\gamma(u))\phi_{\gamma(u)} \right\|_{\infty}
+        &\leq \sqrt{2} (\|f\|_{\infty} \|\nabla \phi\| + \|\phi\|_{\infty} \|\nabla f\|) 
+        \sum_{u \in T(B)} \|u - \gamma(u)\|_{\infty} \\
+        &\leq \sqrt{10} (\|f\|_{\infty} \|\nabla \phi\| + \|\phi\|_{\infty} \|\nabla f\|) 
+        \sum_{u \in B} \|u - \gamma(u)\|_{\infty} \\
+        &= \sqrt{10} (\|f\|_{\infty} \|\nabla \phi\| + \|\phi\|_{\infty} \|\nabla f\|) W_1(B, B').
+    \end{align}
 \end{proof}
 
 Persistence images are stable with respect to the $1$-Wasserstein distance.
 
-\begin{theorem}[Theorem 5, \cite{adams}]
+\begin{theorem}[Theorem 5, \cite{adams}] \
     Let $ A $ be be the maximum area of any pixel in the image, $ A' $ the total area of the image, and $ n $ the number of pixels in the image. Then
     \begin{align}
         &\| I(\rho_B) - I(\rho_{B'}) \|_\infty \leq \sqrt{10} A (\|f\|_\infty |\nabla \phi | + \|\phi\|_\infty |\nabla f |) \omega_1(D, D'), \\
@@ -140,7 +201,20 @@ Persistence images are stable with respect to the $1$-Wasserstein distance.
     \end{align}
 \end{theorem}
 \begin{proof}
-    ...
+    Note for any pixel $ p $ with area $ A(p) $ we have
+    \begin{align}
+        |I(\rho_{B})_{p} - I(\rho_{B'})_{p}| &= \left| \iint_{p} \rho_{B} \, dy dz - \iint_{p} \rho_{B'} \, dy dx \right| \\
+        &= \left| \iint_{p} \rho_{B} - \rho_{B'} \, dy dx \right| \\
+        &\leq A(p) \|\rho_{B} - \rho_{B'}\|_{\infty} \\
+        &\leq \sqrt{10} A(p) \big( \|f\|_{\infty} |\nabla \phi| + \|\phi\|_{\infty} |\nabla f| \big) \omega_{1}(B, B'),
+    \end{align}
+    where the last inequality comes by applying Theorem \ref{theorem:images-1}. Hence we have
+    \begin{align}
+        \|I(\rho_{B}) - I(\rho_{B^{\prime}})\|_{\infty} &\leq \sqrt{10}A(\|f\|_{\infty}|\nabla\phi| + \|\phi\|_{\infty}|\nabla f|\big)\omega_{1}(B,B^{\prime}) \\
+        \|I(\rho_{B}) - I(\rho_{B^{\prime}})\|_{1} &\leq \sqrt{10}A^{\prime}\big(\|f\|_{\infty}|\nabla\phi| + \|\phi\|_{\infty}|\nabla f|\big)\omega_{1}(B,B^{\prime}) \\
+        \|I(\rho_{B}) - I(\rho_{B^{\prime}})\|_{2} &\leq \sqrt{n}\|I(\rho_{B}) - I(\rho_{B^{\prime}})\|_{\infty} \\
+        &\leq \sqrt{10n}A\big(\|f\|_{\infty}|\nabla\phi| + \|\phi\|_{\infty}|\nabla f|\big)\omega_{1}(B,B^{\prime}).
+    \end{align}
 \end{proof}
 
 \section{Euler curves}  \label{sec:euler-curves}
