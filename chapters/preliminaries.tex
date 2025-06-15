@@ -1,11 +1,11 @@
 \chapter{Preliminaries}
 
-Topological Data Analysis is a wide topic, were results from all Mathematical branches are put together in order to compute topological invariants among real world data. Basic knowledge in both, Algebra and Analysis, as well as Geometry is needed to approach the theoretical results that strengthen the main theory that defines proves the needed structures and their stability. Therefore, in order to settle a common base and notation unifying the diverse procedures among bibliography, this chapter introduces the main definitions and basic results needed to tackle the rest of the thesis.
+Topological Data Analysis is a wide topic, where results from all Mathematical branches are put together in order to compute topological invariants among real world data. A basic understanding of algebra, analysis, and geometry is required to approach the theoretical results that underpin the core theory, which establishes the necessary structures and their stability. Therefore, to establish a common foundation and unify the diverse notations and procedures found in the literature, this chapter introduces the key definitions and basic results needed for the rest of the thesis.
 
 Section \ref{sec:preliminaries-homology} makes a 
-brief recall of simplicial homology in order to define persistent homology modules. Section \ref{sec:preliminaries-modules} then introduces persistence modules, the algebraic tool used to study the structure of persistence homology groups. Section \ref{sec:preliminaries-barcodes} introduces a tool to summarize the data from the persistence homology groups, the barcodes. With this summary it is possible to compute how homologically different are two datasets, or how different are two filtrations among the same data. To make this measure, the interleaving and bottleneck distance are introduced. The first one measures distances between persistence modules, while the later one measures distance between the barcodes of those modules. One key aspect of them, is that they are actually equivalent, as its later proved in Chapter \ref{chap:interleaving-stability}.
+brief recall of simplicial homology in order to define persistent homology modules. Section \ref{sec:preliminaries-modules} then introduces persistence modules, the algebraic tool used to study the structure of persistence homology groups. Section \ref{sec:preliminaries-barcodes} introduces a tool to summarize the data from the persistence homology groups, the barcodes. With this summary it is possible to compute how homologically different are two datasets, or how different are two filtrations among the same data. To make this measure, the interleaving and bottleneck distance are introduced. The first one measures distances between persistence modules, while the latter one measures distance between the barcodes of those modules. One key aspect of them, is that they are actually equivalent, as its later proved in Chapter \ref{chap:interleaving-stability}.
 
-A visual way of presenting barcodes is through persistence diagrams. Both barcodes and persistence diagrams are equivalent manners of presenting the homological features of data. To give a different perspective about how to measure distances between persistence diagrams, Section \ref{sec:preliminaries-wp-persistance} introduces the Wasserstein distance and redefines the bottleneck distance as a particular case.
+A visual way of presenting barcodes is through persistence diagrams. Both barcodes and persistence diagrams are equivalent ways of presenting the homological features of data. To give a different perspective about how to measure distances between persistence diagrams, Section \ref{sec:preliminaries-wp-persistance} introduces the Wasserstein distance and redefines the bottleneck distance as a particular case.
 
 Finally, Section \ref{sec:preliminaries-hausdorff} recalls the Hausdorff distance to measure distance between subsets of metric spaces, and generalices it presenting the Gromov-Hausdorff distance, which allows to measure distances between sets located in different metric spaces. This will be useful to delimit bottleneck distance in order to proof its stability.
 
@@ -47,7 +47,7 @@ In most Algebraic Topology introductory texts, homology is first presented in th
     An {\bf abstract simplicial complex} $K $ is a finite collection of simplices such that for every face of a simplex in $ K $ is also a simplex in $ K $.
 \end{definition}
 
-\begin{definition}[Siplicial $k$-chain]
+\begin{definition}[Simplicial $k$-chain]
     Let $R$ be a commutative ring with additive identity $0 $ and multiplicative identity $1$ and let $K$ be a simplicial complex. A {\bf simplicial $k$-chain} is a formal sum of $k$-simplices,
     \begin{equation}
         \sum_{i=1}^{N} r_i \sigma_i,
@@ -71,18 +71,24 @@ As the boundary map can be extends linearly to arbitrary $k$-chains, it forms an
     A {\bf chain complex} $(K, d)$ is a sequence of $R$-modules $ A_k $ with boundary maps $ d_k \colon A_k \to A_{k-1} $, such that the composition $ d_{k-1} \circ d_k = 0 $ for all $k \leq 0$.
 \end{definition}
 
-\begin{lemma}[Lemma 2.7, \cite{wang}]
+\begin{lemma}[Lemma 2.1, \cite{hatcher}]
     The collection of $R$-modules $K_k$ connected by boundary maps $\partial_k$ forms a chain complex $(K, \partial)$.
 \end{lemma}
 \begin{proof}
-    ...
+    We just need to prove that for every $k$-simplex $\sigma = (x_0, \dots, x_k) $ for $ k \geq 1 $, we get $ \partial_{k-1} \circ \partial_k (\sigma) = 0$. By linearity of the boundary map, we can just compute
+    \begin{align}
+        \partial_{k-1} \circ \partial_k (\sigma) = & \sum_{i=0}^{k} (-1)^i \partial_{k-1} (x_0, \dots, \hat x_i, \dots, x_k) \\
+        = & \sum_{j < i} (-1)^i (-1)^j (x_0, \dots, \hat x_j, \dots, \hat x_j, \dots, x_k) \\
+        & + \sum_{j > i} (-1)^i (-1)^{j-1} (x_0, \dots, \hat x_i, \dots, \hat x_j, \dots, x_k).
+    \end{align}
+    The last two sums vanish as when changing $ i $ and $j $ positions in the second, it becomes the negative of the first.
 \end{proof}
 
 \begin{corolary}
     The boundary maps $\partial_k$ satisfy that for every $k \leq 0$, $\im \partial_{k+1} \subseteq \ker \partial_k $.
 \end{corolary}
 \begin{proof}
-    ...
+    If there is some $k$-simplex $\sigma \in \im(\partial)$ then there exists some $(k+1)$-simplex $\tau$ such that $ \partial_{k+1} \tau = \sigma $. Hence, as $ \partial_k \circ \partial_k+1 = 0 $,we have that $ \partial_k(\partial_{k+1} \tau) = \partial_k \sigma = 0 $ and $ \sigma \in \ker(\partial_k) $.
 \end{proof}
 
 \begin{definition}[Homology module]
