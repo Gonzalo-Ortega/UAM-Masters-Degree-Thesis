@@ -110,6 +110,11 @@ Homology can be extended to every topological space, not just those that are tri
 
 Filtrations are a natural way of obtaining simplicial complexes from datasets, as it is posible to set the first element of the filtration to be the points in the datasets, and then join in various steps each of the point to form a simplicial complex that connects every point by simplices of different dimensions. Naturally, depending on the procedure we follow we could get quite different filtration for one same dataset.
 
+\begin{example} \label{ex:filtration}
+    Figure \ref{fig:filtration} depicts a posible filtration of a simplicial complex $K$ in four steps. It starts with four 0-simplices and one 1-simplex at $ F_0 K $ and ads components until it has six $0$-simplices, six 1-simplices and one 2-simplex at $ F_3 K $.
+    \input{figures/filtration.tex}
+\end{example}
+
 Considering a filtration of a simplicial complex, we can compute the homology groups at each step of the filtration. Hence, for each $ k \geq 0 $, there are induced linear maps $ H_kg_i \colon H_k(F_iK) \to H_k(F_{i+1}K) $ that fit together into a sequence of vector spaces
 \begin{equation}
 \begin{tikzcd}
@@ -156,6 +161,19 @@ As $ X $ is triangulable, we will look for functions that satisfy that each $ X_
         \beta_x^y \coloneq \dim(F_x^y).
     \end{equation}
 \end{definition}
+
+\begin{example} \label{ex:persistent groups}
+    We can compute persistent homology modules at each step of the filtration of Example \ref{ex:filtration}. For simplicity, We will fix the $R$-module homology, taking $R = \Z $, to compute classic group homology. Also note that for every $ k \neq 0, 1 $, homology groups will be the trivial ones, as there are no posible chain complexes of dimensions different from $ 0, 1 $ or $ 2 $. Recall that $0$-dimensional homology measures the number of path components of a space, and that $1$-dimensional homology counts the number of $1$-dimensional ``holes'' (see \cite{nina}[Section 3]).
+    
+    Hence for each step of the filtration $ F_i K $ we have:
+    \begin{align}
+        H_0(F_0 K) &= \Z^3,  & H_1(F_0 K) &= \{1\}, \\
+        H_0(F_1 K) &= \Z^2,  & H_1(F_1 K) &= \Z, \\
+        H_0(F_2 K) &= \Z^3,  & H_1(F_2 K) &= \Z^2, \\
+        H_0(F_3 K) &= \Z^2,  & H_1(F_3 K) &= \Z.
+    \end{align}
+    Note that as this particular filtration is discrete, and there is not any isomorphism in each of the changes, every $ i = 0, 1, 2, 3 $ is a critical point both for $ k = 1 $ and for $ k = 2 $.
+\end{example}
 
 \section{Persistence modules and interleaving distance} \label{sec:preliminaries-modules}
 
@@ -250,8 +268,8 @@ Tameness property ensures that the persistence modules have manageable and well-
     The interleaving distance between two tame persistence modules is actually a distance.
 \end{proposition}
 \begin{proof}
-    ...
-\end{proof}
+    We wont make this proof directly as in Chapter \ref{chap:interleaving-stability} we will prove that the interleaving distance between two persistence modules is the same as the bottleneck distance between their respective barcodes. As each module is uniquely described my their barcodes as we will see in Chapter \ref{chap:structure}, and bottleneck is actually a distance as we will see in Proposition \ref{prop:wasserstein-is-distance}, this prove will be completed.
+\end{proof}  
 
 \begin{definition}[Interval module]
     Let $ I = (a, b] $ be an interval with $ b \leq \infty $ and let $ \F $ be a field. An {\bf interval module} $\F(I)$ is a persistence module defined as
@@ -283,6 +301,11 @@ Barcodes are the main representation element that will allow us to resume the in
 \begin{definition}[Barcode]
     A {\bf barcode} $B$ is a finite multiset of intervals. That is, a collection $\{(I_i, m_i)\}$ of intervals $I_i$ with multiplicities $m_i \in N$, where each interval $ I_i $ is either finite of the form $(a, b]$ or infinite of the form $(a, \infty)$. Each interval $I_i$ is named to be a {\bf bar} of $B$. The first number, $ a $ is named the {\bf birth} of the barcode and is second number is its {\bf death}.
 \end{definition}
+
+\begin{example}
+    We can compute the barcodes associated to the filtrations of Example \ref{ex:filtration}.
+    \input{figures/barcodes}.
+\end{example}
 
 Chapter \ref{chap:structure} proves the Structure Theorem of persistence modules, that asserts that it is possible to express any persistence module as a direct sum of the interval modules given by the bars of a barcode. This is a key result in our purpose of introduce measures between the homological features of datasets. 
 
@@ -328,6 +351,10 @@ and the diagonal of the plane as
 \end{definition}
 
 Persistence diagrams are just a way of presenting barcodes as subsets of the plane, so we could introduce more distances between them. Note that while formally a persistence diagram is a function, usually it is used to also denote the set of points and their multiplicities in the plane. Note that when we do so, it is equivalent to name a barcode than a persistence diagram. Hence, the bottleneck distance as defined in Definition \ref{def:bot-dist} can be also used to measure distances between persistence diagrams.
+
+\begin{example}[Persistence diagrams]
+    \input{figures/persistence-diagrams.tex}
+\end{example}
 
 While definition \ref{def:bot-dist} is purely algebraic, this section gives an alternative analytical definition for the bottleneck distance making an adaptation of the classic Wasserstein distance, used originally to measure distances between probability measures (see \cite{givens}).
 
@@ -411,7 +438,7 @@ We now verify that the upper triangular region of the Euclidean plane with the C
 
 Next proposition will prove that, in indeed, the space of persistence diagrams with the $p$-Wasserstein distance $(\dgmp, \wdp)$ is a metric space. Its proof is usually omitted in literature, as it based on the simple fact that $ d_\infty $ is a distance. We will give, however, an step by step version here.
 
-\begin{proposition}
+\begin{proposition} \label{prop:wasserstein-is-distance}
     $\wdp$ is a distance on the space $ (\dgmp, \wdp) $.
 \end{proposition}
 \begin{proof}

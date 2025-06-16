@@ -1,0 +1,61 @@
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.45\linewidth}
+            \centering
+            \begin{tikzpicture}[line cap=round, line join=round, x=1cm, y=1cm]
+                \clip (-0.6, 2.5) rectangle (7, 10);
+
+                \draw[dashed] (0, 2) -- (0, 8) node[above] {$F_0$};
+                \draw[dashed] (2, 2) -- (2, 8) node[above] {$F_1$};
+                \draw[dashed] (4, 2) -- (4, 8) node[above] {$F_2$};
+                \draw[dashed] (6, 2) -- (6, 8) node[above] {$F_3$};
+
+                % Bar 1
+                \draw (0, 7) node[left] {$[a]$} -- (6.2, 7) node[right] {$\cdots$};
+                \draw[fill=black] (0, 7) circle (2pt);
+
+                % Bar 2
+                \draw (0, 6) node[left] {$[b]$} -- (2, 6);
+                \draw[fill=black] (0, 6) circle (2pt);
+                \draw[fill=black] (2, 6) circle (2pt);
+
+                % Bar 3
+                \draw (0, 5) node[left] {$[c]$} -- (4, 5);
+                \draw[fill=black] (0, 5) circle (2pt);
+                \draw[fill=black] (4, 5) circle (2pt);
+
+                % Bar 4
+                \draw (4, 4) node[left] {$[e]$} -- (6, 4);
+                \draw[fill=black] (4, 4) circle (2pt);
+                \draw[fill=black] (6, 4) circle (2pt);
+
+                % Bar 5
+                \draw (4, 3) node[left] {$[f]$} -- (6.2, 3) node[right] {$\cdots$};
+                \draw[fill=black] (4, 3) circle (2pt);
+            \end{tikzpicture}
+            \caption{Bars of $H_0(K)$.}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.45\linewidth}
+            \centering
+            \begin{tikzpicture}[line cap=round, line join=round, x=1cm, y=1cm]
+                \clip (-0.2, 2.5) rectangle (7, 10);
+
+                \draw[dashed] (0, 5.5) -- (0, 8) node[above] {$F_0$};
+                \draw[dashed] (2, 5.5) -- (2, 8) node[above] {$F_1$};
+                \draw[dashed] (4, 5.5) -- (4, 8) node[above] {$F_2$};
+                \draw[dashed] (6, 5.5) -- (6, 8) node[above] {$F_3$};
+
+                % Bar 1
+                \draw (2, 7) node[left] {$[bcd]$} -- (6.2, 7) node[right] {$\cdots$};
+                \draw[fill=black] (2, 7) circle (2pt);
+
+                % Bar 2
+                \draw (4, 6) node[left] {$[abc]$} -- (6, 6);
+                \draw[fill=black] (4, 6) circle (2pt);
+                \draw[fill=black] (6, 6) circle (2pt);
+            \end{tikzpicture}
+            \caption{Bars of $H_1(K)$.}
+        \end{subfigure}
+        \caption{Barcodes associated to the filtration of Example \ref{ex:filtration}.}
+    \end{figure}

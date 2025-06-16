@@ -1,0 +1,63 @@
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.45\linewidth}
+            \centering
+            \begin{tikzpicture}[line cap=round, line join=round, x=1cm, y=1cm]
+                
+                \draw[thick,->] (0,0) -- (5,0) node[anchor=north west] {$x$};
+                \draw[thick,->] (0,0) -- (0,5) node[anchor=south east] {$y$};
+                \draw[dashed] (0,0) -- (4.5,4.5) node[above right] {$\Delta$};
+                \draw[dotted] (0,4.5) -- (4.5,4.5);
+
+                \draw (0.5 cm,1pt) -- (0.5 cm,-1pt) node[anchor=north] {0};
+                \draw (1.5 cm,1pt) -- (1.5 cm,-1pt) node[anchor=north] {1};
+                \draw (2.5 cm,1pt) -- (2.5 cm,-1pt) node[anchor=north] {2};
+                \draw (3.5 cm,1pt) -- (3.5 cm,-1pt) node[anchor=north] {3};
+
+                \draw (1pt,0.5 cm) -- (-1pt,0.5 cm) node[anchor=east] {0};
+                \draw (1pt,1.5 cm) -- (-1pt,1.5 cm) node[anchor=east] {1};
+                \draw (1pt,2.5 cm) -- (-1pt,2.5 cm) node[anchor=east] {2};
+                \draw (1pt,3.5 cm) -- (-1pt,3.5 cm) node[anchor=east] {3};
+
+                \draw (1pt,4.5 cm) -- (-1pt,4.5 cm) node[anchor=east] {$\infty$};
+
+                \draw[fill=black] (0.5, 1.5) circle (2pt); 
+                \draw[fill=black] (0.5, 2.5) circle (2pt); 
+                \draw[fill=black] (0.5, 4.5) circle (2pt); 
+
+                \draw[fill=black] (2.5, 3.5) circle (2pt); 
+                \draw[fill=black] (2.5, 4.5) circle (2pt); 
+                
+            \end{tikzpicture}
+            \caption{Persistence diagram of $H_0(K)$.}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.45\linewidth}
+            \centering
+            \begin{tikzpicture}[line cap=round, line join=round, x=1cm, y=1cm]
+                
+                \draw[thick,->] (0,0) -- (5,0) node[anchor=north west] {$x$};
+                \draw[thick,->] (0,0) -- (0,5) node[anchor=south east] {$y$};
+                \draw[dashed] (0,0) -- (4.5,4.5) node[above right] {$\Delta$};
+                \draw[dotted] (0,4.5) -- (4.5,4.5);
+
+                \draw (0.5 cm,1pt) -- (0.5 cm,-1pt) node[anchor=north] {0};
+                \draw (1.5 cm,1pt) -- (1.5 cm,-1pt) node[anchor=north] {1};
+                \draw (2.5 cm,1pt) -- (2.5 cm,-1pt) node[anchor=north] {2};
+                \draw (3.5 cm,1pt) -- (3.5 cm,-1pt) node[anchor=north] {3};
+
+                \draw (1pt,0.5 cm) -- (-1pt,0.5 cm) node[anchor=east] {0};
+                \draw (1pt,1.5 cm) -- (-1pt,1.5 cm) node[anchor=east] {1};
+                \draw (1pt,2.5 cm) -- (-1pt,2.5 cm) node[anchor=east] {2};
+                \draw (1pt,3.5 cm) -- (-1pt,3.5 cm) node[anchor=east] {3};
+
+                \draw (1pt,4.5 cm) -- (-1pt,4.5 cm) node[anchor=east] {$\infty$};
+
+                \draw[fill=black] (2.5, 3.5) circle (2pt);
+                \draw[fill=black] (1.5, 4.5) circle (2pt);
+
+            \end{tikzpicture}
+            \caption{Persistence diagram of $H_1(K)$.}
+        \end{subfigure}
+        \caption{Persistence diagrams associated to the filtration of Example \ref{ex:filtration}.}
+    \end{figure}
