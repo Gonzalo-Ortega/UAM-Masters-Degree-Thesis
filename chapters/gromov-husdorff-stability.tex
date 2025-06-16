@@ -75,11 +75,11 @@ To prove Theorem \ref{theorem:gh-stability} we first give tree auxiliary lemmas 
 \end{proof}
 
 \begin{definition}[Paracompact space]
-    Let $ X $ be a topological space. It is said to be {\bf paracompact} if for all covering $ U $ of $ X $, there exists $ \mathcal V \subseteq \mathcal U $ such that $ \mathcal V $ is a finite covering.
+    Let $ X $ be a topological space. It is said to be {\bf paracompact} if for all covering $ \mathcal U $ of $ X $, there exists $ \mathcal V \subseteq \mathcal U $ such that $ \mathcal V $ is a finite covering.
 \end{definition}
 
 \begin{definition}[Good cover]
-    Let $ S $ be a topological space and $ I $ a set of indexes. A {\bf good cover} of $ S $ is a family $ \mathcal U = {U_i} $ of open subsets covering $ S $ such that for every finite subset $ J \subset I $, the common intersection
+    Let $ S $ be a topological space and $ I $ a set of indexes. A {\bf good cover} of $ S $ is a family $ \mathcal U = \{U_i\}_{i\in I} $ of open subsets covering $ S $ such that for every finite subset $ J \subset I $, the common intersection
     \begin{equation}
         \bigcap_{j\in J} U_j
     \end{equation}
@@ -117,7 +117,7 @@ To prove Theorem \ref{theorem:gh-stability} we first give tree auxiliary lemmas 
     \begin{equation}
         \| \delta_X - \delta_Y \|_\infty = \max_{i=1, \dots, n} | \delta_{x_i} - \delta_{y_i} | \leq \e.
     \end{equation}
-    As distance functions are linear, both $ \delta_X $ and $ \delta_Y $ are lower envelopes of picewise-linear functions and therefore they are picewise-linear too. Hence,  both $ \delta_X $ and $ \delta_Y $ are tame and continuous so by Theorem \ref{theorem:edelsbrunner-stability} we have
+    As distance functions are linear, both $ \delta_X $ and $ \delta_Y $ are lower envelopes of piecewise linear functions and therefore they are piecewise linear too. Hence,  both $ \delta_X $ and $ \delta_Y $ are tame and continuous so by Theorem \ref{theorem:edelsbrunner-stability} we have
     \begin{equation}
         \db(D(\delta_X), D(\delta_Y)) \leq \| \delta_X - \delta_Y \|_\infty \leq \e.
     \end{equation}

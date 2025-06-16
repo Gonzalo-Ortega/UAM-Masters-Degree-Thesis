@@ -49,7 +49,7 @@ Once we are able to build a $\delta$-interleaving between two $\delta$-matched i
 \begin{proof}
     Suppose that $\rho\colon \barc (V) \to \barc (W) $ is a $\delta$-matching between the barcodes of $ V $ and $ W $. By the Structure Theorem \ref{theorem:structure}, $ V $ and $ W $ decompose in a finite direct sum of interval modules
     \begin{align}
-        V \cong \! \bigoplus_{I \in \barc (V)} \mathbb F (I),& &W \cong \! \bigoplus_{J \in  \barc (W)} \mathbb F (W) .
+        V \cong \! \bigoplus_{I \in \barc (V)} \mathbb F (I),& &W \cong \! \bigoplus_{J \in  \barc (W)} \mathbb F (J) .
     \end{align}
     We can express $ V = V_Y \oplus V_N $, $ W = W_Y \oplus W_N $ denoting
     \begin{align}
@@ -93,7 +93,7 @@ $$
 $$
 
 \begin{lemma}[Proposition 3.1.1, \cite{polterovich}] \label{lemma:inj-cardinalities}
-    Let $ I = (b, d] $ be an interval. It exists an injective morphism $\iota \colon (V, \pi) \in (W, \theta) $, then $\#(\barc_{I-}(V)) \leq \#(\barc_{I-}(W)) $. Where $ \#(\cdot) $ denotes the cardinal operator.
+    Let $ I = (b, d] $ be an interval. If there exists an injective morphism $\iota \colon (V, \pi) \to (W, \theta) $, then $\#(\barc_{I-}(V)) \leq \#(\barc_{I-}(W)) $. Where $ \#(\cdot) $ denotes the cardinal operator.
 \end{lemma}
 \begin{proof}
     For $ b < s < d < r $, denote the set of elements in $ V_d $ witch come from all $ V_s $ and disappear in all $ V_r $ as
@@ -126,7 +126,7 @@ $$
 \end{proof}
  
 \begin{lemma}[Exercise 3.1.3, \cite{polterovich}] \label{lemma:sur-cardinalities}
-    Let $ I = (b, d] $ be an interval. It exists a surjective morphism $s\colon (V, \pi) \to (W, \theta) $, then $\#(\barc_{I+}(V)) \geq \#(\barc_{I+}(W)) $.
+    Let $ I = (b, d] $ be an interval. Suppose there exists a surjective morphism $s\colon (V, \pi) \to (W, \theta) $. Then $\#(\barc_{I+}(V)) \geq \#(\barc_{I+}(W)) $.
 \end{lemma}
 \begin{proof}
     Analogously to the proof of Lemma \ref{lemma:inj-cardinalities} we now define

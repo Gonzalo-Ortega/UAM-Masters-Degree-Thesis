@@ -98,7 +98,7 @@ As the boundary map can be extends linearly to arbitrary $k$-chains, it forms an
     \end{equation} 
 \end{definition}
 
-Homology can be extended to every topological space, not just those that are triangulable by introducing singular homology. However, in this work, we will restrict ourselves to simplicial homology. This choice is motivated by the nature of the data typically encountered in topological data analysis. The spaces involved are usually "sufficiently nice" and therefore triangulable. Moreover, real-world data intended for computational analysis is finite by nature, and hence, triangulable. Furthermore, simplicial homology of a finite simplicial complex $K$ is computable (see \cite{munkres}[Chapter 4, Theorem 11.5]) what makes it a prefect tool for computational studies.
+Homology can be extended to every topological space, not just those that are triangulable by introducing singular homology (see \cite{munkres}[Chapter 4]). However, in this work, we will restrict ourselves to simplicial homology. This choice is motivated by the nature of the data typically encountered in topological data analysis. The spaces involved are usually "sufficiently nice" and therefore triangulable. Moreover, real-world data intended for computational analysis is finite by nature, and hence, triangulable. Furthermore, simplicial homology of a finite simplicial complex $K$ is computable (see \cite{munkres}[Theorem 11.5]) what makes it a prefect tool for computational studies.
 
 \begin{definition}[Filtration]
     Let $ K $ be a simplicial complex and let $ T $ be a complete ordered index set. A {\bf filtration} of $ K $ is a nested sequence of subcomplexes $ F_i K $, $ i \in T $, such that for every $ i \in T $, 
@@ -179,7 +179,7 @@ To enable a more rigorous and structured study, we introduce the category of per
     If a morphism $ i $ verifies that for all $ t \in T $, $ i_t \colon V_t \to V_t $ is the identity, then $ i $ is the {\bf identity morphism}. If there exists two morphisms $ p \colon (V, \pi) \to (W, \theta) $ and $ q \colon (W, \theta) \to (V, \pi) $ such that the compositions $ p \circ q $ and $ q \circ p $ are both the identity morphism, then $ p $ and $ q $ are {\bf isomorphisms} of persistence modules. In this case, $ (V, \pi) $ and $ (W, \theta) $ are said to be {\bf isomorphic} persistence modules.
 \end{definition}
 
-For now on, to simplify notation, we will limit our totally order set to be the real numbers, $ T = \R $. Also, when there is no possible confusion, we might denote the persistence module $ (V, \pi) $ by just is collection of vector spaces $ V $. 
+For now on, to simplify notation, we will limit our totally ordered set to be the real numbers, $ T = \R $. Also, when there is no possible confusion, we might denote the persistence module $ (V, \pi) $ by just is collection of vector spaces $ V $. 
 
 This section defines a distance between persistence modules that will allow us to differentiate how far are two modules from each other.
 
@@ -284,7 +284,7 @@ Barcodes are the main representation element that will allow us to resume the in
     A {\bf barcode} $B$ is a finite multiset of intervals. That is, a collection $\{(I_i, m_i)\}$ of intervals $I_i$ with multiplicities $m_i \in N$, where each interval $ I_i $ is either finite of the form $(a, b]$ or infinite of the form $(a, \infty)$. Each interval $I_i$ is named to be a {\bf bar} of $B$. The first number, $ a $ is named the {\bf birth} of the barcode and is second number is its {\bf death}.
 \end{definition}
 
-Chapter \ref{chap:structure} proves the Structure Theorem of persistence modules, that asserts that it i possible to express any persistence module as a direct sum of the interval modules given by the bars of a barcode. This is a key result in our purpose of introduce measures between the homological features of datasets. 
+Chapter \ref{chap:structure} proves the Structure Theorem of persistence modules, that asserts that it is possible to express any persistence module as a direct sum of the interval modules given by the bars of a barcode. This is a key result in our purpose of introduce measures between the homological features of datasets. 
 
 Given an interval $ I = (a, b]$, and some $ \delta \geq 0 $, we will denote
 \begin{equation}
@@ -295,10 +295,10 @@ Given an interval $ I = (a, b]$, and some $ \delta \geq 0 $, we will denote
     Let $ X $ and $ Y $ be two multi-sets and let $ X' \subseteq X $, $ Y' \subseteq Y$. A {\bf matching} between them is a bijection $ \mu \colon X' \to Y' $. The elements in $ X' $ and $ Y' $ are said to be {\bf matched} by $ \mu $.
 \end{definition}
 
-Note that $ X' = \coim(\mu) $ and $ Y' = \im(\mu) $. Also note that as $ X $ and $ Y $ are multisets, it might happen that one same element appears several times in one of the multisets, ans that some, but not all of its copies are matched to some element in the other multiset. 
+Note that $ X' = \coim(\mu) $ and $ Y' = \im(\mu) $. Also note that as $ X $ and $ Y $ are multisets, it might happen that one same element appears several times in one of the multisets, and that some, but not all of its copies are matched to some element in the other multiset. 
 
 \begin{definition}[$\delta$-matching barcodes] \label{delta-matching}
-    A delta matching between two barcodes $ B $ and $ C $ is a multiset matching that verifies
+    A {\bf $\delta$-matching} between two barcodes $ B $ and $ C $ is a multiset matching that verifies
     \begin{enumerate}
         \item $B_{2\delta} \subseteq \coim(\mu) $,
         \item $C_{2\delta} \subseteq \im(\mu) $,
@@ -329,9 +329,9 @@ and the diagonal of the plane as
 
 Persistence diagrams are just a way of presenting barcodes as subsets of the plane, so we could introduce more distances between them. Note that while formally a persistence diagram is a function, usually it is used to also denote the set of points and their multiplicities in the plane. Note that when we do so, it is equivalent to name a barcode than a persistence diagram. Hence, the bottleneck distance as defined in Definition \ref{def:bot-dist} can be also used to measure distances between persistence diagrams.
 
-While definition \ref{def:bot-dist} is purely algebraic, this section gives an alternative analytical definition for the bottleneck distance making an adaptation of the classic Wasserstein distance, used originally to measure distances between probability measures.
+While definition \ref{def:bot-dist} is purely algebraic, this section gives an alternative analytical definition for the bottleneck distance making an adaptation of the classic Wasserstein distance, used originally to measure distances between probability measures (see \cite{givens}).
 
-Instead of probability measures, now we are actually dealing with countable sets of points in $ \R $. We will make use of the $ l^p $ norm at countable spaces to measure the distance between matched pairs and the distance between unmatched pairs and the diagonal $ \Delta $. For a more detailed explanation of Lebesgue measures check \cite{rudin}[Definition 3.7]. This norm is named after Pafnuty Chebyshev.
+Instead of probability measures, now we are actually dealing with countable sets of points in $ \R $. We will make use of the $ l^p $ norm at countable spaces to measure the distance between matched pairs and the distance between unmatched pairs and the diagonal $ \Delta $. For a more detailed explanation of Lebesgue measures see \cite{rudin}[Definition 3.7]. This norm is named after Pafnuty Chebyshev.
 
 \begin{definition}[Chebyshev distance]
     Let $ a, b \in \R^2 $ with $a = (a_x, a_y) $ and $ b = (b_x, b_y) $. The {\it Chebyshev distance} is defined as
@@ -442,10 +442,10 @@ Next proposition will prove that, in indeed, the space of persistence diagrams w
 
 \section{The Hausdorff and Gromov-Hausdorff distances} \label{sec:preliminaries-hausdorff}
 
-The Hausdorff distance is a way of measuring distances of different sets contained into a same metric space. This concept can be generalized defining a metric which allow us to measure distances between different metric spaces.
+The Hausdorff distance is a way of measuring distances of different compact, non-empty sets contained into a same metric space. This concept can be generalized defining a metric which allow us to measure distances between different metric spaces.
 
 \begin{definition}[Hausdorff distance] \label{def:hausdorff-distance}
-    Let $ (M, d) $ be a metric space, and let $ A \subseteq M $, $ B \subseteq M $ two compact subspaces of $ M $. Define the {\bf $r$-neighborhood} of a set $ S \subset M $ as
+    Let $ (M, d) $ be a metric space, and let $ A \subseteq M $, $ B \subseteq M $ two compact, non-empty subspaces of $ M $. Define the {\bf $r$-neighborhood} of a set $ S \subset M $ as
     $$
         U_r(S) \coloneq \left\{ x \in S \mid d(x, S) \leq r \right\}.
     $$
@@ -471,7 +471,7 @@ The Hausdorff distance is a way of measuring distances of different sets contain
 \end{definition}
 
 \begin{lemma}[Proposition 7.3.16, \cite{burago}] \label{lemma:gh-triangle}
-    Gromov-Hausdorff distance satisfy the triangle inequality. That is, for any metric spaces $ X_1, X_2, X_3 $ it is verified that
+    The Gromov-Hausdorff distance satisfies the triangle inequality. That is, for any metric spaces $ X_1, X_2, X_3 $ it is verified that
     \begin{equation}
         \dgh(X_1, X_3) \leq \dgh(X_1, X_2) + \dgh(X_2, X_3).
     \end{equation}

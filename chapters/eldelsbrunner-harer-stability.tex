@@ -63,7 +63,7 @@ We will denote the closed upper left quadrant of a point $ (x, y) \in \R^2 $ as
         \mu &= \sum_{k \leq i \leq j \leq l} \mu_k^l = \sum_{k \leq i \leq j \leq l} \beta_{b_{k-1}}^{b_l} - \beta_{b_k}^{b_l} + \beta_{b_k}^{b_{l-1}} - \beta_{b_{k-1}}^{b_{l-1}} \label{eq:k-triangle-1} \\
         &= \beta_{b_{-1}}^{b_{n+1}} - \beta_{b_i}^{b_{n+1}} + \beta_{b_i}^{b_{j-1}} - \beta_{b_{j-1}}^{b_{-1}} = \beta_{b_k}^{b_{l-1}} = \beta_x^y. \label{eq:k-triangle-2}
     \end{align}
-    The fist two equalities in \eqref{eq:k-triangle-1} are just the definition of total multiplicity. In \eqref{eq:k-triangle-2}, note that every other term in the sum cancels. Then note that $ \beta_{b_{-1}}^{b_{n+1}} = \dim F_{-\infty}^{\infty} $, $ \beta_{b_i}^{b_{n+1}} = \dim F_{x}^{\infty} $ and $ \beta_{b_{j-1}}^{b_{-1}} = \dim F_{-\infty}^y $. All of them are the dimension of the trivial group, therefore, equal to $ 0 $. This leaves only one remaining term and completes the proof.
+    The fist two equalities in \eqref{eq:k-triangle-1} are just the definition of total multiplicity. In \eqref{eq:k-triangle-2}, note that every other term in the sum cancels. Then note that $ \beta_{b_{-1}}^{b_{n+1}} = \dim F_{-\infty}^{\infty} $, $ \beta_{b_i}^{b_{n+1}} = \dim F_{x}^{\infty} $ and $ \beta_{b_{j-1}}^{b_{-1}} = \dim F_{-\infty}^y $. All of them are the dimension of the trivial module, therefore, equal to $ 0 $. This leaves only one remaining term and completes the proof.
 \end{proof}
 
 Denote the {\bf upper left quadrants} $ Q \coloneq Q_b^c = [-\infty, b] \times [c, \infty] $, $ Q_\e \coloneq Q_{b-\e}^{c+\e} = [-\infty, b-\e] \times [c+\e, \infty] $.
@@ -92,7 +92,7 @@ Denote the {\bf upper left quadrants} $ Q \coloneq Q_b^c = [-\infty, b] \times [
         & G_c \arrow[u, "\psi_c"']        
     \end{tikzcd}
     \end{equation}
-    Last inclusion is enough for the requirements of this proof, never the less, we will make one more note that will be useful latter on, through the proof of Lemma \ref{lemma:box-lemma}. Fit the maps so that they describe commutative diagram \eqref{cd:quadrant-2}, showing that
+    Last inclusion is enough for the requirements of this proof, nevertheless, we will make one more note that will be useful later on, through the proof of Lemma \ref{lemma:box-lemma}. Fit the maps so that they describe commutative diagram \eqref{cd:quadrant-2}, showing that
     \begin{align}
         \psi_c(G_b^c) = \psi_c \circ g_b^c(G_b) = f_{b+\e}^{c+\e} \circ \psi_b(G_b) \subseteq F_{b+\e}^{c+\e}.
     \end{align}
@@ -113,10 +113,10 @@ Denote the {\bf upper left quadrants} $ Q \coloneq Q_b^c = [-\infty, b] \times [
         \#(D(f) \cap Q_\e) &= \beta_{b-\e}^{c+\e} = \dim F_{b-\e}^{c+\e}, \\
         \#(D(g) \cap Q) &= \beta_b^c = \dim G_b^c.
     \end{align}
-    As if one homology group is contain in an other, the dimension of the first must be lower or equal to the one of the second. Also, the dimension is invariant under inclusion maps. Thus, the first inclusion of \eqref{eq:quadrant-3} asserts that $ F_{c-\e}^{c+\e} \subseteq \psi_c (G_b^c) $ and therefore we have proven that $ \dim F_{c-\e}^{c+\e} \leq  \dim G_b^c $.
+    As if one homology module is contain into an other, the dimension of the first must be lower or equal to the one of the second. Also, the dimension is invariant under inclusion maps. Thus, the first inclusion of \eqref{eq:quadrant-3} asserts that $ F_{c-\e}^{c+\e} \subseteq \psi_c (G_b^c) $ and therefore we have proven that $ \dim F_{c-\e}^{c+\e} \leq  \dim G_b^c $.
 \end{proof}
 
-Before next lemma we will introduce some new notation. Let $ f\colon X \to \R $ be a tame function. Let $ w < x < y < z \in \R $ be numbers different from critical values of $ f $. Recall that $ F_x = H_k(f^{-1}(-\infty, x]) $, $ f_x^y \colon F_x \to F_y $ and $ F_x^y = \dim f_x^y $. We denote
+We will introduce some useful notation. Let $ f\colon X \to \R $ be a tame function. Let $ w < x < y < z \in \R $ be numbers different from critical values of $ f $. Recall that $ F_x = H_k(f^{-1}(-\infty, x]) $, $ f_x^y \colon F_x \to F_y $ and $ F_x^y = \dim f_x^y $. We denote
 \begin{align}
     f_x^{y, z} &\coloneq f_y^z \rvert_{F_x^y},
     \quad &
@@ -204,17 +204,20 @@ Hence, the desired inequality is hold as we have seen that
 \end{align}
 \end{proof}
 
-\begin{theorem}[Hausdorff Stability] \label{theorem:hausdorff-stability}
-$$
-    \dhf(D(f), D(g)) \leq \| f - g \|_\infty.
-$$
+\begin{theorem}[Hausdorff Stability, \cite{Edelsbrunner}] \label{theorem:hausdorff-stability}
+    Let $ X $ be a triangulable space, and $ f, g\colon X \to \R $ continuous tame functions. Then,
+    \begin{equation}
+        \dhf(D(f), D(g)) \leq \| f - g \|_\infty.
+    \end{equation}
 \end{theorem}
 \begin{proof}
-    As a direct consequence of Lemma \ref{lemma:box-lemma} if $ (x, y)\in D(f) $ then there must exist some point at $ D(g) $ at distance less than or equal to $ \varepsilon =  \| f - g \|_\infty $ from $(x, y) $ since the total multiplicity of $ D(g) \cap R_\varepsilon $ is at least one.
+    As a direct consequence of Lemma \ref{lemma:box-lemma} if $ (x, y)\in D(f) $ then there must exist some point in $ D(g) $ at distance less than or equal to $ \varepsilon =  \| f - g \|_\infty $ from $(x, y) $ since the total multiplicity of $ D(g) \cap R_\varepsilon $ is at least one.
 \end{proof}
 
 \section{Bottleneck Stability} \label{sec:bot-stability}
 In this section we are going to prove Theorem \ref{theorem:edelsbrunner-stability}. 
+
+\Main*
 
 \begin{definition}[Very close tame functions]
     Let $ f, g \colon X \to \R $ be tame functions. We define
@@ -244,10 +247,10 @@ In this section we are going to prove Theorem \ref{theorem:edelsbrunner-stabilit
 \end{proof}
 
 \begin{definition}
-    Let $\hat f, \hat g $ be two picewise linear functions over a simplicial complex $ K $. Let $ \lambda \in [0, 1] $. A {\bf convex combination} of $ \hat f $ and $ \hat g $ is a function of the form
-    $$
+    Let $\hat f, \hat g $ be two piecewise linear functions over a simplicial complex $ K $. Let $ \lambda \in [0, 1] $. A {\bf convex combination} of $ \hat f $ and $ \hat g $ is a function of the form
+    \begin{equation}
         h_\lambda \coloneq (1-\lambda) \hat f + \lambda \hat g.
-    $$
+    \end{equation}
 \end{definition}
 
 \begin{lemma}[Interpolation Lemma, \cite{Edelsbrunner}] \label{lemma:interpolation}
