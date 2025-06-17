@@ -142,7 +142,7 @@ This stability results can be extended for $ p \neq \infty $ obtaining some less
 
 \section{Persistence images} \label{sec:images}
 
-Persistence images offer an alternative vectorization by transforming persistence diagrams into finite-dimensional representations through kernel density estimation. Here, we define persistence surfaces and images, analyze their stability under the 1-Wasserstein distance, and derive bounds that ensure their reliability in machine learning and statistical applications.
+Persistence images offer an alternative vectorization by transforming persistence diagrams into finite-dimensional representations through kernel density estimation. On practice, the use of persistence images with vector-based machine learning tools can be useful to identify features of data containing discriminating topological information (see \cite{adams}). Here, we define persistence surfaces and images, analyze their stability under the 1-Wasserstein distance, and derive bounds that ensure their reliability in machine learning and statistical applications.
 
 \begin{definition}[Persistence surface]
     Let $ D $ be a persistence diagram. Let $ T \colon \R^2 \to \R^2 $ be the linear transformation $ T(x, y) = (x, y-x) $. Fix a nonnegative weighting function $ f \colon \R^2 \to R $ that is zero along the horizontal axis, continuous and picewise differentiable. Fix a differentiable probability distribution $ \phi_u \colon \R^2 \to \R $, with mean $ u \in \R^2 $. The {\bf persistence surface} associated to $ D $, by $ f $ and $ \phi_u $ is a function $ \rho_D \colon \R^2 \to \R $ defined as
