@@ -143,6 +143,34 @@ As $ X $ is triangulable, we will look for functions that satisfy that each $ X_
     A function $ f\colon X \to \R $ is said to be {\bf tame} if it has a finite number of homological critical values, and for all $ z \in \Z $, and for all $ a \in \R $, $ \dim F_a < \infty $.
 \end{definition}
 
+\begin{example}[Piecewise linear functions]
+    The first example of tame functions, and the one we will most make use of, are piecewise linear functions.
+\end{example}
+\begin{proof}
+    To prove that piecewise linear functions are tame, we need to verify the two conditions in Definition \ref{def:tame-function}:
+
+    First we will check that piecewise linear functions have a finite number of homological critical values. A piecewise linear function $ f \colon X \to \mathbb{R} $ is defined by its values on the vertices of a simplicial complex and is linearly interpolated on the simplices. The function $ f $ can only change the homology of its sublevel sets at the values it takes on the vertices. Since a simplicial complex has finitely many vertices, $ f $ has finitely many such values. These are the only candidates for homological critical values. Thus, $ f $ has finitely many homological critical values.
+
+    Now, we need to check that every sublevel sets has finite-dimensional homology. For any $ a \in \R $, the sublevel set $ f^{-1}(-\infty, a] $ is a subcomplex of the simplicial complex $ X $ (or a subset thereof). Because $ f $ is linear on each simplex, $ f^{-1}(-\infty, a] $ consists of all simplices where $ f \leq a $ on all vertices. The homology groups of a finite simplicial complex are finitely generated (and thus finite-dimensional when using field coefficients). Hence, $ \dim H_k(f^{-1}(-\infty, a]) < \infty $ for all $ k \in \Z $.
+\end{proof}
+
+\begin{example}[Morse functions]
+    A real function defined over a differential manifold, $ f\colon M \to \R $ it is said to be a {\bf Morse function} if it has no degenerate analytical critical points. Recall that analytical critical points are those were the differential of $ f $ vanishes. A critical point $ p \in \R $ is degenerate if the Hessian matrix determinant vanish.
+
+    By how Morse functions are defined, if they are taken over a compact manifold, then Morse functions are tame.
+\end{example}
+
+\begin{example}[Non-tame function]
+    Of course, not every function is tame. A classic counterexample comes from the topologist's sine curve $ f: [0, 1] \in \R $ defined as
+    \begin{equation}
+        f(x) = \begin{cases}
+            \sin(\frac{1}{x}) &\text{ if } x \neq 0, \\
+            0 &\text{ if } x = 0,
+        \end{cases}
+    \end{equation}
+    Note that the interval $ [0, 1] $ is isomorphic to a simplicial complex formed by one 1-simplex and two 0-simplices. As $ x $ tends to $ 0 $, $ \sin(\frac{1}{x}) $ oscillates between 1 and -1. Hence, each local extremum $ a $ of $ \sin(\frac{1}{x}) $ introduces a change in the topology of the sublevel sets $ f^{-1}(-\infty, a] $, creating infinitely many homological critical values.
+\end{example}
+
 \begin{definition}[Persistent homology module] \label{def:persistent-homology}
     Let $X$ be a triangulable topological space and let $ f \colon X \to \R $. For every fixed $ k \in \Z $, we denote
     \begin{equation}
@@ -302,9 +330,17 @@ Barcodes are the main representation element that will allow us to resume the in
     A {\bf barcode} $B$ is a finite multiset of intervals. That is, a collection $\{(I_i, m_i)\}$ of intervals $I_i$ with multiplicities $m_i \in N$, where each interval $ I_i $ is either finite of the form $(a, b]$ or infinite of the form $(a, \infty)$. Each interval $I_i$ is named to be a {\bf bar} of $B$. The first number, $ a $ is named the {\bf birth} of the barcode and is second number is its {\bf death}.
 \end{definition}
 
-\begin{example}
-    We can compute the barcodes associated to the filtrations of Example \ref{ex:filtration}.
-    \input{figures/barcodes}.
+\begin{example}[Barcodes] \label{ex:barcodes}
+    We can compute the barcodes associated to the filtrations of Example \ref{ex:filtration}. Figure \ref{fig:barcodes} depicts the barcodes associated to the 0-dimensional and 1-dimensional homology of the filtration. The barcode of $H_0(K)$ is the multiset
+    \begin{equation}
+        \{(0, \infty], (0, 1], (0, 2], (2,3], (2,\infty]\},
+    \end{equation}
+    and the barcode of $H_1(K)$ is the multiset
+    \begin{equation}
+        \{(1, \infty], (2, 3]\}.
+    \end{equation}
+    Note that in this particular example, the multiplicity of each bar is just one.
+    \input{figures/barcodes}
 \end{example}
 
 Chapter \ref{chap:structure} proves the Structure Theorem of persistence modules, that asserts that it is possible to express any persistence module as a direct sum of the interval modules given by the bars of a barcode. This is a key result in our purpose of introduce measures between the homological features of datasets. 
@@ -335,6 +371,8 @@ There are various ways of defining the bottleneck distance, all of them equivale
     The {\bf bottleneck distance} between two barcodes $ B $ and $ C $ is the infimum over all $ \delta \in \R $ such that there exists a $\delta$-matching between $ B $ and $ C $.
 \end{definition}
 
+The fact that bottleneck distance defines a proper metric space within the set of barcodes, will be proved in Proposition \ref{prop:wasserstein-is-distance}, after we generalice it as a case of the Wasserstein distance.
+
 \section{Persistence diagrams and the Wasserstein distance} \label{sec:preliminaries-wp-persistance}
 
 Barcodes can be seen as multisets of pair of points $ (a, b) $, where $ b > a $. Hence we could treat each interval $ (a, b] $ in a barcode as a point $ (a, b) $ in the Euclidean plane. We will denote the strict upper triangular region of the Euclidean plane as
@@ -352,7 +390,10 @@ and the diagonal of the plane as
 
 Persistence diagrams are just a way of presenting barcodes as subsets of the plane, so we could introduce more distances between them. Note that while formally a persistence diagram is a function, usually it is used to also denote the set of points and their multiplicities in the plane. Note that when we do so, it is equivalent to name a barcode than a persistence diagram. Hence, the bottleneck distance as defined in Definition \ref{def:bot-dist} can be also used to measure distances between persistence diagrams.
 
-\begin{example}[Persistence diagrams]
+\begin{example}[Persistence diagrams] \label{ex:persistence-diagrams}
+    In order to express an arbitrary barcode $ B $ as a persistence diagram, we just take the bars in $ B $ as if they were coordinates. To deal with the bars of the form $ (a, \infty) $ we need to fix some point grater than every other finite death of the barcode. Picking this upper bound is possible as long as we are working with a barcode given by a tame filtration function or a tame persistence module, thanks to the finite number of change of isomorphism type.
+
+    In Figure \ref{fig:persistance-diagrams} we can see the persistence diagram representation of the barcodes of Example~\ref{ex:barcodes}.
     \input{figures/persistence-diagrams.tex}
 \end{example}
 

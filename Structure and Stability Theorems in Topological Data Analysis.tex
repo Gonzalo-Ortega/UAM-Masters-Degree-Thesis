@@ -9,8 +9,8 @@
 \usepackage{fullpage}
 \usepackage{fancyhdr}
 \usepackage{quotchap}
-\usepackage{subcaption}     % For subfigures (e.g., subfigure environments)
-\usepackage{tikz}           % For drawing diagrams (e.g., tikzpicture)
+\usepackage{subcaption}
+\usepackage{tikz}
 \usepackage{float}
 
 \input{tex-configuration/math-definitions.tex}
@@ -35,6 +35,10 @@
 \setlength{\parskip}{1pt}
 \renewcommand{\baselinestretch}{1}
 \tableofcontents
+\newpage
+
+\listoffigures
+\addcontentsline{toc}{chapter}{\listfigurename}
 \newpage
 
 \setlength{\parskip}{0.75em}
