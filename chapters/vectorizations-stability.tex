@@ -21,11 +21,32 @@ Recall from Definition \ref{def:persistent-homology} that given some persistence
     Since $ \pi_{a \leq d} = \pi_{c \leq d} \circ \pi_{b \leq c} \circ \pi_{a \leq b} $, the dimension of the image of $ \pi_{a \leq d} $ must be smaller than the one of just $ \pi_{b \leq c} $.
 \end{proof}
 
+\begin{definition}[Rank function]
+    The {\bf rank function} of a persistence module $ V $ is the function $ \delta \colon \R^2 \to \R $ given by
+    \begin{equation}
+        \lambda(b, d) = \begin{cases}
+            \beta_b^d &\text{ if }  b \leq d \\
+            0 &\text{ otherwise}.
+        \end{cases}
+    \end{equation}
+    We can change coords to define an analogous function but defined on the upper half plane. Let
+    \begin{align}
+        &m = \frac{b + d}{2}, & &h = \frac{d-b}{2}.
+    \end{align}
+    The {\bf rescaled rank function} is the function $ \delta \colon \R^2 \to \R $ given by
+    \begin{equation}
+        \lambda(m, h) = \begin{cases}
+        \beta^{m-h, m+h} &\text{ if } \geq 0,\\
+        0 & \text{ otherwise}.
+        \end{cases}
+    \end{equation}
+\end{definition}
+
 \begin{lemma}[Lemma 2, \cite{bubenik}] \label{lemma:landscapes-aux-2}
     Let $ 0 \leq h_1 \leq h_2 $ be real numbers. Then $ \beta_{t-h_1}^{t+h_1} \geq \beta_{t-h_2}^{t+h_2} $.
 \end{lemma}
 \begin{proof}
-    ...
+    As $ t - h_2 \leq t-h_1 \leq t+h_1 \leq t+h_2$, the inequality comes from Lemma \ref{lemma:landscapes-aux-1}.
 \end{proof}
 
 Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended real numbers. 
@@ -61,6 +82,11 @@ Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended r
     Hence, by Lemma \ref{lemma:landscapes-aux-1}
 \end{proof}
 
+\begin{example}
+    One of the main advantages of persistence landscapes in comparison with persistence diagrams is that they count with a nice geometry to work with.
+    For example, let $ D = (0, 4) $
+\end{example}
+
 \begin{definition}[$p$-landscape distance]
     Let $ W $ and $ W $ be two persistence modules, and let $ \lambda $ and $ \lambda' $ its corresponding persistence landscapes. Let $ 1 \leq p \leq \infty $. The {\bf $p$-landscape distance between persistence modules} $ V $ and $ W $ is defined as
     \begin{equation}
@@ -89,7 +115,7 @@ Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended r
     \end{equation}
 \end{proof}
 
-\begin{theorem}[Theorem 12, \cite{bubenik}]
+\begin{theorem}[Theorem 12, \cite{bubenik}] \label{theorem:landscape-stability}
     Consider the persistence modules $ V = F_x $, $ W = G_x $ given by the maps $ f, g \colon X \to \R $. Then
     \begin{equation}
         \Lambda_\infty(V, W) \leq \| f - g\|_\infty
@@ -109,8 +135,10 @@ Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended r
     \end{equation}
 \end{theorem}
 \begin{proof}
-    ...
+    To prof this theorem is enough to consider the persistence modules given by the sum of every interval module given by each point in the diagrams, following Theorem \ref{theorem:structure}. Then the result follows by previous Theorem \ref{theorem:landscape-stability}.
 \end{proof}
+
+This stability results can be extended for $ p \neq \infty $ obtaining some less nice, jet still interesting, upper bounds (see \cite{bubenik}).
 
 \section{Persistence images} \label{sec:images}
 

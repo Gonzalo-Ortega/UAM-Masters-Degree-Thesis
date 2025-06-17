@@ -514,13 +514,13 @@ The Hausdorff distance is a way of measuring distances of different compact, non
 
 \begin{definition}[Hausdorff distance] \label{def:hausdorff-distance}
     Let $ (M, d) $ be a metric space, and let $ A \subseteq M $, $ B \subseteq M $ two compact, non-empty subspaces of $ M $. Define the {\bf $r$-neighborhood} of a set $ S \subset M $ as
-    $$
+    \begin{equation}
         U_r(S) \coloneq \left\{ x \in S \mid d(x, S) \leq r \right\}.
-    $$
+    \end{equation}
     The {\bf Hausdorff distance} can be defined as
-    $$
+    \begin{equation}
         \dhf(A, B) \coloneq \inf \left\{ r > 0 \mid A \subset U_r(B) \text{ and } B \subset U_r(A) \right\}.
-    $$
+    \end{equation}
 \end{definition}
 
 \begin{definition}[Isometric metric spaces]
@@ -620,15 +620,13 @@ To check that Gromov-Hausdorff distance is actually a distance we first give a u
         &\geq d_X(z_1, z_2) + r + d_Y(z_3, y) \\
         &\geq d_Z(z_1, z_3).
     \end{align}
-    Analogously, the argument follows for $ z_1 \in X $ and $ z_2, z_3 \in Y $. Thus, all is left to prove is to check $ \dhf(X, Y) < r $.
-
-    ...
+    Analogously, the argument follows for $ z_1 \in X $ and $ z_2, z_3 \in Y $. Thus, all is left to prove is to check $ \dhf(X, Y) \leq r $. But for this is immediate by the definition of distance $d_Z$.
 \end{proof}
 
 \begin{definition}[Distortion of a map]
     Let $ (X, d_X), (Y, d_Y) $ be two metric spaces and let $ f \colon X \to Y $ an arbitrary map. The {\bf distortion} of $ f $ is defined as
     \begin{equation}
-        \operatorname{dis}(f) \coloneq \sup_{x_1, x_2 \in X} |d_Y(d(x_1), f(x_2)) - d_X(x_1, x_2)|.
+        \operatorname{dis}(f) \coloneq \sup_{x_1, x_2 \in X} |d_Y(f(x_1), f(x_2)) - d_X(x_1, x_2)|.
     \end{equation}
 \end{definition}
 
@@ -637,15 +635,14 @@ To check that Gromov-Hausdorff distance is actually a distance we first give a u
 \end{definition}
 
 \begin{proposition}[Theorem 7.3.28.1, \cite{burago}] \label{prop:e-isometry}
-    Let $ X $ and $ Y $ be two metric spaces and let $ \e > 0 $. If $ \dgh < \e $, them there exists a $ 2 \e -isometry $ from $ X $ to $ Y $.
+    Let $ X $ and $ Y $ be two metric spaces and let $ \e > 0 $. If $ \dgh(X, Y) < \e $, them there exists a $ 2\e-isometry $ from $ X $ to $ Y $.
 \end{proposition}
 \begin{proof}
-    Let $ R $ be a correspondance between $ X $ and $ Y $. By \ref{prop:gh-characterization} it holds that $\operatorname{dis}(R) < 2 \e$. For every $ x \in X $ we choose some $ y \in Y $ such that $(x, y) \in R$ and define $ f(x) \coloneq y $. This defines a map $ f \colon X \to Y $. We then have
+    Let $ R $ be a correspondance between $ X $ and $ Y $. By \ref{prop:gh-characterization} it holds that $\operatorname{dis}(R) < 2 \e$. For every $ x \in X $ we choose some $ y \in Y $ such that $(x, y) \in R$ and define $ f(x) \coloneq y $. This defines a map $ f \colon X \to Y $. Then for every $ y \in Y $, consider an $ x \in X $ such that $ (x,y) \in R $. Since both $ y $ and $ f(x) $ are in correspondance with $ x $, we have that
     \begin{equation}
-        \operatorname{dis}(f) \leq \operatorname{dis}(R) < 2 \e.
+        d(x, f(x)) \leq d(x, x) + \operatorname{dis}(R) \leq 2\e.
     \end{equation}
-
-    ...
+    Hence, $ d(y, f(X)) < 2 \e $ and $ f $ is a $ 2\e $-isometry.
 \end{proof}
 
 Up to this moment we have seen that Gromov-Hausdorff distance defines a pseudo-metric over the set of metric spaces. Note that if $ X $ and $ Y $ are isometric, directly of the definition ge get, $ \dgh(X, Y) = 0 $. To make Gromov-Hausdorff distance an actual metric we need to ask one more thing to our metric spaces. That is, to be compact. Denote
@@ -659,9 +656,20 @@ Up to this moment we have seen that Gromov-Hausdorff distance defines a pseudo-m
 \begin{proof}
     We just seen that if $ X $ and $ Y $ are isometric, directly of the definition ge get, $ \dgh(X, Y) = 0 $. By definition, Gromov-Hausdorff distance is nonnegative and symmetric and, by Lemma \ref{lemma:gh-triangle}, it verifies the triangle inequality. It only remains to prove that given two metric spaces $ X, Y \in \mathcal{X} $, if $ \dgh(X, Y) = 0 $ then $ X $ and $ Y $ are isometric.  
     
-    Let  $ X, Y \in \mathcal{X} $ such that $ \dgh(X, Y) = 0 $. By Proposition \ref{prop:e-isometry}, there exists a sequence of maps $ f_n \colon X \to Y $ such that $ \operatorname{dis}(f_n) \to 0 $. As $ X $ is compact, we can fix a countable dense set $ S \subset X $.
-    
-    ...
+    Let  $ X, Y \in \mathcal{X} $ such that $ \dgh(X, Y) = 0 $. By Proposition \ref{prop:e-isometry}, there exists a sequence of maps $ f_n \colon X \to Y $ such that $ \operatorname{dis}(f_n) \to 0 $. As $ X $ is compact, we can fix a countable dense set $ S \subset X $. We can then choose a subsequence $\{f_{n_k} \}$ of $\{f_n\}$ such that for every $ x \in S $, the sequence $\{f_{n_k} \}$ converges in $ Y $. Now, without loss of generality, we can assume that this holds for $ \{f_n\} $ itself. Use this to define a map
+    \begin{align}
+        f\colon &S \to Y \\
+        &x \mapsto \lim f_n(x).
+    \end{align}
+    Hence, since for every $ x, y \in S $,
+    \begin{equation}
+        |d(f_n(x), f_n(y)) - d(x, y)| \leq \operatorname{dis}(f_n) \to 0,
+    \end{equation}
+    we have that
+    \begin{equation}
+        d(f(x), f(y)) = \lim d(f_n(x), f_n(y)) = d(x, y).
+    \end{equation} 
+    This map is a distance preserving map from $ S $ to $ Y $ and it is posible to extend it to the entire $ X $ (see \cite{burago}[Proposition 1.5.9]). Repeating the process analogously, we can find a distance preserving map from $ Y $ to $ X $, from what follows that $ X $ and $ Y $ are isometric making a composition of both maps.
 \end{proof}
 
 In order to extend the scope of Gromov-Hausdorff distance we can endow our compact metric spaces with real-valued functions, which will still maintain good stability properties as we will see in Chapter \ref{chapter:gromov-hausdorf-stability}.

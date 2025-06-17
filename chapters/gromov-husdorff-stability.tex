@@ -66,13 +66,16 @@ To prove Theorem \ref{theorem:gh-stability} we first give tree auxiliary lemmas 
 
 \begin{lemma}[Lemma VII, \cite{ghrist}] \label{lemma:haus-aux-2}
     Let $ X \subset \R^n $ and $ \alpha > 0 $. Then the $\alpha$-\v Cech and the $\alpha$-Rips complexes coincide when using the $ \ell^\infty $-norm. That is
-    $$
+    \begin{equation}
         \check C_\alpha(X, \ell^\infty) = R_\alpha(X, \ell^\infty).
-    $$
+    \end{equation}
 \end{lemma}
 \begin{proof}
-    ...
+    For $ n = 1 $ the result is immediate. For $ n > 1 $ note that balls with the $ \ell^\infty $ norm are actually cubes, and the entire problem decomposes into cross-products of the $ d = 1 $ case. 
 \end{proof}
+
+We will give the third lemma without proof as it involves going deep into homotopy theory, and presenting it here will require a long detour. 
+nonetheless, we give a couple of definitions to make the lemma understandable. The lemma is proven in \cite{oudot}[Lemma 3.3] and it is an adaptation for persistence theory of the Nerve Theorem (see \cite{hatcher}[Corollary~4G.3.]).
 
 \begin{definition}[Paracompact space]
     Let $ X $ be a topological space. It is said to be {\bf paracompact} if for all covering $ \mathcal U $ of $ X $, there exists $ \mathcal V \subseteq \mathcal U $ such that $ \mathcal V $ is a finite covering.
@@ -86,7 +89,7 @@ To prove Theorem \ref{theorem:gh-stability} we first give tree auxiliary lemmas 
     is either empty or contractible.
 \end{definition}
 
-\begin{lemma}[\cite{oudot}] \label{lemma:haus-aux-3}
+\begin{lemma}[Lemma 3.3, \cite{oudot}] \label{lemma:haus-aux-3}
     Let $ S \subset S' $ be two paracompact spaces. Let $ \mathcal U = \{U_x\}_{x \in A}$, $ \mathcal U' = \{U'_x\}_{x \in A'}$ be two good covers of $ S $ and $ S'$ respectively, based on finite parameter sets $ A \subset A ' $ such that $ U_x \subset U_x' $ for all $ x \in A $. Then the homotopy equivalences $ \n \mathcal U \to S $ and $\n U' \to S' $ commute with the canonical inclusions $ S \to S' $ and $ \n \mathcal U \to \n \mathcal U' $ at homology level.
 \end{lemma}
 
