@@ -168,6 +168,16 @@ Hence, by the fundamental theorem of calculus for line integrals, for every $ u,
 \end{equation}
 Now, for a differentiable probability distribution $ \phi_u \colon \R^2 \to \R $, with mean $ u \in \R^2 $ we can denote $ |\nabla \phi_u| $ as $ |\nabla \phi| $ and $ \|\phi_u\| $ as $ \|\phi\| $ because both the maximal directional derivative and the uniform norm of a fixed differentiable probability function are invariable under translation.
 
+\begin{example}[Persistence images]
+    Figure \ref{fig:persistent-images} (taken from \cite{adams}) depicts the pipeline proposed by persistence images. It starts with a dataset from were we compute, for a desired $k \geq 0 $, the $k$-th persistence diagram $ B $, given a filtration of the data. After applying the linear transformation $T(B)$ we compute the corresponding persistence surface. Finally, we can compute a persistence image with a chosen resolution, which will serve as a proper data resume.        
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth, trim=0 0 0 200, clip]{figures/persistent-images.png}
+        \caption[Persistence images pipeline]{(From \cite{adams}[Figure 1]) Algorithm pipeline to transform data into a persistence image.}
+        \label{fig:persistent-images}
+\end{figure}
+\end{example}
+
 \begin{lemma}[Lemma 3, \cite{adams}] \label{lemma:images-aux}
     Let $ u, v \in \R^2 $. Fix a nonnegative weighting function $ f \colon \R^2 \to R $ that is zero along the horizontal axis, continuous and picewise differentiable. Fix a differentiable probability distribution $ \phi_u \colon \R^2 \to \R $, with mean $ u \in \R^2 $. The following inequality asserts.
     \begin{equation}
@@ -261,15 +271,81 @@ The Euler characteristic curve provides a concise topological signature by track
     \begin{equation}
         \ecc(K, t) \coloneq \chi(K_t),
     \end{equation}
-    where $ K_t f^{-1} (-\infty, t] $.
+    where $ K_t = f^{-1} (-\infty, t] $.
 \end{definition}
 
-\begin{proposition}[Proposition 2, \cite{dlotko}]
+Using the $L_1$ norm, we can measure distances between Euler curves of different filtered simplicial complexes in a manner that results to be stable.
+
+\begin{definition}[$k$-th Betti curve]
+    Let $ K $ be a simplicial complex with filtration function $ f \colon K \to \R $. Its {\bf $k$-th Betti curve} is a function that assigns a Betti number for each filtration level $t \in \R $.
+    \begin{equation}
+        \beta_k(K, t) \coloneq \beta_k(K_t).
+    \end{equation}
+\end{definition}
+
+\begin{definition}[\bf $k$-th Betti curve for a persistence diagram]
+    Let $ D $ be a persistence diagram. Given a point $ (b,d) \in D $, let $ I_{[b,d)} $ be the indicator function defined as
+    \begin{equation}
+        I_{[b,d)}(t) \coloneq \begin{cases}
+            1 &\text{ if } t \in [b,d), \\
+            0 &\text{ otherwise}.
+        \end{cases}
+    \end{equation}
+    The {\bf $k$-th Betti curve for a persistence diagram $ D $} with finitely many off-diagonal points is defined as
+    \begin{equation}
+        \beta_k(D, t) = \sum_{(b, d) \in D} I_{[b,d)}(t).
+    \end{equation}
+\end{definition}
+
+\begin{proposition}[Proposition 1, \cite{dlotko}] \label{prop:curves}
+    Let $ D $, $ D' $ be two $ k$-dimensional persistence diagrams. Their Betti curves are stable respect the 1-Wasserstein distance,
+    \begin{equation}
+        \| \beta_k(D, t) - \beta_k(D', t) \|_1 \leq 2 \omega_1(D, D').
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    Order the points in each diagram $ (b_i, d_i) \in D $, and  $ (b_i', d_i') \in D' $ such that points with the same index $ i $ are paired by the optimal matching given by the 1-Wasserstein distance. We then can write the difference between the two Betti curves as
+    \begin{equation}
+        \|\beta_k(D, t) - \beta_k(D', t)\|_1 = \| \sum_i \left(I_{[b_i, d_i)}(t) - I_{[b_i', d_i')}(t)\right)  \|_1 
+        \leq \sum_i \| \left(I_{[b_i, d_i)}(t) - I_{[b_i', d_i')}(t)\right)  \|_1.
+    \end{equation}
+    We can now focus on each term of the sum and differentiate three cases. Case 1 comes up when $ b_i \leq b_i' \leq d_i \leq d_i' $. Unfolding $ L_1 $ norm we get 
+    \begin{align}
+        \|  \! \left(I_{[b_i, d_i)}(t) - I_{[b_i', d_i')}(t)\right) \! \|_1 &=
+        \! \! \int_{b_i}^{b_i'} \left| I_{[b_i, d_i)(t)}\right| dt + \! \! \int_{b_i'}^{d_i} \left| I_{[b_i, d_i)(t)} - I_{[b_i', d_i')(t)}\right| dt + \! \! \int_{d_i}^{d_i'} \left| I_{[b_i', d_i')(t)}\right| dt \\
+        &= \int_{b_i}^{b_i'} \left| 1 \right| dt + \int_{b_i'}^{d_i} \left| 1-1 \right| dt + \int_{d_i}^{d_i'} \left|1\right| dt \\
+        &= |b_i' - b_i| + |d_i' - d_i| \leq 2 \max(|b_i' - b_i|, |d_i' - d_i|).
+    \end{align}
+    Case 2 comes up when $ b_i \leq b_i' \leq d_i' \leq d_i $, getting
+    \begin{align}
+        \|  \! \left(I_{[b_i, d_i)}(t) - I_{[b_i', d_i')}(t)\right) \! \|_1 &=
+        \int_{b_i}^{b_i'} \left| 1 \right| dt + \int_{b_i'}^{d_i'} \left| 1-1 \right| dt + \int_{d_i'}^{d_i} \left|1\right| dt \\
+        &= |b_i' - b_i| + |d_i - d_i'| \leq 2 \max(|b_i' - b_i|, |d_i' - d_i|).
+    \end{align}
+    A degenerate case 2 comes when some point $ (b_i, d_i) \in C $ is matched to a point in the diagonal of $ D $, and thus $ b_i \leq b_i' = d_i' \leq d_i $. The final posible case comes when $ b_i \leq d_i \leq b_i' \leq d_i' $, but this will never happen as if so, a better matching between the diagrams can be found matching both points to the diagonal.
+
+    Summing up both posible cases we complete the proof as
+    \begin{align}
+        \|\beta_k(D, t) - \beta_k(D', t)\|_1 &  = \| \sum_i \left(I_{[b_i, d_i)}(t) - I_{[b_i', d_i')}(t)\right)  \|_1 \\
+        &\leq \sum_i 2 \max(|b_i' - b_i|, |d_i' - d_i|) = 2 \omega_1 (D, D').
+    \end{align}
+\end{proof}
+
+\begin{theorem}[Proposition 2, \cite{dlotko}]
     Let $ X, Y $ be two filtered cell complexes and let $ D(X), D(Y) $ be its respective persistence diagrams. Then,
     \begin{equation}
         \| \ecc(X, t) - \ecc(Y, t) \|_1 \leq \sum_k 2 \omega_1(D(X), D(Y)).
     \end{equation}
-\end{proposition}
+\end{theorem}
 \begin{proof}
-    ...
+    The Euler-Poincaré formula implies that we can express the Euler characteristic curve of a filtered simplicial complex $K $ as the alternating sum of its Betti curves. That is
+    \begin{align}
+        \ecc(K, t) = \sum_k(-1)^k \beta_k(K, t).
+    \end{align}
+    Hence, applying Proposition \ref{prop:curves} and the triangular inequality we get
+    \begin{align}
+        \| \ecc(X, t) - \ecc(Y, t) \|_1 &= \| \sum_{k=0}^n \left( (-1)^k (\beta_k(D(X), t) - \beta_k(D(Y), t)) \right)\|_1 \\
+        &\leq \sum_{k=0}^n \|(\beta_k(D(X), t) - \beta_k(D(Y), t))\|_1 \\
+        &\leq \sum_{k=0}^n 2 \omega_1(D(X), D(Y)).    
+    \end{align}
 \end{proof}
