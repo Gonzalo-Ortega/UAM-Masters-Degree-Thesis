@@ -79,12 +79,22 @@ Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended r
     \begin{equation}
         t - \lambda_k(t) < s- h < s + h < t + \lambda_k(t).
     \end{equation}
-    Hence, by Lemma \ref{lemma:landscapes-aux-1}
+    Hence, by Lemma \ref{lemma:landscapes-aux-1} we have $ \beta_{s-h}^{s+h} \geq k $ and $ \lambda_k(s) \geq \lambda_k(t) - |t -s| $. Therefore, $ \lambda_k(t) - \lambda_k(s) \leq |t-s| $.
 \end{proof}
 
+\begin{example}[Persistence landscape]
+    Figure \ref{fig:persistance-landscapes} shows the rank function, the rescaled rank function and the persistence diagram of one of the persistence diagrams of Example \ref{ex:wasserstein}.
+    \input{figures/persistece-landscapes.tex}
+\end{example}
+
 \begin{example}
-    One of the main advantages of persistence landscapes in comparison with persistence diagrams is that they count with a nice geometry to work with.
-    For example, let $ D = (0, 4) $
+    One of the main advantages of persistence landscapes in comparison with persistence diagrams is that they count with a nice geometry to work with. For example, in Figure \ref{fig:landscape-means} we can see how meanwhile persistence diagrams might not have a unique mean, persistence landscapes do have.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{figures/landscape-means.png}
+        \caption[Means from persistence landscapes]{(From \cite{bubenik}[Figure 3]) Top left: the rescaled persistence diagrams $\{(6, 6), (10, 6)\}$ and $\{(8, 4), (8, 8)\}$ have two (Fréchet) means: $\{(7, 5), (9, 7)\}$ and $\{(7, 7), (9, 5)\}$. In contrast, their corresponding persistence landscapes (top right and bottom left) have a unique mean (bottom right)..}
+        \label{fig:landscape-means}
+    \end{figure}
 \end{example}
 
 \begin{definition}[$p$-landscape distance]
@@ -175,7 +185,7 @@ Now, for a differentiable probability distribution $ \phi_u \colon \R^2 \to \R $
         \includegraphics[width=\linewidth, trim=0 0 0 200, clip]{figures/persistent-images.png}
         \caption[Persistence images pipeline]{(From \cite{adams}[Figure 1]) Algorithm pipeline to transform data into a persistence image.}
         \label{fig:persistent-images}
-\end{figure}
+    \end{figure}
 \end{example}
 
 \begin{lemma}[Lemma 3, \cite{adams}] \label{lemma:images-aux}
