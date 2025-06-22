@@ -12,7 +12,7 @@ For the presented proof we have followed \cite{polterovich}. Hence, we will divi
 
 \section{First inequality}
 
-The first claim can be deduced from the Structure Theorem in a rather direct way, proving first the case where our modules are just interval modules.
+The first claim can be deduced from the Structure Theorem \ref{theorem:structure} in a rather direct way, proving first the case where our modules are just interval modules.
 
 \begin{lemma}[Exercise 2.2.7, \cite{polterovich}] \label{lemma:interval-interleaving-if-matching}
     Let $ I, J $ be two $\delta$-matched intervals. Then, their corresponding interval modules $ (\mathbb F (I), \pi) $ and $( \mathbb F (J), \theta) $ are $\delta$-interleaved.
@@ -261,14 +261,14 @@ Finally, we can claim the two main lemmas from which we will construct our desir
     $$
     Sorting all bars of $\barc(V) $ and of $\barc(\im \pi_{t \leq t+2\delta}) $ in length-not-increasing order and matching the bars though the longest-first order, each bar $ (a, b] \in \barc(V) $ is matched with the bar $ (a, b - 2\delta] \in \barc(\im \pi_{t \leq t+2\delta}) $ while $ b -a >2 \delta $. The smaller bars are not matched. Thus,
     $$
-        \operatorname{coim} \mu_{sur}(phi) \supseteq \operatorname{coim} \mu_{sur}(\im \pi_{t \leq t+2\delta}) = \barc (V)_{\geq 2\delta}.
+        \operatorname{coim} \mu_{sur}(\phi) \supseteq \operatorname{coim} \mu_{sur}(\im \pi_{t \leq t+2\delta}) = \barc (V)_{\geq 2\delta}.
     $$
 
     \item
     The second part is just a reformulation of Lemma \ref{lemma:inj-cardinalities}.
 
     \item
-    Let $ (b,d] \in \operatorname{coim} $. There are two cases:
+    Let $ (b,d] \in \operatorname{coim} \mu_{sur}  $. There are two cases:
 
     On one hand, if $ d - b \leq 2 \delta $, $(b, d]$ is matched to $ (b, d'] $ where $ d \geq d'$, by definition of $ \mu_{sur} $. Also, $ d' > b $ and, as in this case we have $ b \geq d - 2 \delta $, we have $ d' > d - 2 \delta $. Therefore, $ d' \in [d - 2 \delta, d]$.
 
