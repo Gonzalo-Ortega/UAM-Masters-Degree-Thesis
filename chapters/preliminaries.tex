@@ -98,7 +98,7 @@ As the boundary map can be extends linearly to arbitrary $k$-chains, it forms an
     \end{equation} 
 \end{definition}
 
-Homology can be extended to every topological space, not just those that are triangulable by introducing singular homology (see \cite{munkres}[Chapter 4]). However, in this work, we will restrict ourselves to simplicial homology. This choice is motivated by the nature of the data typically encountered in topological data analysis. The spaces involved are usually "sufficiently nice" and therefore triangulable. Moreover, real-world data intended for computational analysis is finite by nature, and hence, triangulable. Furthermore, simplicial homology of a finite simplicial complex $K$ is computable (see \cite{munkres}[Theorem 11.5]) what makes it a prefect tool for computational studies.
+Homology can be extended to every topological space, not just those that are triangulable by introducing singular homology (see \cite{munkres}[Chapter 4]). However, in this work, we will restrict ourselves to simplicial homology. This choice is motivated by the nature of the data typically encountered in topological data analysis. The spaces involved are usually ``sufficiently nice" and therefore triangulable. Moreover, real-world data intended for computational analysis is finite by nature, and hence, triangulable. Furthermore, simplicial homology of a finite simplicial complex $K$ is computable (see \cite{munkres}[Theorem 11.5]) what makes it a prefect tool for computational studies.
 
 \begin{definition}[Filtration]
     Let $ K $ be a simplicial complex and let $ T $ be a complete ordered index set. A {\bf filtration} of $ K $ is a nested sequence of subcomplexes $ F_i K $, $ i \in T $, such that for every $ i \in T $, 
@@ -111,7 +111,7 @@ Homology can be extended to every topological space, not just those that are tri
 Filtrations are a natural way of obtaining simplicial complexes from datasets, as it is posible to set the first element of the filtration to be the points in the datasets, and then join in various steps each of the point to form a simplicial complex that connects every point by simplices of different dimensions. Naturally, depending on the procedure we follow we could get quite different filtration for one same dataset.
 
 \begin{example} \label{ex:filtration}
-    Figure \ref{fig:filtration} depicts a posible filtration of a simplicial complex $K$ in four steps. It starts with four 0-simplices and one 1-simplex at $ F_0 K $ and ads components until it has six $0$-simplices, six 1-simplices and one 2-simplex at $ F_3 K $.
+    Figure \ref{fig:filtration} depicts a posible filtration of a simplicial complex $K$ in four steps. It starts with four 0-simplices and one 1-simplex at $ F_0 K $ and adds components until it has six $0$-simplices, six 1-simplices and one 2-simplex at $ F_3 K $.
     \input{figures/filtration.tex}
 \end{example}
 
@@ -290,13 +290,13 @@ Persistence modules are a vast abstract algebraic tool. In order to make it more
     \end{equation}
 \end{definition}
 
-Tameness property ensures that the persistence modules have manageable and well-behaved structures, which are essential for the infimum in the definition of the interleaving distance to exist and be meaningful. If there was some infinite dimensional vector space $ V_t $ or $ W_t$, they could lead to some pathological behavior, making it difficult to define or compute distances meaningfully. On the other hand, if there were infinite many different isomorphisms, then the infimum in the definition of the interleaving distance might not exist or could be zero for modules that are not "close" in any intuitive sense.
+Tameness property ensures that the persistence modules have manageable and well-behaved structures, which are essential for the infimum in the definition of the interleaving distance to exist and be meaningful. If there was some infinite dimensional vector space $ V_t $ or $ W_t$, they could lead to some pathological behavior, making it difficult to define or compute distances meaningfully. On the other hand, if there were infinite many different isomorphisms, then the infimum in the definition of the interleaving distance might not exist or could be zero for modules that are not ``close" in any intuitive sense.
 
 \begin{proposition}
     The interleaving distance between two tame persistence modules is actually a distance.
 \end{proposition}
 \begin{proof}
-    We wont make this proof directly as in Chapter \ref{chap:interleaving-stability} we will prove that the interleaving distance between two persistence modules is the same as the bottleneck distance between their respective barcodes. As each module is uniquely described my their barcodes as we will see in Chapter \ref{chap:structure}, and bottleneck is actually a distance as we will see in Proposition \ref{prop:wasserstein-is-distance}, this prove will be completed.
+    We will not make this proof directly as, in Chapter \ref{chap:interleaving-stability}, we will prove that the interleaving distance between two persistence modules is the same as the bottleneck distance between their respective barcodes. As each module is uniquely described my their barcodes as we will see in Chapter \ref{chap:structure}, and bottleneck is actually a distance as we will see in Proposition \ref{prop:wasserstein-is-distance}, this prove will be completed.
 \end{proof}  
 
 \begin{definition}[Interval module]
@@ -367,7 +367,7 @@ Note that $ X' = \coim(\mu) $ and $ Y' = \im(\mu) $. Also note that as $ X $ and
 
 There are various ways of defining the bottleneck distance, all of them equivalent to one an other. We first give the natural definition that comes up following the use of $\delta$-matchings.
 
-\begin{definition}[Bottleneck distance] \label{def:bot-dist}
+\begin{definition}[Bottleneck distance] \label{def:bot-dist-1}
     The {\bf bottleneck distance} between two barcodes $ B $ and $ C $ is the infimum over all $ \delta \in \R $ such that there exists a $\delta$-matching between $ B $ and $ C $.
 \end{definition}
 
@@ -438,17 +438,17 @@ We now verify that the upper triangular region of the Euclidean plane with the C
 
 \begin{definition}[$p$-cost] \label{def:pcost}
     Let $ D_1: I_1 \to \upr $ and $ D_2: I_2 \to \upr $ be persistence diagrams. Let $ (I_1', I_2', f) $ be a partial matching between them. If $ p < \infty $, the {\it $p$-cost of $ f $} is defined as
-    \begin{align*}
-        \costp(f) := \bigg(&\sum_{i \in I_1'} d_\infty(D_1(i), D_2(f(i)))^p \\
-        &+ \sum_{i \in I_1 \setminus I_1'} d_\infty(D_1(i), \Delta)^p \\
-        &+ \sum_{i \in I_2 \setminus I_2'} d_\infty(D_2(i), \Delta)^p \bigg)^{\frac{1}{p}}.
-    \end{align*}
+    \begin{equation}
+        \costp(f) := (\sum_{i \in I_1'} d_\infty(D_1(i), D_2(f(i)))^p
+        + \sum_{i \in I_1 \setminus I_1'} d_\infty(D_1(i), \Delta)^p
+        + \sum_{i \in I_2 \setminus I_2'} d_\infty(D_2(i), \Delta)^p )^{\frac{1}{p}}.
+    \end{equation}
     For $ p = \infty $, the {\it $\infty$-cost of $ f $} is defined as
-    \begin{align*}
-        \costi(f) := \max \bigg\{&\sup_{i \in I_1'} d_\infty(D_1(i), D_2(f_i)), \\
-        &\sup_{i\in I_1 \setminus I_1'} d_\infty(D_1(i), \Delta), \\
-        &\sup_{i\in I_2 \setminus I_2'} d_\infty(D_2(i), \Delta)\bigg\}.
-    \end{align*}
+    \begin{equation}
+        \costi(f) := \max \{\sup_{i \in I_1'} d_\infty(D_1(i), D_2(f_i)),
+        \sup_{i\in I_1 \setminus I_1'} d_\infty(D_1(i), \Delta),
+        \sup_{i\in I_2 \setminus I_2'} d_\infty(D_2(i), \Delta)\}.
+    \end{equation}
 \end{definition}
 
 \begin{definition}[p-Wasserstein distance] \label{def:Wasserstein}
@@ -459,7 +459,7 @@ We now verify that the upper triangular region of the Euclidean plane with the C
     Let $ \emptyset $ denote the unique persistence diagram with empty indexing set. Let $ (\dgmp, \wdp) $ be the space of persistence diagrams $ D $ that satisfy $ \twdp(D, \emptyset) < \infty $ modulo the equivalence relation $ D_1 \sim D_2 $ if $ \twdp (D_1, D_2) = 0 $. The metric $ \wdp $ is called the {\it $p$-Wasserstein distance}.
 \end{definition}
 
-\begin{definition}[Bottleneck distance]
+\begin{definition}[Bottleneck distance] \label{def:bot-dist-2}
     In the conditions of Definition \ref{def:Wasserstein}, if $ p = \infty $, the metric $ \wdi $ is called the {\it bottleneck distance}.
 \end{definition}
 
@@ -475,6 +475,76 @@ We now verify that the upper triangular region of the Euclidean plane with the C
 \end{proposition}
 \begin{proof}
     Let $ I' \subseteq D $. If $ f $ is a partial matching between $ D $ and $ \emptyset $, means that $ f(I') = \emptyset$ is a bijection. That is only posible if $ I' = \emptyset $ too. Therefore $ I \setminus I' = I \setminus \emptyset = I $ and following Definition \ref{def:pcost} we conclude our proof.
+\end{proof}
+
+\begin{proposition}
+    Let $B$ and $C$ be two barcodes, and let $D_1$ and $D_2$ be the corresponding persistence diagrams (each interval $[b,d)$ represented as the point $(b,d)$ in $\mathbb{R}^2$). Then the bottleneck distance defined via $\delta$-matchings (Definition \ref{def:bot-dist-1}) is equal to the $\infty$-Wasserstein distance between $D_1$ and $D_2$ (Definition \ref{def:bot-dist-2}).
+    \begin{equation}
+        \db(B, C) = \omega_\infty(D_1, D_2).
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    We will show the equality by proving the inequalities in both directions.
+
+    ($\Rightarrow$) Suppose $\db(B, C) \leq \delta$. Then $\omega_\infty(D_1, D_2) \leq \delta$. Let $\mu: B \to C$ be a $\delta$-matching between $B$ and $C$, as in Definition \ref{def:bot-dist-1}. Then the condition $I \subseteq J^\delta$ and $J \subseteq I^\delta$ implies:
+    \begin{equation}
+        |b_1 - b_2| \leq \delta \quad \text{and} \quad |d_1 - d_2| \leq \delta,
+    \end{equation}
+    which means the $L^\infty$ distance between the corresponding points in the persistence diagrams is at most $\delta$:
+    \begin{equation}
+        d_\infty((b_1,d_1), (b_2,d_2)) \leq \delta.
+    \end{equation}
+
+    Construct a partial matching $f$ from $D_1$ to $D_2$ by setting $f((b_1,d_1)) = (b_2,d_2)$ whenever $\mu([b_1,d_1)) = [b_2,d_2)$. For unmatched intervals in $B$ or $C$, observe that the conditions $B_{2\delta} \subseteq \operatorname{coim}(\mu)$ and $C_{2\delta} \subseteq \operatorname{im}(\mu)$ imply that any unmatched interval must have length at most $2\delta$. Consequently, the corresponding point in the persistence diagram lies within $\delta$ of the diagonal $\Delta$, since:
+    \begin{equation}
+        d_\infty((b,d), \Delta) = \frac{d-b}{2} \leq \delta.
+    \end{equation}
+    Thus, for this partial matching $f$, we have
+    \begin{equation}
+        \mathrm{cost}_\infty(f) \leq \delta.
+    \end{equation}
+    Taking the infimum over all such $f$, we obtain
+    \begin{equation}
+        \omega_\infty(D_1, D_2) \leq \delta.
+    \end{equation}
+    Since this holds for all $\delta$ such that a $\delta$-matching exists, we conclude:
+    \begin{equation}
+        \omega_\infty(D_1, D_2) \leq \db(B, C).
+    \end{equation}
+
+    ($\Leftarrow$) Suppose $\omega_\infty(D_1, D_2) \leq \delta$. Then $d_B(B, C) \leq \delta$. Let $f: I_1' \to I_2'$ be a partial matching between $D_1$ and $D_2$ such that:
+    \begin{equation}
+        \mathrm{cost}_\infty(f) \leq \delta.
+    \end{equation}
+    That is,
+    \begin{equation}
+        \max\left\{ \sup_{i \in I_1'} d_\infty(D_1(i), D_2(f(i))),\ 
+        \sup_{i \in I_1 \setminus I_1'} d_\infty(D_1(i), \Delta),\ 
+        \sup_{j \in I_2 \setminus I_2'} d_\infty(D_2(j), \Delta) \right\} \leq \delta.
+    \end{equation}
+    Now define a multiset matching $\mu$ between barcodes $B$ and $C$ as follows:
+    \begin{itemize}
+    \item For each matched pair $(b_1,d_1) \in D_1$, $(b_2,d_2) \in D_2$ with $f((b_1,d_1)) = (b_2,d_2)$, set $\mu([b_1,d_1)) = [b_2,d_2)$.
+    \item For any unmatched interval $[b,d) \in B$ such that $(b,d) \in D_1 \setminus I_1'$, we have $d - b \leq 2\delta$, so $[b,d) \in B_{2\delta}$.
+    \item Similarly, unmatched intervals in $C$ are in $C_{2\delta}$.
+    \end{itemize}
+    Hence, $\mu$ defines a $\delta$-matching:
+    \begin{itemize}
+    \item $B_{2\delta} \subseteq \operatorname{coim}(\mu)$,
+    \item $C_{2\delta} \subseteq \operatorname{im}(\mu)$,
+    \item For any matched intervals, $d_\infty((b_1,d_1), (b_2,d_2)) \leq \delta$ implies
+    \begin{equation}
+    |b_1 - b_2| \leq \delta \quad \text{and} \quad |d_1 - d_2| \leq \delta,
+    \end{equation}
+    hence,
+    \begin{equation}
+    [b_1,d_1) \subseteq [b_2,d_2)^\delta \quad \text{and} \quad [b_2,d_2) \subseteq [b_1,d_1)^\delta.
+    \end{equation}
+    \end{itemize}
+    Therefore, there exists a $\delta$-matching between $B$ and $C$, and taking infimum over all such $\delta$, we obtain
+    \begin{equation}
+        \db(B, C) \leq \omega_\infty(D_1, D_2).
+    \end{equation}
 \end{proof}
 
 Next proposition will prove that, in indeed, the space of persistence diagrams with the $p$-Wasserstein distance $(\dgmp, \wdp)$ is a metric space. Its proof is usually omitted in literature, as it based on the simple fact that $ d_\infty $ is a distance. We will give, however, an step by step version here.
