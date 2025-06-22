@@ -388,16 +388,16 @@ and the diagonal of the plane as
     Let $ I $ be a countable multiset. A {\it persistence diagram} is a function $ D: I \to \upr $.
 \end{definition}
 
-Persistence diagrams are just a way of presenting barcodes as subsets of the plane, so we could introduce more distances between them. Note that while formally a persistence diagram is a function, usually it is used to also denote the set of points and their multiplicities in the plane. Note that when we do so, it is equivalent to name a barcode than a persistence diagram. Hence, the bottleneck distance as defined in Definition \ref{def:bot-dist} can be also used to measure distances between persistence diagrams.
+Persistence diagrams are just a way of presenting barcodes as subsets of the plane, so we could introduce more distances between them. Note that while formally a persistence diagram is a function, usually it is used to also denote the set of points and their multiplicities in the plane. Note that when we do so, it is equivalent to name a barcode than a persistence diagram. Hence, the bottleneck distance as defined in Definition \ref{def:bot-dist-1} can be also used to measure distances between persistence diagrams.
 
 \begin{example}[Persistence diagrams] \label{ex:persistence-diagrams}
-    In order to express an arbitrary barcode $ B $ as a persistence diagram, we just take the bars in $ B $ as if they were coordinates. To deal with the bars of the form $ (a, \infty) $ we need to fix some point grater than every other finite death of the barcode. Picking this upper bound is possible as long as we are working with a barcode given by a tame filtration function or a tame persistence module, thanks to the finite number of change of isomorphism type.
+    In order to express an arbitrary barcode $ B $ as a persistence diagram, we just take the bars in $ B $ as if they were coordinates. To deal with the bars of the form $ (a, \infty] $ we need to fix some point grater than every other finite death of the barcode. Picking this upper bound is possible as long as we are working with a barcode given by a tame filtration function or a tame persistence module, thanks to the finite number of change of isomorphism type.
 
     In Figure \ref{fig:persistance-diagrams} we can see the persistence diagram representation of the barcodes of Example~\ref{ex:barcodes}.
     \input{figures/persistence-diagrams.tex}
 \end{example}
 
-While definition \ref{def:bot-dist} is purely algebraic, this section gives an alternative analytical definition for the bottleneck distance making an adaptation of the classic Wasserstein distance, used originally to measure distances between probability measures (see \cite{givens}).
+While definition \ref{def:bot-dist-1} is purely algebraic, this section gives an alternative analytical definition for the bottleneck distance making an adaptation of the classic Wasserstein distance, used originally to measure distances between probability measures (see \cite{givens}).
 
 Instead of probability measures, now we are actually dealing with countable sets of points in $ \R $. We will make use of the $ l^p $ norm at countable spaces to measure the distance between matched pairs and the distance between unmatched pairs and the diagonal $ \Delta $. For a more detailed explanation of Lebesgue measures see \cite{rudin}[Definition 3.7]. This norm is named after Pafnuty Chebyshev.
 
@@ -429,7 +429,7 @@ We now verify that the upper triangular region of the Euclidean plane with the C
     The function $ d_\infty $ is a distance in $ \upr $ with the diagonal $ \Delta $.
 \end{proposition}
 \begin{proof}
-    For points $ a, b \in \upr \subset \R^2 $, $ d_\infty $ is a distance as usual Lebesgue norms are well defined. See \cite{rudin}[Chapter 3]. To verify that the metric requirements are fulfilled for $ d_\infty(a, \Delta) $, it is enough to consider $ t = \frac{a_y - a_x}{2} $ as in Proposition \ref{prop:distance-delta}.
+    For points $ a, b \in \upr \subset \R^2 $, $ d_\infty $ is a distance as usual Lebesgue norms are well defined (see \cite{rudin}[Chapter 3]). To verify that the metric requirements are fulfilled for $ d_\infty(a, \Delta) $, it is enough to consider $ t = \frac{a_y - a_x}{2} $ as in Proposition \ref{prop:distance-delta}.
 \end{proof}
 
 \begin{definition}[Partial matching]
