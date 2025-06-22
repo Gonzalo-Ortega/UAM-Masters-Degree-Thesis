@@ -126,13 +126,10 @@ Note, from linear algebra, that $ \dim F_x^{y,z} = \dim F_x^y - \dim F_x^z $. Al
 \begin{align}
     F_{w,x}^{y,z} \coloneq F_x^{y,z} / F_w^{y,z}.
 \end{align}
-Figure \ref{fig:homology-modules} (from \cite{Edelsbrunner}) depicts a visual interpretation and recap of this notation
+Figure \ref{fig:homology-modules} depicts a visual interpretation and recap of this notation, based on Figure 3 from \cite{Edelsbrunner}.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\linewidth]{figures/homology-modules.png}
-    \caption[Persistent homology notation]{(From \cite{Edelsbrunner}[Figure 3]) (a) Homology modules of the sub-level set $f^{-1}(-\infty, x) $. (b) Image of $ F_x $ in $ F_y $. (c) Kernel of the surjection $ F_x^y \to F_x^z $. (d) Quotient of $ F_x^{y, z} $ and $ F_w^{y, z} $.}
-    \label{fig:homology-modules}
+    \input{figures/homology-modules.tex}
 \end{figure}
 
 Let $ a < b < c < d \in \R $. Denote the {\bf rectangles} $ R \coloneq [a, b] \times [c, d] $, $ R_\e \coloneq [a+\e, b-\e] \times [c+\e, d -\e] $.

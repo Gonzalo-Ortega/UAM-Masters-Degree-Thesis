@@ -90,10 +90,7 @@ Let $ \overline{\R} \coloneq \R \cup \{-\infty, \infty\} $ denote the extended r
 \begin{example}
     One of the main advantages of persistence landscapes in comparison with persistence diagrams is that they count with a nice geometry to work with. For example, in Figure \ref{fig:landscape-means} we can see how meanwhile persistence diagrams might not have a unique mean, persistence landscapes do have.
     \begin{figure}[H]
-        \centering
-        \includegraphics[width=\linewidth]{figures/landscape-means.png}
-        \caption[Means from persistence landscapes]{(From \cite{bubenik}[Figure 3]) Top left: the rescaled persistence diagrams $\{(6, 6), (10, 6)\}$ and $\{(8, 4), (8, 8)\}$ have two (Fréchet) means: $\{(7, 5), (9, 7)\}$ and $\{(7, 7), (9, 5)\}$. In contrast, their corresponding persistence landscapes (top right and bottom left) have a unique mean (bottom right)..}
-        \label{fig:landscape-means}
+        \input{figures/landscape-means.tex}
     \end{figure}
 \end{example}
 
@@ -182,7 +179,8 @@ Now, for a differentiable probability distribution $ \phi_u \colon \R^2 \to \R $
     Figure \ref{fig:persistent-images} (taken from \cite{adams}) depicts the pipeline proposed by persistence images. It starts with a dataset from were we compute, for a desired $k \geq 0 $, the $k$-th persistence diagram $ B $, given a filtration of the data. After applying the linear transformation $T(B)$ we compute the corresponding persistence surface. Finally, we can compute a persistence image with a chosen resolution, which will serve as a proper data resume.        
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\linewidth, trim=0 0 0 200, clip]{figures/persistent-images.png}
+        \includegraphics[width=\linewidth]{figures/persistence-images-1.png}
+        \includegraphics[width=0.66\linewidth]{figures/persistence-images-2.png}
         \caption[Persistence images pipeline]{(From \cite{adams}[Figure 1]) Algorithm pipeline to transform data into a persistence image.}
         \label{fig:persistent-images}
     \end{figure}
