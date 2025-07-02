@@ -143,8 +143,22 @@
   \begin{block}{Definition $\delta$-interleaved modules}
     Let $ (V, \pi), (W, \theta) $ be two persistence modules and let $ \delta > 0 $. $ V $ and $ W $ are {\bf $\delta$-interleaved } if there exists two persistence module morphisms $ \phi \colon V \to W_\delta $ and $ \psi \colon W \to V_\delta $ such that the following diagrams commute:
   \end{block}
+
+
   \centering
   \includegraphics[width=0.8\linewidth]{../figures/diagrams.png}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Preliminaries}
+  \framesubtitle{Persistent homology}
+  \begin{block}{Definition (Interleaving distance)}
+    Let $ (V, \pi) $ and $ (W, \theta) $ be two tame persistence modules. The {\bf interleaving distance} between them is defined as
+    \begin{equation}
+        \di(V, W) \coloneq \inf \{ \delta > 0 \mid V \text{ and } W \text{ are } \delta\text{-interleaved}\}.
+    \end{equation}
+  \end{block}
 \end{frame}
 
 \begin{frame}
@@ -214,7 +228,7 @@
             \end{tikzpicture}
             \caption{Bars of $H_1(K)$.}
         \end{subfigure}
-        \caption{Barcodes associated to the previous filtration}
+        \caption{Barcodes associated to the previous filtration.}
     \end{figure}
 \end{frame}
 
@@ -343,18 +357,10 @@
 \begin{frame}
   \frametitle{Stability Theorems}
   \framesubtitle{Hausdorff Stability Theorem}
-
-  \begin{block}{Theorem}
-    Let $ X $ be a triangulable space, and $ f, g\colon X \to \R $ continuous tame functions. Then,
-    \begin{equation}
-        \dhf(D(f), D(g)) \leq \| f - g \|_\infty.
-    \end{equation}
-  \end{block}
-  \pause
   \begin{block}{Theorem}
     Let $ X $ be a triangulable space, and $ f, g\colon X \to \R $ continuous tame functions. Then,
     \begin{align}
-        \db (D(f), D(g)) \leq \|f-g\|_\infty
+        \db (D(f), D(g)) \leq \dhf(D(f), D(g)) \leq \|f-g\|_\infty.
     \end{align}
   \end{block}
 \end{frame}
@@ -384,7 +390,7 @@
     The {\bf rank function} of a persistence module $ V $ is the function $ \delta \colon \R^2 \to \R $ given by
     \begin{equation}
         \lambda(b, d) = \begin{cases}
-            \beta_b^d &\text{ if }  b \leq d \\
+            \beta_b^d &\text{ if }  b \leq d, \\
             0 &\text{ otherwise}.
         \end{cases}
     \end{equation}
