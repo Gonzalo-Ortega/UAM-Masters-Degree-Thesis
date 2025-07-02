@@ -40,7 +40,7 @@
 
 \begin{document}
 
-\frame{\titlepage}
+\frame[plain]{\titlepage}
 
 \AtBeginSection[]
 {
@@ -171,6 +171,74 @@
 
 \begin{frame}
   \begin{figure}
+  \centering
+        \begin{subfigure}[b]{0.2\linewidth}
+            \centering
+            \begin{tikzpicture}[line cap=round, line join=round, x=1cm, y=1cm, scale=0.4]
+                \clip (-0.5, 0) rectangle (5, 3.5);
+                \coordinate (a) at (0.21, 0.14);
+                \coordinate (b) at (0.62, 2.82);
+                \coordinate (c) at (2.01, 1.32);
+                \coordinate (d) at (4.23, 2.23);
+                \draw (c) -- (d);
+                \foreach \point/\pos in {a/above left, b/above left, c/below right, d/above right}
+                    \draw[fill=black] (\point) circle (1pt);
+            \end{tikzpicture}
+            \caption*{$F_0 K$}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.2\linewidth}
+            \centering
+            \begin{tikzpicture}[line cap=round, line join=round, x=1cm, y=1cm, scale=0.4]
+                \clip (-0.5, 0) rectangle (5, 3.5);
+                \coordinate (a) at (0.21, 0.14);
+                \coordinate (b) at (0.62, 2.82);
+                \coordinate (c) at (2.01, 1.32);
+                \coordinate (d) at (4.23, 2.23);
+                \draw (c) -- (d) -- (b) -- cycle;
+                \foreach \point/\pos in {a/above left, b/above left, c/below right, d/above right}
+                    \draw[fill=black] (\point) circle (1pt);
+            \end{tikzpicture}
+            \caption*{$F_1 K$}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.2\linewidth}
+            \centering
+            \begin{tikzpicture}[line cap=round, line join=round, x=1cm, y=1cm, scale=0.4]
+                \clip (-0.5, 0) rectangle (5, 3.5);
+                \coordinate (a) at (0.21, 0.14);
+                \coordinate (b) at (0.62, 2.82);
+                \coordinate (c) at (2.01, 1.32);
+                \coordinate (d) at (4.23, 2.23);
+                \coordinate (e) at (4.64, 0.91);
+                \coordinate (f) at (2.78, 0.63);
+                \draw (a) -- (b) -- (c) -- cycle;
+                \draw (c) -- (d) -- (b);
+                \foreach \point/\pos in {a/above left, b/above left, c/below right, d/above right, e/below right, f/below}
+                    \draw[fill=black] (\point) circle (1pt);
+            \end{tikzpicture}
+            \caption*{$F_2 K$}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.2\linewidth}
+            \centering
+            \begin{tikzpicture}[line cap=round, line join=round, x=1cm, y=1cm, scale=0.4]
+                \clip (-0.5, 0) rectangle (5, 3.5);
+                \coordinate (a) at (0.21, 0.14);
+                \coordinate (b) at (0.62, 2.82);
+                \coordinate (c) at (2.01, 1.32);
+                \coordinate (d) at (4.23, 2.23);
+                \coordinate (e) at (4.64, 0.91);
+                \coordinate (f) at (2.78, 0.63);
+                \fill[fill=black, fill opacity=0.1] (a) -- (b) -- (c) -- cycle;
+                \draw (a) -- (b) -- (c) -- cycle;
+                \draw (c) -- (d) -- (b);
+                \draw (d) -- (e);
+                \foreach \point/\pos in {a/above left, b/above left, c/below right, d/above right, e/below right, f/below}
+                    \draw[fill=black] (\point) circle (1pt);
+            \end{tikzpicture}
+            \caption*{$F_3 K$}
+        \end{subfigure}
+      \end{figure}
+  \vspace{-1cm}
+  \begin{figure}
         \centering
         \begin{subfigure}[b]{0.4\linewidth}
             \centering
@@ -207,6 +275,7 @@
             \end{tikzpicture}
             \caption{Bars of $H_0(K)$.}
         \end{subfigure}
+        \hspace{1cm}
         \begin{subfigure}[b]{0.4\linewidth}
             \centering
             \begin{tikzpicture}[line cap=round, line join=round, x=1cm, y=1cm, scale=0.8]
@@ -567,6 +636,30 @@
       \end{equation}
       where $ K_t = f^{-1} (-\infty, t] $.
   \end{block}
+\end{frame}
+
+\begin{frame}[plain]
+
+\begin{center}
+
+  \bigskip  \bigskip
+
+  \begin{Large} \textcolor{green}{\textbf{\projecttitle}} \end{Large} \bigskip \bigskip
+
+  \begin{footnotesize} \textrm{Master's Final Thesis} \\ \end{footnotesize} \bigskip \bigskip
+
+  \begin{footnotesize} \textbf{Mathematics and Applications Master} -- Curse 2024 - 2025 \end{footnotesize} \bigskip \bigskip
+
+  \begin{footnotesize} \textsf{Author:} \textit{\authorname} \\
+  \smallskip \textsf{Advisor (UPM):} \textit{Jaime Santos Rodríguez} \\
+  \smallskip \textsf{Advisor (UAM):} \textit{Lui Guijarro Santamaría} \\
+\end{footnotesize} \bigskip \bigskip
+
+
+  \includegraphics[height=1cm]{../figures/marcaUAM_AhorizontalColor_imp.pdf}
+
+\end{center}
+
 \end{frame}
 
 \end{document}
